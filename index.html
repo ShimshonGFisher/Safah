@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAFAH | Human Software Resources</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --text-primary: #2c2c2c;
+            --text-secondary: #6b6b6b;
+            --text-light: #9a9a9a;
+            --bg-warm: #faf9f7;
+            --bg-card: #ffffff;
+            --border-subtle: #e8e6e3;
+            --accent: #8b7355;
+            --accent-hover: #6b5a45;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-warm);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .header {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+        }
+
+        .header-cta {
+            background: var(--text-primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .header-cta:hover {
+            background: #1a1a1a;
+        }
+
+        /* Hero */
+        .hero {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 80px 24px 100px;
+            text-align: center;
+        }
+
+        .hero-tagline {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 52px);
+            font-weight: 600;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+            line-height: 1.15;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            max-width: 580px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--text-primary);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background: #1a1a1a;
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            padding: 14px 32px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-primary);
+        }
+
+        /* Section */
+        .section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 24px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .section-header h2 {
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Roles Grid */
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .role-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 32px;
+            transition: all 0.2s;
+        }
+
+        .role-card:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .role-icon {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        .role-card h3 {
+            font-size: 17px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .role-card p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Industries Section */
+        .industries-section {
+            background: white;
+            padding: 80px 24px;
+        }
+
+        .industries-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .industry-item {
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .industry-item:first-child {
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .industry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .industry-header:hover {
+            color: var(--accent);
+        }
+
+        .industry-header h3 {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .industry-toggle {
+            font-size: 20px;
+            color: var(--text-light);
+            transition: transform 0.3s;
+            user-select: none;
+        }
+
+        .industry-item.open .industry-toggle {
+            transform: rotate(45deg);
+        }
+
+        .industry-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .industry-item.open .industry-content {
+            max-height: 300px;
+            padding-bottom: 24px;
+        }
+
+        .industry-content p {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            padding-right: 40px;
+        }
+
+        .industry-content ul {
+            margin-top: 12px;
+            padding-left: 20px;
+        }
+
+        .industry-content li {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+
+        /* Discover Section */
+        .discover-section {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 100px 24px;
+            text-align: center;
+        }
+
+        .discover-section h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .discover-section p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .discover-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .btn-voice {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--accent);
+            color: white;
+            padding: 16px 36px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-voice:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(139, 115, 85, 0.2);
+        }
+
+        .btn-chat {
+            background: transparent;
+            color: var(--text-secondary);
+            padding: 12px 24px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .btn-chat:hover {
+            color: var(--text-primary);
+        }
+
+        /* Pricing */
+        .pricing-section {
+            background: white;
+            padding: 80px 24px;
+        }
+
+        .pricing-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .pricing-card {
+            background: var(--bg-warm);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            padding: 36px 28px;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .pricing-card.featured {
+            border-color: var(--accent);
+            position: relative;
+        }
+
+        .pricing-card.featured::before {
+            content: 'Popular';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            padding: 4px 14px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .pricing-label {
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+
+        .pricing-amount {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .pricing-period {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .pricing-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .pricing-note {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        /* CTA */
+        .cta-section {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 80px 24px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 24px;
+            text-align: center;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .footer-logo {
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+
+        .footer-tagline {
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+
+        .footer-text {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .roles-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 16px 20px;
+            }
+
+            .hero {
+                padding: 60px 20px 80px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">SAFAH</div>
+        <a href="https://calendly.com/shimshongfisher/30min" target="_blank" class="header-cta">Book a Call</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-tagline">Human Software Resources</div>
+        <h1>SAFAH</h1>
+        <p class="hero-description">
+            AI staff that handle calls, messages, intake, sales, and admin — trained for your industry.
+        </p>
+        <div class="hero-buttons">
+            <a href="#industries" class="btn-primary">Explore Industries</a>
+            <a href="#how-it-works" class="btn-secondary">See How It Works</a>
+        </div>
+    </section>
+
+    <section class="section" id="how-it-works">
+        <div class="section-header">
+            <h2>What SAFAH does</h2>
+            <p>Software roles that work alongside your team</p>
+        </div>
+
+        <div class="roles-grid">
+            <div class="role-card">
+                <div class="role-icon">📞</div>
+                <h3>Software Receptionist</h3>
+                <p>Answers calls, routes customers, books appointments. Available around the clock.</p>
+            </div>
+            <div class="role-card">
+                <div class="role-icon">📋</div>
+                <h3>Software Intake & Qualification</h3>
+                <p>Asks the right questions, filters leads, captures structured data for your team.</p>
+            </div>
+            <div class="role-card">
+                <div class="role-icon">💼</div>
+                <h3>Software Sales Agent</h3>
+                <p>Handles follow-ups, sends quotes, manages inbound and outbound calls.</p>
+            </div>
+            <div class="role-card">
+                <div class="role-icon">⚙️</div>
+                <h3>Software Operations Assistant</h3>
+                <p>Updates CRM systems, responds to messages, triggers workflows automatically.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="industries-section" id="industries">
+        <div class="industries-container">
+            <div class="section-header">
+                <h2>Trained for your industry</h2>
+                <p>Same roles, tailored to your workflows</p>
+            </div>
+
+            <div class="industry-item">
+                <div class="industry-header" onclick="toggleIndustry(this)">
+                    <h3>Healthcare</h3>
+                    <span class="industry-toggle">+</span>
+                </div>
+                <div class="industry-content">
+                    <p>Patient intake, appointment scheduling, prescription refill requests, and after-hours triage routing.</p>
+                    <ul>
+                        <li>Books appointments and sends confirmations</li>
+                        <li>Collects patient information before visits</li>
+                        <li>Routes urgent calls to on-call staff</li>
+                        <li>Handles insurance pre-qualification</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="industry-item">
+                <div class="industry-header" onclick="toggleIndustry(this)">
+                    <h3>Legal</h3>
+                    <span class="industry-toggle">+</span>
+                </div>
+                <div class="industry-content">
+                    <p>Client intake and case qualification, appointment scheduling, and follow-up communication.</p>
+                    <ul>
+                        <li>Qualifies potential clients with intake questions</li>
+                        <li>Books consultations and sends reminders</li>
+                        <li>Captures case details accurately</li>
+                        <li>Routes urgent matters appropriately</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="industry-item">
+                <div class="industry-header" onclick="toggleIndustry(this)">
+                    <h3>Retail & E-commerce</h3>
+                    <span class="industry-toggle">+</span>
+                </div>
+                <div class="industry-content">
+                    <p>Order status, product inquiries, returns processing, and customer support.</p>
+                    <ul>
+                        <li>Answers questions about products and availability</li>
+                        <li>Tracks orders and delivery status</li>
+                        <li>Processes return requests</li>
+                        <li>Handles complaints professionally</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="industry-item">
+                <div class="industry-header" onclick="toggleIndustry(this)">
+                    <h3>Transportation & Logistics</h3>
+                    <span class="industry-toggle">+</span>
+                </div>
+                <div class="industry-content">
+                    <p>Shipment tracking, delivery scheduling, driver dispatch, and customer updates.</p>
+                    <ul>
+                        <li>Provides real-time tracking information</li>
+                        <li>Schedules pickups and deliveries</li>
+                        <li>Handles delivery exceptions</li>
+                        <li>Coordinates with drivers and dispatch</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="industry-item">
+                <div class="industry-header" onclick="toggleIndustry(this)">
+                    <h3>Real Estate</h3>
+                    <span class="industry-toggle">+</span>
+                </div>
+                <div class="industry-content">
+                    <p>Property inquiries, viewing bookings, tenant communication, and lead qualification.</p>
+                    <ul>
+                        <li>Answers property listing questions</li>
+                        <li>Schedules viewings and open houses</li>
+                        <li>Qualifies buyer and renter leads</li>
+                        <li>Handles maintenance requests for property managers</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="industry-item">
+                <div class="industry-header" onclick="toggleIndustry(this)">
+                    <h3>Home Services</h3>
+                    <span class="industry-toggle">+</span>
+                </div>
+                <div class="industry-content">
+                    <p>Service booking, quote requests, job scheduling, and customer follow-ups.</p>
+                    <ul>
+                        <li>Books service appointments</li>
+                        <li>Collects job details for accurate quotes</li>
+                        <li>Sends appointment reminders</li>
+                        <li>Follows up after service completion</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="industry-item">
+                <div class="industry-header" onclick="toggleIndustry(this)">
+                    <h3>Finance & Insurance</h3>
+                    <span class="industry-toggle">+</span>
+                </div>
+                <div class="industry-content">
+                    <p>Policy inquiries, claims intake, appointment scheduling, and document collection.</p>
+                    <ul>
+                        <li>Answers policy and coverage questions</li>
+                        <li>Initiates claims and collects details</li>
+                        <li>Schedules consultations with advisors</li>
+                        <li>Sends document requests and reminders</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="industry-item">
+                <div class="industry-header" onclick="toggleIndustry(this)">
+                    <h3>Security & Control Rooms</h3>
+                    <span class="industry-toggle">+</span>
+                </div>
+                <div class="industry-content">
+                    <p>Incident reporting, visitor access, patrol check-ins, and emergency escalation.</p>
+                    <ul>
+                        <li>Logs incidents with accurate details</li>
+                        <li>Manages visitor access requests</li>
+                        <li>Handles resident and tenant queries</li>
+                        <li>Escalates emergencies to response teams</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="discover-section" id="discover">
+        <h2>Discover for yourself</h2>
+        <p>Experience SAFAH firsthand. Talk to our assistant or start a chat — no signup needed.</p>
+        <div class="discover-buttons">
+            <button class="btn-voice" id="start-voice-demo">
+                <span>📞</span> Talk Now
+            </button>
+            <button class="btn-chat" onclick="document.getElementById('safa-chat-launcher').click()">
+                Or start a text conversation
+            </button>
+        </div>
+    </section>
+
+    <section class="pricing-section" id="pricing">
+        <div class="pricing-container">
+            <div class="section-header">
+                <h2>Simple pricing</h2>
+                <p>Choose what fits your business</p>
+            </div>
+
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-label">Basic</div>
+                    <div class="pricing-amount">R2,500</div>
+                    <div class="pricing-period">per month</div>
+                    <p class="pricing-desc">For small businesses getting started</p>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="pricing-label">Booster</div>
+                    <div class="pricing-amount">R5,000</div>
+                    <div class="pricing-period">per month</div>
+                    <p class="pricing-desc">For growing businesses with higher volumes</p>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-label">Pro</div>
+                    <div class="pricing-amount">R10,000</div>
+                    <div class="pricing-period">per month</div>
+                    <p class="pricing-desc">Enterprise features for larger operations</p>
+                </div>
+            </div>
+            <p class="pricing-note">All plans include a once-off setup fee</p>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Ready to get started?</h2>
+        <p>Book a call and we'll show you exactly how SAFAH can work for your business.</p>
+        <a href="https://calendly.com/shimshongfisher/30min" target="_blank" class="btn-primary">Book a Call</a>
+    </section>
+
+    <footer>
+        <div class="footer-logo">SAFAH</div>
+        <div class="footer-tagline">Human Software Resources</div>
+        <p class="footer-text">© 2025 SAFAH · A ConverSA Partnership</p>
+        <p class="footer-text" style="margin-top: 6px;">Built in South Africa</p>
+    </footer>
+
+    <!-- Industry Dropdown Script -->
+    <script>
+        function toggleIndustry(header) {
+            const item = header.parentElement;
+            const wasOpen = item.classList.contains('open');
+            
+            // Close all
+            document.querySelectorAll('.industry-item').forEach(i => {
+                i.classList.remove('open');
+            });
+            
+            // Open clicked one (if it wasn't already open)
+            if (!wasOpen) {
+                item.classList.add('open');
+            }
+        }
+
+        // Voice button connects to widget
+        document.getElementById('start-voice-demo').addEventListener('click', function() {
+            // Try to trigger the widget's voice call
+            const voiceBtn = document.getElementById('start-voice-call');
+            if (voiceBtn) {
+                voiceBtn.click();
+            } else {
+                // If widget not loaded, open chat first
+                const launcher = document.getElementById('safa-chat-launcher');
+                if (launcher) launcher.click();
+            }
+        });
+    </script>
+
+    <!-- SAFAH WIDGET -->
+    <script src="safa-widget.js"></script>
+
+</body>
+</html>

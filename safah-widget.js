@@ -7,8 +7,8 @@
   
   const CONFIG = {
     // Webhook URLs - UPDATE THESE after importing workflows to n8n
-    webhookUrl: 'https://kaielran.app.n8n.cloud/webhook-test/safa-chat',
-    voiceTokenWebhookUrl: 'https://kaielran.app.n8n.cloud/webhook-test/safa-voice/start',
+    webhookUrl: 'https://kaielran.app.n8n.cloud/webhook/safa-chat',
+    voiceTokenWebhookUrl: 'https://kaielran.app.n8n.cloud/webhook/safa-voice/start',
     
     // Branding
     companyName: 'SAFAH',

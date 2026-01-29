@@ -2,7 +2,7 @@
   'use strict';
 
   // ==========================================
-  // SAFA / CONVERSA WIDGET - KAY THE SHAPESHIFTER
+  // SAFA / CONVERSA WIDGET - Jenny THE SHAPESHIFTER
   // ==========================================
   
   const CONFIG = {
@@ -12,7 +12,7 @@
     
     // Branding
     companyName: 'SAFAH',
-    agentName: 'Kay',
+    agentName: 'Jenny',
     agentAvatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face',
     
     // Colors - Warm, elegant, white-glove feel
@@ -992,7 +992,7 @@
         retellClient.on('agent_start_talking', () => {
           state.aiSpeaking = true;
           document.getElementById('voice-avatar-container').classList.add('speaking');
-          document.getElementById('call-status').textContent = 'KAY SPEAKING';
+          document.getElementById('call-status').textContent = 'Jenny SPEAKING';
         });
 
         retellClient.on('agent_stop_talking', () => {

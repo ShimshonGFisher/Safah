@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAFAH | Human Software Resources</title>
+    <title>Amira | Human Software Resources</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -33,7 +33,6 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Header */
         .header {
             padding: 20px 40px;
             display: flex;
@@ -65,7 +64,6 @@
             background: #1a1a1a;
         }
 
-        /* Hero */
         .hero {
             max-width: 800px;
             margin: 0 auto;
@@ -141,7 +139,6 @@
             border-color: var(--text-primary);
         }
 
-        /* Section */
         .section {
             max-width: 1000px;
             margin: 0 auto;
@@ -167,7 +164,6 @@
             margin: 0 auto;
         }
 
-        /* Roles Grid */
         .roles-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -205,7 +201,6 @@
             line-height: 1.6;
         }
 
-        /* Industries Section */
         .industries-section {
             background: white;
             padding: 80px 24px;
@@ -218,17 +213,17 @@
 
         .industry-item {
             border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .industry-item:first-child {
-            border-top: 1px solid var(--border-subtle);
+            background: var(--bg-warm);
+            margin-bottom: 8px;
+            border-radius: 8px;
+            overflow: hidden;
         }
 
         .industry-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 20px 24px;
             cursor: pointer;
             transition: color 0.2s;
         }
@@ -261,14 +256,13 @@
 
         .industry-item.open .industry-content {
             max-height: 300px;
-            padding-bottom: 24px;
+            padding: 0 24px 24px;
         }
 
         .industry-content p {
             font-size: 14px;
             color: var(--text-secondary);
             line-height: 1.7;
-            padding-right: 40px;
         }
 
         .industry-content ul {
@@ -282,7 +276,6 @@
             margin-bottom: 6px;
         }
 
-        /* Discover Section */
         .discover-section {
             max-width: 700px;
             margin: 0 auto;
@@ -346,91 +339,6 @@
             color: var(--text-primary);
         }
 
-        /* Pricing */
-        .pricing-section {
-            background: white;
-            padding: 80px 24px;
-        }
-
-        .pricing-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .pricing-card {
-            background: var(--bg-warm);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 36px 28px;
-            text-align: center;
-            transition: all 0.2s;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-2px);
-        }
-
-        .pricing-card.featured {
-            border-color: var(--accent);
-            position: relative;
-        }
-
-        .pricing-card.featured::before {
-            content: 'Popular';
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent);
-            color: white;
-            padding: 4px 14px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-        }
-
-        .pricing-label {
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--text-light);
-            margin-bottom: 12px;
-        }
-
-        .pricing-amount {
-            font-size: 36px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-        }
-
-        .pricing-period {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-        }
-
-        .pricing-desc {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .pricing-note {
-            text-align: center;
-            margin-top: 32px;
-            font-size: 13px;
-            color: var(--text-light);
-        }
-
-        /* CTA */
         .cta-section {
             max-width: 600px;
             margin: 0 auto;
@@ -450,7 +358,90 @@
             margin-bottom: 32px;
         }
 
-        /* Footer */
+        .about-section {
+            background: var(--bg-warm);
+            padding: 80px 24px;
+        }
+
+        .about-container {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about-container h2 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .about-container p {
+            font-size: 17px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        .about-highlight {
+            font-size: 18px;
+            color: var(--text-primary);
+            font-style: italic;
+            margin-top: 24px;
+        }
+
+        .founder-section {
+            background: white;
+            padding: 80px 24px;
+        }
+
+        .founder-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 48px;
+        }
+
+        .founder-image {
+            flex-shrink: 0;
+        }
+
+        .founder-image img {
+            width: 280px;
+            height: 280px;
+            border-radius: 16px;
+            object-fit: cover;
+            object-position: center top;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .founder-content h2 {
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+
+        .founder-content h3 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .founder-content p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .founder-content .cheeky {
+            margin-top: 16px;
+            font-style: italic;
+            color: var(--accent);
+        }
+
         footer {
             padding: 40px 24px;
             text-align: center;
@@ -477,10 +468,8 @@
             color: var(--text-light);
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
-            .roles-grid,
-            .pricing-grid {
+            .roles-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -491,19 +480,29 @@
             .hero {
                 padding: 60px 20px 80px;
             }
+
+            .founder-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .founder-image img {
+                width: 200px;
+                height: 200px;
+            }
         }
     </style>
 </head>
 <body>
 
     <header class="header">
-        <div class="logo">SAFAH</div>
+        <div class="logo">AMIRA</div>
         <a href="https://calendly.com/shimshongfisher/30min" target="_blank" class="header-cta">Book a Call</a>
     </header>
 
     <section class="hero">
         <div class="hero-tagline">Human Software Resources</div>
-        <h1>SAFAH</h1>
+        <h1>Amira</h1>
         <p class="hero-description">
             AI staff that handle calls, messages, intake, sales, and admin — trained for your industry.
         </p>
@@ -515,7 +514,7 @@
 
     <section class="section" id="how-it-works">
         <div class="section-header">
-            <h2>What SAFAH does</h2>
+            <h2>What Amira does</h2>
             <p>Software roles that work alongside your team</p>
         </div>
 
@@ -682,7 +681,7 @@
 
     <section class="discover-section" id="discover">
         <h2>Discover for yourself</h2>
-        <p>Experience SAFAH firsthand. Talk to our assistant or start a chat — no signup needed.</p>
+        <p>Experience Amira firsthand. Talk to our assistant or start a chat — no signup needed.</p>
         <div class="discover-buttons">
             <button class="btn-voice" id="start-voice-demo">
                 <span>📞</span> Talk Now
@@ -693,83 +692,78 @@
         </div>
     </section>
 
-    <section class="pricing-section" id="pricing">
-        <div class="pricing-container">
-            <div class="section-header">
-                <h2>Simple pricing</h2>
-                <p>Choose what fits your business</p>
-            </div>
-
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="pricing-label">Basic</div>
-                    <div class="pricing-amount">R2,500</div>
-                    <div class="pricing-period">per month</div>
-                    <p class="pricing-desc">For small businesses getting started</p>
-                </div>
-                <div class="pricing-card featured">
-                    <div class="pricing-label">Booster</div>
-                    <div class="pricing-amount">R5,000</div>
-                    <div class="pricing-period">per month</div>
-                    <p class="pricing-desc">For growing businesses with higher volumes</p>
-                </div>
-                <div class="pricing-card">
-                    <div class="pricing-label">Pro</div>
-                    <div class="pricing-amount">R10,000</div>
-                    <div class="pricing-period">per month</div>
-                    <p class="pricing-desc">Enterprise features for larger operations</p>
-                </div>
-            </div>
-            <p class="pricing-note">All plans include a once-off setup fee</p>
-        </div>
-    </section>
-
     <section class="cta-section">
         <h2>Ready to get started?</h2>
-        <p>Book a call and we'll show you exactly how SAFAH can work for your business.</p>
+        <p>Book a call and we'll show you exactly how Amira can work for your business.</p>
         <a href="https://calendly.com/shimshongfisher/30min" target="_blank" class="btn-primary">Book a Call</a>
     </section>
 
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <h2>Why "Amira"?</h2>
+            <p>
+                From the ancient Hebrew word for "saying" — the foundation of every connection, every deal, every relationship.
+            </p>
+            <p>
+                Your business has a lot to say. To customers. To leads. To that person calling at 2am asking if you're open tomorrow. But you can't be everywhere, saying everything, all the time.
+            </p>
+            <p class="about-highlight">
+                So we say it for you. Exactly how you'd say it. Just... without the coffee breaks. ☕
+            </p>
+        </div>
+    </section>
+
+    <section class="founder-section" id="founder">
+        <div class="founder-container">
+            <div class="founder-image">
+                <img src="shimshon-founder.jpg" alt="Shimshon Gavriel Fisher - Founder">
+            </div>
+            <div class="founder-content">
+                <h2>Founder</h2>
+                <h3>Shimshon Gavriel Fisher</h3>
+                <p>
+                    CompSci grad with a knack for making people lazy by getting their work done for them — automatically.
+                </p>
+                <p class="cheeky">
+                    If there's a button that can be pushed, a form that can be filled, or a call that can be answered... why should you have to do it? 😏
+                </p>
+            </div>
+        </div>
+    </section>
+
     <footer>
-        <div class="footer-logo">SAFAH</div>
+        <div class="footer-logo">AMIRA</div>
         <div class="footer-tagline">Human Software Resources</div>
-        <p class="footer-text">© 2025 SAFAH · A ConverSA Partnership</p>
-        <p class="footer-text" style="margin-top: 6px;">Built in South Africa</p>
+        <p class="footer-text">© 2025 Amira</p>
+        <p class="footer-text" style="margin-top: 6px;">Built in South Africa 🇿🇦</p>
     </footer>
 
-    <!-- Industry Dropdown Script -->
     <script>
         function toggleIndustry(header) {
             const item = header.parentElement;
             const wasOpen = item.classList.contains('open');
             
-            // Close all
             document.querySelectorAll('.industry-item').forEach(i => {
                 i.classList.remove('open');
             });
             
-            // Open clicked one (if it wasn't already open)
             if (!wasOpen) {
                 item.classList.add('open');
             }
         }
 
-        // Voice button connects to widget
         document.getElementById('start-voice-demo').addEventListener('click', function() {
-            // Try to trigger the widget's voice call
             const voiceBtn = document.getElementById('start-voice-call');
             if (voiceBtn) {
                 voiceBtn.click();
             } else {
-                // If widget not loaded, open chat first
                 const launcher = document.getElementById('safa-chat-launcher');
                 if (launcher) launcher.click();
             }
         });
     </script>
 
-    <!-- SAFAH WIDGET -->
-    <script src="safah-widget.js"></script>
+    <script src="amira-widget.js"></script>
 
 </body>
 </html>

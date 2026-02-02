@@ -2,17 +2,17 @@
   'use strict';
 
   // ==========================================
-  // SAFA / CONVERSA WIDGET - Jenny THE SHAPESHIFTER
+  // Amira WIDGET - KAY THE SHAPESHIFTER
   // ==========================================
   
   const CONFIG = {
     // Webhook URLs - UPDATE THESE after importing workflows to n8n
-    webhookUrl: 'https://kaielran.app.n8n.cloud/webhook/safa-chat',
-    voiceTokenWebhookUrl: 'https://kaielran.app.n8n.cloud/webhook/safa-voice/start',
+    webhookUrl: 'https://YOUR-N8N-INSTANCE.app.n8n.cloud/webhook/safa-chat',
+    voiceTokenWebhookUrl: 'https://YOUR-N8N-INSTANCE.app.n8n.cloud/webhook/safa-voice/start',
     
     // Branding
-    companyName: 'SAFAH',
-    agentName: 'Jenny',
+    companyName: 'Amira',
+    agentName: 'Kay',
     agentAvatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face',
     
     // Colors - Warm, elegant, white-glove feel
@@ -24,7 +24,7 @@
     position: 'right',
     
     // Greeting
-    greeting: "Hi! I'm here to help. What industry is your business in?",
+    greeting: "Hi! I'm here to help?",
     
     // Timing
     autoOpenDelay: 4000,
@@ -802,12 +802,12 @@
     
     const demoBannerHTML = CONFIG.showDemoBanner ? `
       <div class="safa-demo-banner">
-        <strong>DEMO:</strong> Experience SAFAH in action
+        <strong>DEMO:</strong> Experience Amira in action
       </div>
     ` : '';
 
     const poweredByHTML = CONFIG.showPoweredBy ? `
-      <div class="safa-powered-by">Powered by <span>SAFAH</span></div>
+      <div class="safa-powered-by">Powered by <span>Amira</span></div>
     ` : '<div></div>';
 
     const voiceButtonHTML = CONFIG.voiceEnabled ? `
@@ -992,7 +992,7 @@
         retellClient.on('agent_start_talking', () => {
           state.aiSpeaking = true;
           document.getElementById('voice-avatar-container').classList.add('speaking');
-          document.getElementById('call-status').textContent = 'Jenny SPEAKING';
+          document.getElementById('call-status').textContent = 'KAY SPEAKING';
         });
 
         retellClient.on('agent_stop_talking', () => {
@@ -1284,7 +1284,7 @@
     await detectLocation();
     setupAutoOpen();
     
-    console.log('SAFAH Widget initialized');
+    console.log('Amira Widget initialized');
     console.log('Voice enabled:', CONFIG.voiceEnabled);
   }
 

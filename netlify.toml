@@ -1,0 +1,15 @@
+[[redirects]]
+  from = "/ai-staff"
+  to = "/ai-staff.html"
+  status = 200
+
+[[redirects]]
+  from = "/services"
+  to = "/ai-staff.html"
+  status = 301
+
+# Old pages that might be bookmarked redirect to new home
+[[redirects]]
+  from = "/concierge"
+  to = "/"
+  status = 301

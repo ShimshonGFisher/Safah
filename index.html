@@ -1,770 +1,738 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Amira - AI staff that handle calls, messages, and leads for your business. Human Software Resources.">
-    <title>Amira | Human Software Resources</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --text-primary: #2c2c2c;
-            --text-secondary: #6b6b6b;
-            --text-light: #9a9a9a;
-            --bg-warm: #faf9f7;
-            --bg-card: #ffffff;
-            --border-subtle: #e8e6e3;
-            --accent: #8b7355;
-            --accent-hover: #6b5a45;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-warm);
-            color: var(--text-primary);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .header {
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 18px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            color: var(--text-primary);
-        }
-
-        .header-cta {
-            background: var(--text-primary);
-            color: white;
-            padding: 10px 24px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: background 0.2s;
-        }
-
-        .header-cta:hover {
-            background: #1a1a1a;
-        }
-
-        .hero {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 80px 24px 100px;
-            text-align: center;
-        }
-
-        .hero-tagline {
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--accent);
-            margin-bottom: 24px;
-        }
-
-        .hero h1 {
-            font-size: clamp(36px, 5vw, 52px);
-            font-weight: 600;
-            letter-spacing: -1px;
-            margin-bottom: 24px;
-            line-height: 1.15;
-        }
-
-        .hero-description {
-            font-size: 18px;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            max-width: 580px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.7;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: var(--text-primary);
-            color: white;
-            padding: 14px 32px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: all 0.2s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary:hover {
-            background: #1a1a1a;
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            padding: 14px 32px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            border: 1px solid var(--border-subtle);
-            transition: all 0.2s;
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--text-primary);
-        }
-
-        .section {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 80px 24px;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 48px;
-        }
-
-        .section-header h2 {
-            font-size: 28px;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-            margin-bottom: 12px;
-        }
-
-        .section-header p {
-            font-size: 16px;
-            color: var(--text-secondary);
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .roles-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .role-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 12px;
-            padding: 32px;
-            transition: all 0.2s;
-        }
-
-        .role-card:hover {
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-            transform: translateY(-2px);
-        }
-
-        .role-icon {
-            font-size: 28px;
-            margin-bottom: 16px;
-        }
-
-        .role-card h3 {
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: var(--text-primary);
-        }
-
-        .role-card p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .industries-section {
-            background: white;
-            padding: 80px 24px;
-        }
-
-        .industries-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .industry-item {
-            border-bottom: 1px solid var(--border-subtle);
-            background: var(--bg-warm);
-            margin-bottom: 8px;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .industry-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 24px;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-
-        .industry-header:hover {
-            color: var(--accent);
-        }
-
-        .industry-header h3 {
-            font-size: 16px;
-            font-weight: 500;
-        }
-
-        .industry-toggle {
-            font-size: 20px;
-            color: var(--text-light);
-            transition: transform 0.3s;
-            user-select: none;
-        }
-
-        .industry-item.open .industry-toggle {
-            transform: rotate(45deg);
-        }
-
-        .industry-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-        }
-
-        .industry-item.open .industry-content {
-            max-height: 300px;
-            padding: 0 24px 24px;
-        }
-
-        .industry-content p {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .industry-content ul {
-            margin-top: 12px;
-            padding-left: 20px;
-        }
-
-        .industry-content li {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 6px;
-        }
-
-        .discover-section {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 100px 24px;
-            text-align: center;
-        }
-
-        .discover-section h2 {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .discover-section p {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin-bottom: 40px;
-            line-height: 1.7;
-        }
-
-        .discover-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            align-items: center;
-        }
-
-        .btn-voice {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--accent);
-            color: white;
-            padding: 16px 36px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .btn-voice:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(139, 115, 85, 0.2);
-        }
-
-        .btn-chat {
-            background: transparent;
-            color: var(--text-secondary);
-            padding: 12px 24px;
-            border: none;
-            font-size: 14px;
-            cursor: pointer;
-            text-decoration: underline;
-            text-underline-offset: 3px;
-        }
-
-        .btn-chat:hover {
-            color: var(--text-primary);
-        }
-
-        .cta-section {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 80px 24px;
-            text-align: center;
-        }
-
-        .cta-section h2 {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .cta-section p {
-            font-size: 16px;
-            color: var(--text-secondary);
-            margin-bottom: 32px;
-        }
-
-        .about-section {
-            background: var(--bg-warm);
-            padding: 80px 24px;
-        }
-
-        .about-container {
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-container h2 {
-            font-size: 28px;
-            font-weight: 600;
-            margin-bottom: 24px;
-        }
-
-        .about-container p {
-            font-size: 17px;
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 16px;
-        }
-
-        .about-highlight {
-            font-size: 18px;
-            color: var(--text-primary);
-            font-style: italic;
-            margin-top: 24px;
-        }
-
-        .founder-section {
-            background: white;
-            padding: 80px 24px;
-        }
-
-        .founder-container {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 48px;
-        }
-
-        .founder-image {
-            flex-shrink: 0;
-        }
-
-        .founder-image img {
-            width: 280px;
-            height: 280px;
-            border-radius: 16px;
-            object-fit: cover;
-            object-position: center top;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .founder-content h2 {
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--text-light);
-            margin-bottom: 12px;
-        }
-
-        .founder-content h3 {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .founder-content p {
-            font-size: 16px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .founder-content .cheeky {
-            margin-top: 16px;
-            font-style: italic;
-            color: var(--accent);
-        }
-
-        footer {
-            padding: 40px 24px;
-            text-align: center;
-            border-top: 1px solid var(--border-subtle);
-        }
-
-        .footer-logo {
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            margin-bottom: 4px;
-        }
-
-        .footer-tagline {
-            font-size: 11px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--text-light);
-            margin-bottom: 16px;
-        }
-
-        .footer-text {
-            font-size: 12px;
-            color: var(--text-light);
-        }
-
-        @media (max-width: 768px) {
-            .roles-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .header {
-                padding: 16px 20px;
-            }
-
-            .hero {
-                padding: 60px 20px 80px;
-            }
-
-            .founder-container {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .founder-image img {
-                width: 200px;
-                height: 200px;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMIRA — AI Concierge for Jewelry Stores | Your Digital Salesperson</title>
+<meta name="description" content="AMIRA creates brand-trained AI concierges for jewelry stores — a 24/7 digital salesperson who knows your inventory, speaks in your voice, and turns browsers into buyers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sand: #F5F0E8;
+    --sand-light: #FAF8F3;
+    --sand-deep: #E8DFD0;
+    --stone: #C4B5A0;
+    --stone-dark: #8A7D6B;
+    --gold: #C9A96E;
+    --gold-light: #E8D5AB;
+    --gold-dark: #A6873E;
+    --charcoal: #1A1A1A;
+    --charcoal-soft: #2D2D2D;
+    --ink: #333333;
+    --ink-light: #666666;
+    --cream: #FFFDF8;
+    --terracotta: #C4775A;
+    --olive: #7A8B6F;
+    --white: #FFFFFF;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Outfit',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+  /* ===== NAV ===== */
+  nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:20px 48px;display:flex;align-items:center;justify-content:space-between;transition:all .4s;background:transparent}
+  nav.scrolled{background:rgba(255,253,248,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 1px 0 rgba(201,169,110,.15);padding:14px 48px}
+  .nav-logo{font-family:'Playfair Display',serif;font-size:22px;font-weight:600;color:var(--charcoal);letter-spacing:3px;text-decoration:none}
+  .nav-links{display:flex;gap:36px;align-items:center;list-style:none}
+  .nav-links a{font-size:13px;font-weight:400;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-light);text-decoration:none;transition:color .3s}
+  .nav-links a:hover{color:var(--gold-dark)}
+  .nav-cta{background:var(--charcoal)!important;color:var(--gold)!important;padding:10px 28px!important;border-radius:100px;font-size:12px!important;letter-spacing:2px!important;transition:all .3s!important}
+  .nav-cta:hover{background:var(--gold-dark)!important;color:var(--white)!important}
+  .nav-mobile{display:none;background:none;border:none;cursor:pointer;width:28px;height:20px;position:relative;z-index:1001}
+  .nav-mobile span{display:block;width:100%;height:1.5px;background:var(--charcoal);position:absolute;left:0;transition:all .3s}
+  .nav-mobile span:nth-child(1){top:0}
+  .nav-mobile span:nth-child(2){top:50%;transform:translateY(-50%)}
+  .nav-mobile span:nth-child(3){bottom:0}
+
+  /* ===== SHARED ===== */
+  .section-label{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold-dark);font-weight:500;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+  .section-label::before{content:'';width:32px;height:1px;background:var(--gold)}
+  .fade-up{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+  .fade-up.visible{opacity:1;transform:translateY(0)}
+  .btn-primary{background:linear-gradient(135deg,var(--charcoal),var(--charcoal-soft));color:var(--gold-light);padding:16px 36px;border-radius:100px;font-size:13px;font-family:'Outfit',sans-serif;letter-spacing:2px;text-transform:uppercase;text-decoration:none;font-weight:500;transition:all .35s;border:none;cursor:pointer;display:inline-block}
+  .btn-primary:hover{background:linear-gradient(135deg,var(--gold-dark),var(--gold));color:var(--white);transform:translateY(-2px);box-shadow:0 8px 32px rgba(201,169,110,.3)}
+  .btn-ghost{color:var(--ink-light);font-size:13px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;font-weight:400;padding:16px 24px;transition:color .3s}
+  .btn-ghost:hover{color:var(--gold-dark)}
+
+  /* ===== HERO ===== */
+  .hero{min-height:100vh;display:flex;align-items:center;position:relative;padding:100px 48px 80px;background:var(--cream);overflow:hidden}
+  .hero-glow{position:absolute;border-radius:50%;pointer-events:none;filter:blur(100px);will-change:transform}
+  .hero-glow.g1{width:500px;height:500px;background:rgba(201,169,110,.1);top:-80px;right:-80px;animation:gd 20s ease-in-out infinite}
+  .hero-glow.g2{width:300px;height:300px;background:rgba(196,119,90,.04);bottom:0;left:-50px;animation:gd 25s 5s ease-in-out infinite reverse}
+  @keyframes gd{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,20px)}}
+  .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--stone),transparent)}
+  .hero-content{max-width:1200px;margin:0 auto;width:100%;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;position:relative;z-index:2}
+  .hero-eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold-dark);font-weight:500;margin-bottom:24px;display:flex;align-items:center;gap:12px;opacity:0;animation:ri .7s .2s ease forwards}
+  .hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold)}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(36px,4.2vw,54px);font-weight:500;line-height:1.15;color:var(--charcoal);margin-bottom:24px;opacity:0;animation:ri .7s .35s ease forwards}
+  .hero h1 em{font-style:italic;color:var(--gold-dark)}
+  .hero-sub{font-size:17px;line-height:1.7;color:var(--ink-light);font-weight:300;margin-bottom:36px;max-width:480px;opacity:0;animation:ri .7s .5s ease forwards}
+  .hero-actions{display:flex;gap:16px;align-items:center;flex-wrap:wrap;opacity:0;animation:ri .7s .65s ease forwards}
+  .hero-trust{margin-top:40px;opacity:0;animation:ri .7s .85s ease forwards}
+  .hero-trust-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--stone-dark);margin-bottom:10px}
+  .trust-pill{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--sand-deep);padding:8px 16px;border-radius:100px;font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:600;color:var(--charcoal)}
+  .trust-dot{width:8px;height:8px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light))}
+  @keyframes ri{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+  /* Hero visual */
+  .hero-visual{position:relative;display:flex;justify-content:center;opacity:0;animation:ri .9s .3s ease forwards}
+  .hero-scenario{max-width:420px;width:100%}
+  .scenario-backdrop{background:linear-gradient(145deg,#f0ebe3,#e8dfd0,#d9ceb8);border-radius:20px 20px 0 0;padding:32px 28px;border:1px solid var(--sand-deep);border-bottom:none;position:relative;overflow:hidden}
+  .scenario-backdrop::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 40%,rgba(201,169,110,.06) 0%,transparent 50%)}
+  .scenario-time{font-size:11px;color:var(--stone-dark);letter-spacing:1px;margin-bottom:8px;position:relative;z-index:1}
+  .scenario-narrative{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:var(--charcoal);line-height:1.55;position:relative;z-index:1;opacity:.7}
+  .scenario-narrative strong{font-weight:600;color:var(--gold-dark);opacity:1}
+
+  .hero-widget{width:100%;background:var(--white);border-radius:0 0 20px 20px;border:1px solid var(--sand-deep);border-top:none;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.06)}
+  .hw-header{background:linear-gradient(135deg,var(--charcoal),#2a2a2a);padding:14px 16px;display:flex;align-items:center;gap:10px}
+  .hw-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:12px;font-weight:600;color:var(--charcoal)}
+  .hw-info h4{font-family:'Cormorant Garamond',serif;font-size:12px;color:var(--gold);letter-spacing:1px;font-weight:500}
+  .hw-status{font-size:9px;color:#888;display:flex;align-items:center;gap:4px}
+  .hw-status::before{content:'';width:5px;height:5px;background:#4ade80;border-radius:50%}
+  .hw-msgs{padding:12px;background:#faf9f7;display:flex;flex-direction:column;gap:6px;min-height:160px}
+  .wm{padding:9px 12px;border-radius:14px;font-size:12px;line-height:1.45;max-width:84%;opacity:0;animation:mp .4s ease forwards}
+  .wm:nth-child(1){animation-delay:.8s}.wm:nth-child(2){animation-delay:1.6s}.wm:nth-child(3){animation-delay:2.6s}.wm:nth-child(4){animation-delay:3.6s}
+  @keyframes mp{0%{opacity:0;transform:translateY(8px) scale(.96)}70%{transform:translateY(-1px) scale(1.01)}100%{opacity:1;transform:translateY(0) scale(1)}}
+  .wm.bot{background:var(--white);border:1px solid #f0ebe3;border-bottom-left-radius:4px;align-self:flex-start;color:var(--ink)}
+  .wm.user{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--white);border-bottom-right-radius:4px;align-self:flex-end}
+  .wm-product{background:var(--sand-light);border:1px solid var(--sand-deep);border-radius:8px;padding:8px 10px;margin-top:5px}
+  .wm-product-name{font-family:'Cormorant Garamond',serif;font-size:12px;font-weight:600;color:var(--charcoal)}
+  .wm-product-price{font-size:11px;color:var(--gold-dark);font-weight:500}
+  .hw-input{padding:10px 12px;border-top:1px solid #f0ebe3;background:var(--white);display:flex;align-items:center;gap:6px}
+  .hw-input-f{flex:1;background:#f5f3ef;border:none;border-radius:100px;padding:7px 12px;font-size:10px;color:#bbb}
+  .hw-send{width:26px;height:26px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border:none}
+  .hw-powered{text-align:center;padding:5px;font-size:8px;color:#ccc;background:var(--white)}
+  .hw-powered span{color:var(--gold);font-weight:500}
+
+  .hero-result{position:absolute;bottom:-28px;left:50%;transform:translateX(-50%);background:var(--charcoal);color:var(--gold-light);padding:6px 16px;border-radius:100px;font-size:11px;font-weight:500;letter-spacing:1px;white-space:nowrap;opacity:0;animation:ri .5s 4.2s ease forwards;box-shadow:0 4px 16px rgba(0,0,0,.1)}
+
+  /* ===== MARQUEE ===== */
+  .marquee{padding:18px 0;background:var(--charcoal);overflow:hidden}
+  .marquee-track{display:flex;animation:mq 35s linear infinite;width:max-content;will-change:transform}
+  .marquee-item{padding:0 40px;font-family:'Cormorant Garamond',serif;font-size:14px;color:var(--stone);letter-spacing:2px;white-space:nowrap;display:flex;align-items:center;gap:10px}
+  .marquee-item::after{content:'✦';color:var(--gold);opacity:.4;font-size:9px}
+  @keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ===== PROBLEM ===== */
+  .problem{padding:120px 48px;background:var(--charcoal);position:relative}
+  .problem::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+  .problem-inner{max-width:1000px;margin:0 auto;text-align:center}
+  .problem-eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:32px}
+  .problem h2{font-family:'Playfair Display',serif;font-size:clamp(26px,3.2vw,42px);color:var(--sand-light);font-weight:400;line-height:1.35;margin-bottom:56px}
+  .problem h2 strong{color:var(--gold-light);font-weight:600}
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+  .stat-card{background:rgba(255,255,255,.03);padding:44px 32px;text-align:center;border:1px solid rgba(201,169,110,.08);transition:background .3s}
+  .stat-card:hover{background:rgba(201,169,110,.06)}
+  .stat-num{font-family:'Playfair Display',serif;font-size:52px;font-weight:600;color:var(--gold);margin-bottom:8px;line-height:1}
+  .stat-label{font-size:13px;color:var(--stone);line-height:1.5;font-weight:300}
+  .stat-src{font-size:9px;color:rgba(255,255,255,.2);margin-top:8px}
+
+  /* ===== SCENARIOS (from pitch doc) ===== */
+  .scenarios{padding:120px 48px;background:var(--cream)}
+  .scenarios-inner{max-width:1000px;margin:0 auto}
+  .scenarios h2{font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,40px);color:var(--charcoal);font-weight:500;line-height:1.3;margin-bottom:16px;max-width:700px}
+  .scenarios-sub{font-size:16px;color:var(--ink-light);font-weight:300;line-height:1.7;max-width:600px;margin-bottom:64px}
+  .scenario-cards{display:flex;flex-direction:column;gap:32px}
+  .sc-card{display:grid;grid-template-columns:auto 1fr;gap:32px;padding:36px;background:var(--white);border:1px solid var(--sand-deep);border-radius:20px;transition:all .3s;position:relative;overflow:hidden}
+  .sc-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:4px;background:linear-gradient(to bottom,var(--gold),var(--gold-light));opacity:0;transition:opacity .3s}
+  .sc-card:hover{transform:translateY(-2px);box-shadow:0 12px 36px rgba(0,0,0,.04)}
+  .sc-card:hover::before{opacity:1}
+  .sc-time{font-family:'Playfair Display',serif;font-size:32px;font-weight:600;color:var(--gold);min-width:80px;display:flex;align-items:flex-start;padding-top:4px}
+  .sc-body h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:500;color:var(--charcoal);margin-bottom:10px}
+  .sc-body p{font-size:14px;color:var(--ink-light);line-height:1.7;font-weight:300}
+  .sc-body em{font-style:italic;color:var(--gold-dark);font-weight:400}
+
+  /* ===== SOLUTION ===== */
+  .solution{padding:120px 48px;background:var(--sand-light)}
+  .solution-inner{max-width:1100px;margin:0 auto}
+  .solution h2{font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,40px);color:var(--charcoal);font-weight:500;line-height:1.3;margin-bottom:16px;max-width:700px}
+  .solution-sub{font-size:16px;color:var(--ink-light);font-weight:300;line-height:1.7;max-width:600px;margin-bottom:64px}
+  .features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .f-card{padding:36px 28px;background:var(--white);border:1px solid var(--sand-deep);border-radius:16px;transition:all .3s;position:relative;overflow:hidden}
+  .f-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));opacity:0;transition:opacity .3s}
+  .f-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,.05);border-color:var(--gold)}
+  .f-card:hover::before{opacity:1}
+  .f-icon{width:48px;height:48px;border-radius:12px;background:var(--sand);display:flex;align-items:center;justify-content:center;margin-bottom:20px;font-size:22px}
+  .f-card h3{font-family:'Playfair Display',serif;font-size:18px;font-weight:500;color:var(--charcoal);margin-bottom:10px}
+  .f-card p{font-size:14px;color:var(--ink-light);line-height:1.65;font-weight:300}
+
+  /* ===== RESULTS ===== */
+  .results{padding:100px 48px;background:var(--cream)}
+  .results-inner{max-width:1100px;margin:0 auto;text-align:center}
+  .results h2{font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,40px);color:var(--charcoal);font-weight:500;margin-bottom:12px}
+  .results-sub{font-size:15px;color:var(--ink-light);font-weight:300;margin-bottom:56px}
+  .results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:32px}
+  .r-card{background:var(--white);padding:36px 24px;border-radius:16px;border:1px solid var(--sand-deep);text-align:center;transition:transform .3s}
+  .r-card:hover{transform:translateY(-2px)}
+  .r-num{font-family:'Playfair Display',serif;font-size:40px;font-weight:600;color:var(--gold-dark);margin-bottom:6px}
+  .r-label{font-size:13px;color:var(--ink-light);font-weight:300;line-height:1.4}
+  .results-logos{display:flex;justify-content:center;gap:40px;align-items:center;margin-top:40px;padding-top:32px;border-top:1px solid var(--sand-deep)}
+  .results-logos span{font-size:11px;color:var(--stone);letter-spacing:1px;text-transform:uppercase}
+  .results-note{font-size:11px;color:var(--stone);font-style:italic;margin-top:24px}
+
+  /* ===== HOW ===== */
+  .how{padding:120px 48px;background:var(--sand-light)}
+  .how-inner{max-width:1100px;margin:0 auto}
+  .how h2{font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,40px);color:var(--charcoal);font-weight:500;margin-bottom:12px}
+  .how-sub{font-size:16px;color:var(--ink-light);font-weight:300;margin-bottom:64px;max-width:600px}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;position:relative}
+  .steps::before{content:'';position:absolute;top:44px;left:15%;right:15%;height:1px;background:linear-gradient(90deg,var(--sand-deep),var(--gold),var(--sand-deep))}
+  .step{text-align:center;position:relative}
+  .step-num{width:88px;height:88px;border-radius:50%;background:var(--white);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-family:'Playfair Display',serif;font-size:28px;color:var(--gold-dark);font-weight:500;position:relative;z-index:1;transition:all .3s}
+  .step:hover .step-num{background:var(--gold);color:var(--white)}
+  .step h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:500;color:var(--charcoal);margin-bottom:10px}
+  .step p{font-size:14px;color:var(--ink-light);line-height:1.65;font-weight:300;max-width:280px;margin:0 auto}
+
+  /* ===== DIFF ===== */
+  .diff{padding:100px 48px;background:var(--charcoal)}
+  .diff-inner{max-width:900px;margin:0 auto}
+  .diff h2{font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,40px);color:var(--sand-light);font-weight:400;margin-bottom:12px;text-align:center}
+  .diff h2 em{color:var(--gold-light);font-style:italic}
+  .diff-sub{font-size:15px;color:var(--stone);font-weight:300;text-align:center;margin-bottom:56px}
+  .diff-cards{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .dc{border:1px solid rgba(201,169,110,.12);border-radius:16px;padding:28px 24px;position:relative;overflow:hidden}
+  .dc.them{background:rgba(255,255,255,.02)}
+  .dc.us{background:rgba(201,169,110,.06);border-color:rgba(201,169,110,.25)}
+  .dc.us::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light))}
+  .dc-header{font-size:10px;letter-spacing:3px;text-transform:uppercase;margin-bottom:20px;font-weight:500}
+  .dc.them .dc-header{color:var(--stone-dark)}
+  .dc.us .dc-header{color:var(--gold)}
+  .dc-item{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.04);display:flex;align-items:flex-start;gap:12px}
+  .dc-item:last-child{border-bottom:none}
+  .dc-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:1px}
+  .dc.them .dc-icon{background:rgba(196,119,90,.1);color:var(--terracotta)}
+  .dc.us .dc-icon{background:rgba(122,139,111,.15);color:var(--olive)}
+  .dc-label{font-size:13px;font-weight:400;margin-bottom:2px}
+  .dc.them .dc-label{color:var(--stone)}
+  .dc.us .dc-label{color:var(--gold-light)}
+  .dc-desc{font-size:12px;font-weight:300;line-height:1.45}
+  .dc.them .dc-desc{color:var(--stone-dark)}
+  .dc.us .dc-desc{color:var(--stone)}
+
+  /* ===== PROOF / QUOTE ===== */
+  .proof{padding:100px 48px;background:var(--sand-light);text-align:center}
+  .proof-inner{max-width:800px;margin:0 auto}
+  .proof-qm{font-family:'Playfair Display',serif;font-size:80px;color:var(--gold);opacity:.3;line-height:.5;margin-bottom:24px}
+  .proof blockquote{font-family:'Playfair Display',serif;font-size:clamp(19px,2.3vw,26px);color:var(--charcoal);font-weight:400;line-height:1.5;font-style:italic;margin-bottom:24px}
+  .proof-attr{font-size:13px;color:var(--ink-light);font-weight:400;letter-spacing:1px}
+  .proof-stats{display:flex;justify-content:center;gap:56px;margin-top:48px;padding-top:48px;border-top:1px solid var(--sand-deep)}
+  .ps-num{font-family:'Playfair Display',serif;font-size:34px;color:var(--gold-dark);font-weight:600}
+  .ps-label{font-size:11px;color:var(--stone-dark);letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+
+  /* ===== INSIGHT ENGINE ===== */
+  .insight{padding:100px 48px;background:var(--cream)}
+  .insight-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .insight-text h2{font-family:'Playfair Display',serif;font-size:clamp(24px,2.5vw,34px);color:var(--charcoal);font-weight:500;line-height:1.3;margin-bottom:16px}
+  .insight-text p{font-size:15px;color:var(--ink-light);line-height:1.7;font-weight:300;margin-bottom:16px}
+  .insight-example{background:var(--white);border:1px solid var(--sand-deep);border-radius:16px;padding:28px;position:relative}
+  .insight-example::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:16px 16px 0 0}
+  .insight-example h4{font-family:'Playfair Display',serif;font-size:14px;color:var(--gold-dark);font-weight:500;margin-bottom:12px;letter-spacing:1px}
+  .insight-bar{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+  .insight-bar-fill{height:8px;border-radius:100px;background:linear-gradient(90deg,var(--gold),var(--gold-light))}
+  .insight-bar-label{font-size:12px;color:var(--ink-light);font-weight:400;white-space:nowrap}
+  .insight-bar-note{font-size:11px;color:var(--stone);margin-top:4px;font-style:italic}
+
+  /* ===== TEAM ===== */
+  .team{padding:100px 48px;background:var(--sand-light)}
+  .team-inner{max-width:800px;margin:0 auto;text-align:center}
+  .team h2{font-family:'Playfair Display',serif;font-size:clamp(28px,3vw,40px);color:var(--charcoal);font-weight:500;margin-bottom:12px}
+  .team-sub{font-size:16px;color:var(--ink-light);font-weight:300;line-height:1.7;margin-bottom:56px;max-width:560px;margin-left:auto;margin-right:auto}
+  .team-grid{display:flex;justify-content:center;gap:40px;flex-wrap:wrap}
+  .tm{text-align:center;max-width:220px}
+  .tm-photo{width:110px;height:110px;border-radius:50%;margin:0 auto 16px;background:var(--sand);border:3px solid var(--sand-deep);display:flex;align-items:center;justify-content:center;overflow:hidden}
+  .tm-initials{font-family:'Playfair Display',serif;font-size:32px;font-weight:500;color:var(--gold-dark)}
+  .tm h3{font-family:'Playfair Display',serif;font-size:17px;font-weight:500;color:var(--charcoal);margin-bottom:4px}
+  .tm-role{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gold-dark);font-weight:500;margin-bottom:10px}
+  .tm-bio{font-size:13px;color:var(--ink-light);font-weight:300;line-height:1.55}
+  .tm-placeholder{width:160px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .tm-ph-circle{width:110px;height:110px;border-radius:50%;border:2px dashed var(--sand-deep);margin-bottom:16px;display:flex;align-items:center;justify-content:center}
+  .tm-ph-circle span{font-size:11px;color:var(--stone);letter-spacing:1px;text-transform:uppercase}
+  .tm-placeholder p{font-size:13px;color:var(--stone);font-style:italic}
+
+  /* ===== FINAL CTA ===== */
+  .final-cta{padding:140px 48px;background:linear-gradient(135deg,var(--charcoal),#222);text-align:center;position:relative;overflow:hidden}
+  .final-cta::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:radial-gradient(circle,rgba(201,169,110,.05) 0%,transparent 70%);pointer-events:none}
+  .final-cta-inner{max-width:640px;margin:0 auto;position:relative;z-index:1}
+  .final-cta h2{font-family:'Playfair Display',serif;font-size:clamp(28px,3.5vw,46px);color:var(--sand-light);font-weight:400;line-height:1.3;margin-bottom:20px}
+  .final-cta h2 em{color:var(--gold-light);font-style:italic}
+  .final-cta p{font-size:16px;color:var(--stone);font-weight:300;line-height:1.7;margin-bottom:16px}
+  .final-cta-note{font-size:12px;color:var(--stone-dark);letter-spacing:1px;margin-bottom:36px}
+  .final-cta .btn-primary{font-size:14px;padding:18px 44px}
+
+  /* ===== FOOTER ===== */
+  footer{padding:48px;background:var(--charcoal);border-top:1px solid rgba(201,169,110,.1);display:flex;align-items:center;justify-content:space-between}
+  .footer-logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--sand-light);letter-spacing:3px}
+  .footer-sub{font-size:11px;color:var(--stone-dark);letter-spacing:1px;margin-top:4px}
+  .footer-links{display:flex;gap:24px}
+  .footer-links a{font-size:12px;color:var(--stone);text-decoration:none;letter-spacing:1px;transition:color .3s}
+  .footer-links a:hover{color:var(--gold)}
+  .footer-copy{font-size:11px;color:var(--stone-dark)}
+
+  /* ===== RESPONSIVE ===== */
+  @media(max-width:900px){
+    nav{padding:16px 24px}.nav-links{display:none}.nav-mobile{display:block}
+    .hero{padding:100px 24px 60px}.hero-content{grid-template-columns:1fr;gap:48px;text-align:center}
+    .hero-sub{margin-left:auto;margin-right:auto}.hero-actions{justify-content:center}.hero-eyebrow{justify-content:center}
+    .hero-trust{display:flex;flex-direction:column;align-items:center}
+    .hero-visual{order:-1}.hero-scenario{width:320px}.scenario-backdrop{padding:20px 18px}
+    .scenario-narrative{font-size:15px}.hero-result{display:none}
+    .marquee-item{padding:0 24px;font-size:12px}
+    .problem,.scenarios,.solution,.results,.how,.diff,.proof,.insight,.team,.final-cta{padding:80px 24px}
+    .stat-grid{grid-template-columns:1fr;gap:1px}
+    .sc-card{grid-template-columns:1fr}.sc-time{display:none}
+    .features-grid{grid-template-columns:1fr;gap:16px}
+    .results-grid{grid-template-columns:repeat(2,1fr);gap:16px}
+    .steps{grid-template-columns:1fr;gap:36px}.steps::before{display:none}
+    .diff-cards{grid-template-columns:1fr}
+    .proof-stats{flex-direction:column;gap:20px}
+    .insight-inner{grid-template-columns:1fr;gap:40px}
+    .team-grid{flex-direction:column;align-items:center}
+    footer{flex-direction:column;gap:20px;text-align:center}
+  }
+</style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="logo">AMIRA</div>
-        <a href="https://calendly.com/shimshongfisher/30min" target="_blank" class="header-cta">Book a Call</a>
-    </header>
+<!-- NAV -->
+<nav id="navbar">
+  <a href="/" class="nav-logo">AMIRA</a>
+  <ul class="nav-links">
+    <li><a href="#why">Why</a></li>
+    <li><a href="#what">What</a></li>
+    <li><a href="#how-it-works">How</a></li>
+    <li><a href="#team">About</a></li>
+    <li><a href="/ai-staff.html">AI Staff</a></li>
+    <li><a href="https://calendly.com/shimshongfisher/30min" class="nav-cta" target="_blank">Book a Call</a></li>
+  </ul>
+  <button class="nav-mobile"><span></span><span></span><span></span></button>
+</nav>
 
-    <section class="hero">
-        <div class="hero-tagline">Human Software Resources</div>
-        <h1>Amira</h1>
-        <p class="hero-description">
-            AI staff that handle calls, messages, intake, sales, and admin — trained for your industry.
-        </p>
-        <div class="hero-buttons">
-            <a href="#industries" class="btn-primary">Explore Industries</a>
-            <a href="#how-it-works" class="btn-secondary">See How It Works</a>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow g1"></div>
+  <div class="hero-glow g2"></div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-eyebrow">AI Retail Concierge</div>
+      <h1>Every jewelry store has a salesperson. Your <em>website</em> doesn't.</h1>
+      <p class="hero-sub">AMIRA puts a brand-trained digital salesperson on your site — one who knows every piece, speaks in your voice, and turns midnight browsers into morning buyers.</p>
+      <div class="hero-actions">
+        <a href="https://calendly.com/shimshongfisher/30min" class="btn-primary" target="_blank">Book a Free Demo</a>
+        <a href="#why" class="btn-ghost">See why it works ↓</a>
+      </div>
+      <div class="hero-trust">
+        <div class="hero-trust-label">Trusted by</div>
+        <div class="trust-pill"><span class="trust-dot"></span> Mimush Collection</div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-scenario">
+        <div class="scenario-backdrop">
+          <div class="scenario-time">11:47 PM — FRIDAY NIGHT</div>
+          <div class="scenario-narrative">A man just decided to propose. He opens his laptop and starts browsing rings. On three sites, he scrolls past photos in silence. On <strong>yours</strong>, someone asks what he has in mind.</div>
         </div>
-    </section>
-
-    <section class="section" id="how-it-works">
-        <div class="section-header">
-            <h2>What Amira does</h2>
-            <p>Software roles that work alongside your team</p>
+        <div class="hero-widget">
+          <div class="hw-header">
+            <div class="hw-avatar">A</div>
+            <div class="hw-info">
+              <h4>YOUR JEWELRY STORE</h4>
+              <span class="hw-status">Online — personal stylist</span>
+            </div>
+          </div>
+          <div class="hw-msgs">
+            <div class="wm bot">Hey! 💍 Looking for something special tonight?</div>
+            <div class="wm user">engagement ring — she likes vintage style, white gold</div>
+            <div class="wm bot">Beautiful taste! I'd recommend our Art Deco collection ✨
+              <div class="wm-product">
+                <div class="wm-product-name">Art Deco Halo Ring — White Gold</div>
+                <div class="wm-product-price">From R 12,400</div>
+              </div>
+            </div>
+            <div class="wm user">she's going to love this. I'll come in Saturday.</div>
+          </div>
+          <div class="hw-input">
+            <div class="hw-input-f">Type a message...</div>
+            <div class="hw-send"></div>
+          </div>
+          <div class="hw-powered">✨ Powered by <span>AMIRA</span></div>
         </div>
+        <div class="hero-result">💍 In-store visit booked. Sale closed Saturday.</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="roles-grid">
-            <div class="role-card">
-                <div class="role-icon">📞</div>
-                <h3>Software Receptionist</h3>
-                <p>Answers calls, routes customers, books appointments. Available around the clock.</p>
-            </div>
-            <div class="role-card">
-                <div class="role-icon">📋</div>
-                <h3>Software Intake & Qualification</h3>
-                <p>Asks the right questions, filters leads, captures structured data for your team.</p>
-            </div>
-            <div class="role-card">
-                <div class="role-icon">💼</div>
-                <h3>Software Sales Agent</h3>
-                <p>Handles follow-ups, sends quotes, manages inbound and outbound calls.</p>
-            </div>
-            <div class="role-card">
-                <div class="role-icon">⚙️</div>
-                <h3>Software Operations Assistant</h3>
-                <p>Updates CRM systems, responds to messages, triggers workflows automatically.</p>
-            </div>
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="marquee-item">24/7 digital salesperson</span>
+    <span class="marquee-item">Knows your entire inventory</span>
+    <span class="marquee-item">Cross-sells naturally</span>
+    <span class="marquee-item">Handles objections gracefully</span>
+    <span class="marquee-item">Speaks in your brand voice</span>
+    <span class="marquee-item">Drives in-store visits</span>
+    <span class="marquee-item">Done for you — white glove</span>
+    <span class="marquee-item">One line of code</span>
+    <span class="marquee-item">24/7 digital salesperson</span>
+    <span class="marquee-item">Knows your entire inventory</span>
+    <span class="marquee-item">Cross-sells naturally</span>
+    <span class="marquee-item">Handles objections gracefully</span>
+    <span class="marquee-item">Speaks in your brand voice</span>
+    <span class="marquee-item">Drives in-store visits</span>
+    <span class="marquee-item">Done for you — white glove</span>
+    <span class="marquee-item">One line of code</span>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem" id="why">
+  <div class="problem-inner">
+    <div class="problem-eyebrow">The uncomfortable truth</div>
+    <h2>Most jewelry websites are <strong>beautiful but silent.</strong> They show products, list prices, and wait — while a customer with questions and money to spend moves on to the next tab.</h2>
+    <div class="stat-grid">
+      <div class="stat-card fade-up">
+        <div class="stat-num">70%</div>
+        <div class="stat-label">of online shopping carts abandoned before checkout</div>
+        <div class="stat-src">Baymard Institute, 2025</div>
+      </div>
+      <div class="stat-card fade-up">
+        <div class="stat-num">80%</div>
+        <div class="stat-label">of jewelry purchases happen in-store — but research starts online</div>
+        <div class="stat-src">Industry data</div>
+      </div>
+      <div class="stat-card fade-up">
+        <div class="stat-num">$260B</div>
+        <div class="stat-label">in revenue recoverable through better customer engagement</div>
+        <div class="stat-src">Baymard Institute, 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCENARIOS (from pitch doc) -->
+<section class="scenarios" id="stories">
+  <div class="scenarios-inner">
+    <div class="section-label">Real moments, real sales</div>
+    <h2>Jewelry is emotional. Your website should be too.</h2>
+    <p class="scenarios-sub">These are the moments your static website is missing — and the sales AMIRA captures for you every single day.</p>
+
+    <div class="scenario-cards">
+      <div class="sc-card fade-up">
+        <div class="sc-time">1am</div>
+        <div class="sc-body">
+          <h3>The Midnight Anniversary Shopper</h3>
+          <p>A woman browses anniversary gifts while her husband sleeps. She visits four boutique sites in 20 minutes. Three are silent. On yours, AMIRA learns she loves art deco and shows her two perfect pieces. She screenshots them. Two days later she walks in <em>knowing exactly what she wants.</em> She never would have found those pieces on her own.</p>
         </div>
-    </section>
+      </div>
 
-    <section class="industries-section" id="industries">
-        <div class="industries-container">
-            <div class="section-header">
-                <h2>Trained for your industry</h2>
-                <p>Same roles, tailored to your workflows</p>
-            </div>
-
-            <div class="industry-item">
-                <div class="industry-header" onclick="toggleIndustry(this)">
-                    <h3>Healthcare</h3>
-                    <span class="industry-toggle">+</span>
-                </div>
-                <div class="industry-content">
-                    <p>Patient intake, appointment scheduling, prescription refill requests, and after-hours triage routing.</p>
-                    <ul>
-                        <li>Books appointments and sends confirmations</li>
-                        <li>Collects patient information before visits</li>
-                        <li>Routes urgent calls to on-call staff</li>
-                        <li>Handles insurance pre-qualification</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="industry-item">
-                <div class="industry-header" onclick="toggleIndustry(this)">
-                    <h3>Legal</h3>
-                    <span class="industry-toggle">+</span>
-                </div>
-                <div class="industry-content">
-                    <p>Client intake and case qualification, appointment scheduling, and follow-up communication.</p>
-                    <ul>
-                        <li>Qualifies potential clients with intake questions</li>
-                        <li>Books consultations and sends reminders</li>
-                        <li>Captures case details accurately</li>
-                        <li>Routes urgent matters appropriately</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="industry-item">
-                <div class="industry-header" onclick="toggleIndustry(this)">
-                    <h3>Retail & E-commerce</h3>
-                    <span class="industry-toggle">+</span>
-                </div>
-                <div class="industry-content">
-                    <p>Order status, product inquiries, returns processing, and customer support.</p>
-                    <ul>
-                        <li>Answers questions about products and availability</li>
-                        <li>Tracks orders and delivery status</li>
-                        <li>Processes return requests</li>
-                        <li>Handles complaints professionally</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="industry-item">
-                <div class="industry-header" onclick="toggleIndustry(this)">
-                    <h3>Transportation & Logistics</h3>
-                    <span class="industry-toggle">+</span>
-                </div>
-                <div class="industry-content">
-                    <p>Shipment tracking, delivery scheduling, driver dispatch, and customer updates.</p>
-                    <ul>
-                        <li>Provides real-time tracking information</li>
-                        <li>Schedules pickups and deliveries</li>
-                        <li>Handles delivery exceptions</li>
-                        <li>Coordinates with drivers and dispatch</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="industry-item">
-                <div class="industry-header" onclick="toggleIndustry(this)">
-                    <h3>Real Estate</h3>
-                    <span class="industry-toggle">+</span>
-                </div>
-                <div class="industry-content">
-                    <p>Property inquiries, viewing bookings, tenant communication, and lead qualification.</p>
-                    <ul>
-                        <li>Answers property listing questions</li>
-                        <li>Schedules viewings and open houses</li>
-                        <li>Qualifies buyer and renter leads</li>
-                        <li>Handles maintenance requests for property managers</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="industry-item">
-                <div class="industry-header" onclick="toggleIndustry(this)">
-                    <h3>Home Services</h3>
-                    <span class="industry-toggle">+</span>
-                </div>
-                <div class="industry-content">
-                    <p>Service booking, quote requests, job scheduling, and customer follow-ups.</p>
-                    <ul>
-                        <li>Books service appointments</li>
-                        <li>Collects job details for accurate quotes</li>
-                        <li>Sends appointment reminders</li>
-                        <li>Follows up after service completion</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="industry-item">
-                <div class="industry-header" onclick="toggleIndustry(this)">
-                    <h3>Finance & Insurance</h3>
-                    <span class="industry-toggle">+</span>
-                </div>
-                <div class="industry-content">
-                    <p>Policy inquiries, claims intake, appointment scheduling, and document collection.</p>
-                    <ul>
-                        <li>Answers policy and coverage questions</li>
-                        <li>Initiates claims and collects details</li>
-                        <li>Schedules consultations with advisors</li>
-                        <li>Sends document requests and reminders</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="industry-item">
-                <div class="industry-header" onclick="toggleIndustry(this)">
-                    <h3>Security & Control Rooms</h3>
-                    <span class="industry-toggle">+</span>
-                </div>
-                <div class="industry-content">
-                    <p>Incident reporting, visitor access, patrol check-ins, and emergency escalation.</p>
-                    <ul>
-                        <li>Logs incidents with accurate details</li>
-                        <li>Manages visitor access requests</li>
-                        <li>Handles resident and tenant queries</li>
-                        <li>Escalates emergencies to response teams</li>
-                    </ul>
-                </div>
-            </div>
+      <div class="sc-card fade-up">
+        <div class="sc-time">9pm</div>
+        <div class="sc-body">
+          <h3>The Confused Diamond Buyer</h3>
+          <p>A man is looking at lab-grown diamond earrings for his wife. He hesitates — in his mind, lab-grown means fake. He's about to close the tab. AMIRA catches him: explains they're chemically identical to mined diamonds, same brilliance, same hardness. Honestly mentions the resale difference too. <em>He feels respected, not sold to. He buys the earrings.</em></p>
         </div>
-    </section>
+      </div>
 
-    <section class="discover-section" id="discover">
-        <h2>Discover for yourself</h2>
-        <p>Experience Amira firsthand. Talk to our assistant or start a chat — no signup needed.</p>
-        <div class="discover-buttons">
-            <button class="btn-voice" id="start-voice-demo">
-                <span>📞</span> Talk Now
-            </button>
-            <button class="btn-chat" onclick="document.getElementById('safa-chat-launcher').click()">
-                Or start a text conversation
-            </button>
+      <div class="sc-card fade-up">
+        <div class="sc-time">3pm</div>
+        <div class="sc-body">
+          <h3>The Son Who Doesn't Know Where to Start</h3>
+          <p>He types: "She loves pearls and she's turning 60 — what would you suggest?" AMIRA asks two questions and recommends a piece. He reads the description and feels it's right. <em>He didn't need a discount. He needed someone to help him choose.</em></p>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <section class="cta-section">
-        <h2>Ready to get started?</h2>
-        <p>Book a call and we'll show you exactly how Amira can work for your business.</p>
-        <a href="https://calendly.com/shimshongfisher/30min" target="_blank" class="btn-primary">Book a Call</a>
-    </section>
+<!-- SOLUTION -->
+<section class="solution" id="what">
+  <div class="solution-inner">
+    <div class="section-label">What AMIRA does</div>
+    <h2>A personal salesperson that knows your inventory better than you do</h2>
+    <p class="solution-sub">AMIRA engages every visitor the way a great floor salesperson would — warmly, knowledgeably, and on your terms. At every hour, for every customer.</p>
 
-    <section class="about-section" id="about">
-        <div class="about-container">
-            <h2>Why "Amira"?</h2>
-            <p>
-                From the ancient Hebrew word for "saying" — the foundation of every connection, every deal, every relationship.
-            </p>
-            <p>
-                Your business has a lot to say. To customers. To leads. To that person calling at 2am asking if you're open tomorrow. But you can't be everywhere, saying everything, all the time.
-            </p>
-            <p class="about-highlight">
-                So we say it for you. Exactly how you'd say it. Just... without the coffee breaks. ☕
-            </p>
+    <div class="features-grid">
+      <div class="f-card fade-up">
+        <div class="f-icon">💬</div>
+        <h3>Natural Conversation</h3>
+        <p>Not a chatbot with canned responses. AMIRA talks like your best salesperson — explains carat vs. cut, guides ring sizing, handles "lab-grown vs. mined" with honesty.</p>
+      </div>
+      <div class="f-card fade-up">
+        <div class="f-icon">💍</div>
+        <h3>Deep Product Knowledge</h3>
+        <p>Trained on your full inventory — every piece, every price, every talking point. New collection launches? Updated within hours.</p>
+      </div>
+      <div class="f-card fade-up">
+        <div class="f-icon">🏬</div>
+        <h3>Drives In-Store Visits</h3>
+        <p>80% of jewelry still sells in person. AMIRA creates the emotional connection online that brings customers through your door ready to buy.</p>
+      </div>
+      <div class="f-card fade-up">
+        <div class="f-icon">📊</div>
+        <h3>The Insight Engine</h3>
+        <p>Every conversation is captured. What are customers confused about? What products keep coming up? What objections are quietly killing sales? Now you know.</p>
+      </div>
+      <div class="f-card fade-up">
+        <div class="f-icon">🎨</div>
+        <h3>Your Voice, Every Time</h3>
+        <p>Trained to your store's tone, values, and personality. Two customers at 9am and midnight get the exact same warmth and brand experience.</p>
+      </div>
+      <div class="f-card fade-up">
+        <div class="f-icon">🔗</div>
+        <h3>One Line of Code</h3>
+        <p>We handle everything. You paste one script tag and you're live. No apps, no plugins, no configuration, no headaches.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section class="results" id="results">
+  <div class="results-inner">
+    <div class="section-label" style="justify-content:center">Proven by the industry</div>
+    <h2>The numbers behind AI concierge technology</h2>
+    <p class="results-sub">Published data from brands already using AI shopping concierges globally.</p>
+    <div class="results-grid">
+      <div class="r-card fade-up">
+        <div class="r-num">4×</div>
+        <div class="r-label">higher conversion for shoppers who engage</div>
+      </div>
+      <div class="r-card fade-up">
+        <div class="r-num">97%</div>
+        <div class="r-label">of queries handled without human intervention</div>
+      </div>
+      <div class="r-card fade-up">
+        <div class="r-num">£600K</div>
+        <div class="r-label">monthly revenue unlocked by one brand using AI concierge</div>
+      </div>
+      <div class="r-card fade-up">
+        <div class="r-num">943%</div>
+        <div class="r-label">ROI achieved on AI concierge investment</div>
+      </div>
+    </div>
+    <div class="results-logos">
+      <span>Sources: Rep AI · Ada.cx · Customer Experience Magazine · Baymard Institute</span>
+    </div>
+    <p class="results-note">AMIRA delivers this technology with a premium, white-glove service that outperforms DIY alternatives.</p>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how" id="how-it-works">
+  <div class="how-inner">
+    <div class="section-label">How it works</div>
+    <h2>Live in three steps. Not three months.</h2>
+    <p class="how-sub">No DIY setup. No learning a new platform. We do the work — you get the results.</p>
+    <div class="steps">
+      <div class="step fade-up">
+        <div class="step-num">1</div>
+        <h3>We Learn Your Store</h3>
+        <p>We study your products, your voice, your customers. We build the concierge personality and train it on your entire inventory.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num">2</div>
+        <h3>We Install It</h3>
+        <p>One script tag pasted into your site. That's your only job. We handle design, integration, and testing.</p>
+      </div>
+      <div class="step fade-up">
+        <div class="step-num">3</div>
+        <h3>We Optimise Together</h3>
+        <p>We monitor every conversation, refine the AI weekly, and send you daily reports. You watch your sales climb.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFF -->
+<section class="diff" id="compare">
+  <div class="diff-inner">
+    <h2>Not another chatbot. A <em>concierge.</em></h2>
+    <p class="diff-sub">Here's what white-glove service actually looks like.</p>
+    <div class="diff-cards">
+      <div class="dc them fade-up">
+        <div class="dc-header">DIY AI Chatbots</div>
+        <div class="dc-item">
+          <div class="dc-icon">✗</div>
+          <div>
+            <div class="dc-label">Self-service setup</div>
+            <div class="dc-desc">You configure the AI, write prompts, manage integrations yourself.</div>
+          </div>
         </div>
-    </section>
-
-    <section class="founder-section" id="founder">
-        <div class="founder-container">
-            <div class="founder-image">
-                <img src="shimshon-founder.jpg" alt="Shimshon Gavriel Fisher - Founder">
-            </div>
-            <div class="founder-content">
-                <h2>Founder</h2>
-                <h3>Shimshon Gavriel Fisher</h3>
-                <p>
-                    CompSci grad with a knack for making people lazy by getting their work done for them — automatically.
-                </p>
-                <p class="cheeky">
-                    If there's a button that can be pushed, a form that can be filled, or a call that can be answered... why should you have to do it? 😏
-                </p>
-            </div>
+        <div class="dc-item">
+          <div class="dc-icon">✗</div>
+          <div>
+            <div class="dc-label">Generic bot personality</div>
+            <div class="dc-desc">Same robotic tone for every store. Customers know it's a bot.</div>
+          </div>
         </div>
-    </section>
+        <div class="dc-item">
+          <div class="dc-icon">✗</div>
+          <div>
+            <div class="dc-label">Can't handle objections</div>
+            <div class="dc-desc">"Lab-grown means fake" or "too expensive" ends the conversation.</div>
+          </div>
+        </div>
+        <div class="dc-item">
+          <div class="dc-icon">✗</div>
+          <div>
+            <div class="dc-label">You manage everything</div>
+            <div class="dc-desc">Updates, optimisation, and troubleshooting are on your plate.</div>
+          </div>
+        </div>
+        <div class="dc-item">
+          <div class="dc-icon">✗</div>
+          <div>
+            <div class="dc-label">Flat fee regardless</div>
+            <div class="dc-desc">You pay the same whether it sells one piece or a hundred.</div>
+          </div>
+        </div>
+      </div>
 
-    <footer>
-        <div class="footer-logo">AMIRA</div>
-        <div class="footer-tagline">Human Software Resources</div>
-        <p class="footer-text">© 2025 Amira</p>
-        <p class="footer-text" style="margin-top: 6px;">Built in South Africa 🇿🇦</p>
-    </footer>
+      <div class="dc us fade-up">
+        <div class="dc-header">AMIRA Concierge</div>
+        <div class="dc-item">
+          <div class="dc-icon">✓</div>
+          <div>
+            <div class="dc-label">Fully done for you</div>
+            <div class="dc-desc">We build, install, and manage everything. You paste one line of code.</div>
+          </div>
+        </div>
+        <div class="dc-item">
+          <div class="dc-icon">✓</div>
+          <div>
+            <div class="dc-label">Your brand voice, trained</div>
+            <div class="dc-desc">Sounds like your warmest team member. Knows every piece and talking point.</div>
+          </div>
+        </div>
+        <div class="dc-item">
+          <div class="dc-icon">✓</div>
+          <div>
+            <div class="dc-label">Closes like a real salesperson</div>
+            <div class="dc-desc">Explains lab-grown vs. mined honestly, downsells gracefully, books store visits.</div>
+          </div>
+        </div>
+        <div class="dc-item">
+          <div class="dc-icon">✓</div>
+          <div>
+            <div class="dc-label">We optimise weekly</div>
+            <div class="dc-desc">We read transcripts, refine the AI, and email you daily reports.</div>
+          </div>
+        </div>
+        <div class="dc-item">
+          <div class="dc-icon">✓</div>
+          <div>
+            <div class="dc-label">Aligned with your success</div>
+            <div class="dc-desc">Our pricing is built so we only win when you do.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        function toggleIndustry(header) {
-            const item = header.parentElement;
-            const wasOpen = item.classList.contains('open');
-            
-            document.querySelectorAll('.industry-item').forEach(i => {
-                i.classList.remove('open');
-            });
-            
-            if (!wasOpen) {
-                item.classList.add('open');
-            }
-        }
+<!-- PROOF -->
+<section class="proof">
+  <div class="proof-inner">
+    <div class="proof-qm">"</div>
+    <blockquote>Jewelry is almost never a casual purchase. It marks engagements, anniversaries, grief, and milestones. A customer arriving at your website late at night is often in a heightened emotional state. A static website cannot meet them there. AMIRA can.</blockquote>
+    <p class="proof-attr">— The thesis behind everything we build</p>
+    <div class="proof-stats">
+      <div>
+        <div class="ps-num">12.3%</div>
+        <div class="ps-label">Chat-to-Purchase Rate</div>
+      </div>
+      <div>
+        <div class="ps-num">+240%</div>
+        <div class="ps-label">Apparel Conversion Lift</div>
+      </div>
+      <div>
+        <div class="ps-num">+307%</div>
+        <div class="ps-label">Beauty Conversion Lift</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        document.getElementById('start-voice-demo').addEventListener('click', function() {
-            const voiceBtn = document.getElementById('start-voice-call');
-            if (voiceBtn) {
-                voiceBtn.click();
-            } else {
-                const launcher = document.getElementById('safa-chat-launcher');
-                if (launcher) launcher.click();
-            }
-        });
-    </script>
+<!-- INSIGHT ENGINE -->
+<section class="insight">
+  <div class="insight-inner">
+    <div class="insight-text">
+      <div class="section-label">The insight engine</div>
+      <h2>Your customers are telling you everything. Are you listening?</h2>
+      <p>Every AMIRA conversation is captured and summarised. For the first time, you have visibility into every customer interaction — not just the ones that made it to the till.</p>
+      <p>What products keep coming up that you don't stock? What objections are quietly killing sales? What questions confuse customers most? AMIRA tells you — every single morning.</p>
+    </div>
+    <div class="insight-example fade-up">
+      <h4>Monthly Digest — Sample Insight</h4>
+      <div class="insight-bar">
+        <div class="insight-bar-fill" style="width:75%"></div>
+        <div class="insight-bar-label">Yellow gold rings — 40 enquiries</div>
+      </div>
+      <div class="insight-bar">
+        <div class="insight-bar-fill" style="width:45%"></div>
+        <div class="insight-bar-label">Lab-grown confusion — 24 enquiries</div>
+      </div>
+      <div class="insight-bar">
+        <div class="insight-bar-fill" style="width:30%"></div>
+        <div class="insight-bar-label">Ring sizing help — 16 enquiries</div>
+      </div>
+      <div class="insight-bar-note">A store owner noticed 40 enquiries about yellow gold engagement rings — a category she barely carried. She placed a small order. It sold out in three weeks.</div>
+    </div>
+  </div>
+</section>
 
-    <script src="amira-widget.js"></script>
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="team-inner">
+    <div class="section-label" style="justify-content:center">The people</div>
+    <h2>Who's behind AMIRA</h2>
+    <p class="team-sub">Small team. Big obsession with making jewelry stores sell more through better conversations.</p>
+    <div class="team-grid">
+      <div class="tm fade-up">
+        <div class="tm-photo"><div class="tm-initials">S</div></div>
+        <h3>Shimshon Gavriel Fisher</h3>
+        <div class="tm-role">Founder</div>
+        <p class="tm-bio">Applied Mathematics (Wits). Builds AI systems that handle sales, support, and operations so business owners can focus on what matters.</p>
+      </div>
+      <!-- Placeholder slots for incoming team -->
+      <div class="tm-placeholder fade-up">
+        <div class="tm-ph-circle"><span>You?</span></div>
+        <p>We're growing. Get in touch.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="final-cta-inner">
+    <h2>Your competitors' customers are being helped right now. Are <em>yours?</em></h2>
+    <p>Every visitor who leaves without buying is a conversation that never happened. Let's change that — starting with a free pilot.</p>
+    <p class="final-cta-note">Free pilot · No contracts · We only win when you do</p>
+    <a href="https://calendly.com/shimshongfisher/30min" class="btn-primary" target="_blank">Meet Your Digital Salesperson</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">AMIRA</div>
+    <div class="footer-sub">Human Software Resources</div>
+  </div>
+  <div class="footer-links">
+    <a href="mailto:shimshon@amirahsr.org">Contact</a>
+    <a href="/ai-staff.html">AI Staff Services</a>
+    <a href="https://calendly.com/shimshongfisher/30min" target="_blank">Book a Call</a>
+  </div>
+  <div class="footer-copy">© 2026 AMIRA</div>
+</footer>
+
+<script>
+  window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50)},{passive:true});
+  const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){const siblings=en.target.parentElement.querySelectorAll('.fade-up');const idx=Array.from(siblings).indexOf(en.target);en.target.style.transitionDelay=`${idx*.08}s`;en.target.classList.add('visible');obs.unobserve(en.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.fade-up').forEach(el=>obs.observe(el));
+</script>
 </body>
 </html>

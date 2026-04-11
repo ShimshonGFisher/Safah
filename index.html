@@ -139,7 +139,7 @@
       .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); margin-top: 56px; }
       .feat { background: var(--ivory); padding: 44px 36px; transition: background 0.25s; }
       .feat:hover { background: color-mix(in srgb, var(--cream) 50%, var(--ivory)); }
-      .feat-icon { font-size: 26px; margin-bottom: 18px; display: block; }
+      .feat-icon {   display: block; margin-bottom: 22px;   width: 32px; height: 32px;   color: var(--champagne); } .feat-icon svg { width: 100%; height: 100%; display: block; }  /* features grid — now 3 columns for 6 cards */ .features { grid-template-columns: repeat(3, 1fr) !important; } .feat-group {   grid-column: 1 / -1;   background: var(--ivory);   padding: 32px 36px 8px;   font-family: var(--f-ui); font-size: 9.5px;   letter-spacing: 3.5px; text-transform: uppercase;   color: var(--champagne);   display: flex; align-items: center; gap: 14px; } .feat-group::before, .feat-group::after {   content: ''; flex: 1; height: 0.5px;   background: linear-gradient(90deg, transparent, var(--champ-light), transparent); }
       .feat-title { font-family: var(--f-display); font-size: 20px; font-weight: 500; margin-bottom: 10px; }
       .feat-desc { font-family: var(--f-body); font-size: 17px; font-weight: 300; color: var(--taupe); line-height: 1.6; }
 
@@ -260,7 +260,8 @@
         .nav .links { display: none; }
         .hamburger { display: flex; }
         .stats { grid-template-columns: 1fr; }
-        .features { grid-template-columns: 1fr; }
+        .features { grid-template-columns: 1fr !important; }
+        .feat-group { padding: 24px 28px 4px; font-size: 9px; letter-spacing: 3px; }        
         .steps { grid-template-columns: 1fr; gap: 44px; }
         .team-grid { grid-template-columns: repeat(5, 1fr); gap: 32px 16px; max-width: 680px; }
         .quote-band { padding: 80px 24px; }
@@ -472,36 +473,81 @@
   </section>
 
   <!-- FEATURES -->
-  <section class="section" id="features">
-    <div class="wrap text-center sv">
-      <div class="label">What AMIRA Does</div>
-      <h2 class="heading">Your finest salesperson — <em>at every&nbsp;hour.</em></h2>
-    </div>
-    <div class="wrap">
-      <div class="features">
-        <div class="feat sv sv-d1">
-          <span class="feat-icon">💰</span>
-          <h3 class="feat-title">Recovers Lost Carts</h3>
-          <p class="feat-desc">7 out of 10 shoppers leave before checkout. AMIRA follows up on WhatsApp within minutes — recovering sales that would have walked away forever.</p>
-        </div>
-        <div class="feat sv sv-d2">
-          <span class="feat-icon">🌙</span>
-          <h3 class="feat-title">Closes Sales While You Sleep</h3>
-          <p class="feat-desc">Most jewellery enquiries happen after hours. AMIRA answers in seconds, 24/7, turning late-night browsers into confirmed orders by morning.</p>
-        </div>
-        <div class="feat sv sv-d3">
-          <span class="feat-icon">📈</span>
-          <h3 class="feat-title">Lifts Every Order Value</h3>
-          <p class="feat-desc">Studs become sets. Rings become stacks. AMIRA cross-sells the way your best floor associate would — adding meaningful margin to every basket.</p>
-        </div>
-        <div class="feat sv sv-d4">
-          <span class="feat-icon">🏬</span>
-          <h3 class="feat-title">Drives In-Store Visits</h3>
-          <p class="feat-desc">For high-value pieces, she books appointments and sends customers through your door — the emotional close still happens in person.</p>
-        </div>
+<section class="section" id="features">
+  <div class="wrap text-center sv">
+    <div class="label">What AMIRA Does</div>
+    <h2 class="heading">Your finest associate — <em>at every&nbsp;hour.</em></h2>
+  </div>
+  <div class="wrap">
+    <div class="features">
+
+      <div class="feat-group sv">Before the Sale</div>
+
+      <div class="feat sv sv-d1">
+        <span class="feat-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 8h22l-2 14H7L5 8z"/><circle cx="12" cy="27" r="1.5"/><circle cx="22" cy="27" r="1.5"/><path d="M5 8L4 4H1"/>
+          </svg>
+        </span>
+        <h3 class="feat-title">The Cart Left Behind</h3>
+        <p class="feat-desc">Seven of every ten carts are abandoned before checkout. AMIRA follows up by name, on WhatsApp, within minutes — recovering the sale before the moment passes.</p>
       </div>
+
+      <div class="feat sv sv-d2">
+        <span class="feat-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 18a8 8 0 1 1-8-12 6 6 0 0 0 8 12z"/>
+          </svg>
+        </span>
+        <h3 class="feat-title">The Midnight Browser</h3>
+        <p class="feat-desc">Most jewellery enquiries arrive after hours, when your team is asleep. AMIRA answers in seconds, in your voice — turning quiet curiosity into morning orders.</p>
+      </div>
+
+      <div class="feat sv sv-d3">
+        <span class="feat-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="16,4 26,12 16,28 6,12"/><line x1="6" y1="12" x2="26" y2="12"/><line x1="16" y1="4" x2="11" y2="12"/><line x1="16" y1="4" x2="21" y2="12"/>
+          </svg>
+        </span>
+        <h3 class="feat-title">The Single-Item Basket</h3>
+        <p class="feat-desc">Studs become sets. Rings become stacks. AMIRA suggests the matching piece the way your finest associate would — quietly, beautifully, profitably.</p>
+      </div>
+
+      <div class="feat-group sv">After the Sale</div>
+
+      <div class="feat sv sv-d1">
+        <span class="feat-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="10" width="18" height="14"/><path d="M22 14h5l3 4v6h-8"/><circle cx="10" cy="26" r="2"/><circle cx="24" cy="26" r="2"/>
+          </svg>
+        </span>
+        <h3 class="feat-title">The "Where Is My Order"</h3>
+        <p class="feat-desc">The question that floods every inbox. AMIRA tracks every parcel from packed to delivered — in real time, on WhatsApp, before the customer ever has to ask.</p>
+      </div>
+
+      <div class="feat sv sv-d2">
+        <span class="feat-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 12a10 10 0 0 1 18-3"/><polyline points="24 4 24 9 19 9"/><path d="M26 20a10 10 0 0 1-18 3"/><polyline points="8 28 8 23 13 23"/>
+          </svg>
+        </span>
+        <h3 class="feat-title">The Return That Isn't</h3>
+        <p class="feat-desc">Returns eat margin alive. AMIRA handles them gently — and offers an exchange first. Half your refunds quietly become new sales instead.</p>
+      </div>
+
+      <div class="feat sv sv-d3">
+        <span class="feat-icon">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 27s-10-6-10-14a6 6 0 0 1 10-4 6 6 0 0 1 10 4c0 8-10 14-10 14z"/>
+          </svg>
+        </span>
+        <h3 class="feat-title">The Customer You Forgot</h3>
+        <p class="feat-desc">Every buyer has an anniversary, a birthday, a season. AMIRA remembers them all — and reaches out at exactly the right moment, year after year.</p>
+      </div>
+
     </div>
-  </section>
+  </div>
+</section>
 
   <!-- HOW -->
   <section class="how-band" id="how">

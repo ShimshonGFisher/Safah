@@ -152,8 +152,8 @@
       .step-title { font-family: var(--f-display); font-size: 20px; font-weight: 500; color: var(--ivory); margin-bottom: 12px; }
       .step-desc { font-family: var(--f-body); font-size: 17px; font-weight: 300; color: var(--champ-light); line-height: 1.6; }
 
-      /* TEAM */
-      .team-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 40px 24px; margin-top: 56px; max-width: 1000px; margin-inline: auto; }
+      /* TEAM — now 6 cards, updated grid */
+      .team-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 40px 20px; margin-top: 56px; max-width: 1100px; margin-inline: auto; }
       .team-card { text-align: center; }
       /*
         === HOW TO ADD PHOTOS LATER ===
@@ -225,6 +225,92 @@
       [popover].mob-menu:popover-open { opacity: 1; translate: 0 0; }
       [popover].mob-menu .link { font-size: 13px; letter-spacing: 3.5px; }
       @starting-style { [popover].mob-menu:popover-open { opacity: 0; translate: 0 -8px; } }
+
+      /* ─── BIO MODAL ─── */
+      .team-card { cursor: pointer; }
+      [popover].bio-modal {
+        inset: 0;
+        border: none;
+        background: rgba(44, 36, 32, 0.55);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        padding: 24px;
+        width: 100%; height: 100%;
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s var(--ease), display 0.3s allow-discrete, overlay 0.3s allow-discrete;
+      }
+      [popover].bio-modal:popover-open { opacity: 1; }
+      @starting-style { [popover].bio-modal:popover-open { opacity: 0; } }
+      [popover].bio-modal::backdrop { background: transparent; }
+
+      .bio-card {
+        background: var(--ivory);
+        border: 1px solid var(--border);
+        max-width: 520px; width: 100%;
+        padding: 56px 48px 48px;
+        position: relative;
+        text-align: center;
+        box-shadow: 0 32px 80px rgba(44, 36, 32, 0.25);
+        transform: scale(0.96);
+        transition: transform 0.35s var(--ease);
+      }
+      [popover].bio-modal:popover-open .bio-card { transform: scale(1); }
+      @starting-style { [popover].bio-modal:popover-open .bio-card { transform: scale(0.96); } }
+
+      .bio-close {
+        position: absolute; top: 16px; right: 16px;
+        width: 36px; height: 36px;
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        color: var(--taupe); background: transparent;
+        font-family: var(--f-ui); font-size: 22px; line-height: 1;
+        transition: background 0.2s, color 0.2s;
+      }
+      .bio-close:hover { background: var(--cream); color: var(--dark); }
+
+      .bio-avatar {
+        width: 120px; height: 120px; border-radius: 50%;
+        border: 1px solid var(--champ-light); background: var(--cream);
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 24px; position: relative; overflow: hidden;
+      }
+      .bio-avatar::before {
+        content: attr(data-initial);
+        font-family: var(--f-display); font-size: 40px; font-weight: 400;
+        color: var(--champagne); letter-spacing: 1px;
+      }
+      .bio-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
+
+      .bio-name {
+        font-family: var(--f-display); font-size: 26px; font-weight: 500;
+        color: var(--dark); margin-bottom: 8px;
+      }
+      .bio-role {
+        font-family: var(--f-ui); font-size: 10px; letter-spacing: 3px;
+        text-transform: uppercase; color: var(--champagne); margin-bottom: 28px;
+      }
+      .bio-divider {
+        width: 40px; height: 0.5px;
+        background: linear-gradient(90deg, transparent, var(--champ-light), transparent);
+        margin: 0 auto 28px;
+      }
+      .bio-text {
+        font-family: var(--f-body); font-size: 17px; font-weight: 300;
+        line-height: 1.7; color: var(--dark-soft);
+        max-width: 400px; margin: 0 auto;
+      }
+      .bio-text em {
+        font-style: italic; color: var(--taupe);
+      }
+
+      @media (max-width: 640px) {
+        .bio-card { padding: 48px 28px 36px; }
+        .bio-avatar { width: 96px; height: 96px; margin-bottom: 20px; }
+        .bio-avatar::before { font-size: 32px; }
+        .bio-name { font-size: 22px; }
+        .bio-text { font-size: 16px; line-height: 1.6; }
+      }
     }
 
     @layer scroll-driven {
@@ -235,6 +321,7 @@
       .sv-d3 { animation-range: entry 6% entry 34%; }
       .sv-d4 { animation-range: entry 8% entry 36%; }
       .sv-d5 { animation-range: entry 10% entry 38%; }
+      .sv-d6 { animation-range: entry 12% entry 40%; }
       .hero-glow { animation: glow-drift linear both; animation-timeline: scroll(); animation-range: 0vh 100vh; }
       @keyframes glow-drift { from { translate: -50% -50%; scale: 1; opacity: 1; } to { translate: -50% -20%; scale: 1.15; opacity: 0.25; } }
       @supports not (animation-timeline: view()) {
@@ -252,7 +339,7 @@
         .section { padding: 96px 24px; }
         .how-band { padding: 96px 24px; }
         .cta-section { padding: 96px 24px; }
-        .team-grid { gap: 36px 20px; }
+        .team-grid { grid-template-columns: repeat(3, 1fr); gap: 40px 20px; max-width: 720px; }
       }
 
       /* Tablet / large mobile — collapse nav, stack grids */
@@ -261,9 +348,9 @@
         .hamburger { display: flex; }
         .stats { grid-template-columns: 1fr; }
         .features { grid-template-columns: 1fr !important; }
-        .feat-group { padding: 24px 28px 4px; font-size: 9px; letter-spacing: 3px; }        
+        .feat-group { padding: 24px 28px 4px; font-size: 9px; letter-spacing: 3px; }
         .steps { grid-template-columns: 1fr; gap: 44px; }
-        .team-grid { grid-template-columns: repeat(5, 1fr); gap: 32px 16px; max-width: 680px; }
+        .team-grid { grid-template-columns: repeat(3, 1fr); gap: 32px 16px; max-width: 600px; }
         .quote-band { padding: 80px 24px; }
         .hero-trust { margin-top: 56px; }
       }
@@ -317,17 +404,12 @@
         .step-title { font-size: 19px; margin-bottom: 10px; }
         .step-desc { font-size: 16px; line-height: 1.55; }
 
-        /* Team — 2 cols, 5th card centered on its own row */
+        /* Team — 2 cols on mobile, clean rows of 3 (6 total) */
         .team-grid {
           grid-template-columns: repeat(2, 1fr);
           gap: 40px 18px;
           max-width: 360px;
           margin-top: 44px;
-        }
-        .team-grid .team-card:nth-child(5) {
-          grid-column: 1 / -1;
-          max-width: 150px;
-          margin: 0 auto;
         }
         .team-avatar { width: 76px; height: 76px; margin-bottom: 14px; }
         .team-avatar::before { font-size: 24px; }
@@ -393,6 +475,7 @@
       <a href="#how" class="link">How</a>
       <a href="#team" class="link">Team</a>
       <a href="https://api.amirahsr.org/demos/bluewhite" class="link" target="_blank" rel="noopener">Try Live</a>
+      <a href="https://royale.amirahsr.org" class="link" target="_blank" rel="noopener">Team Login</a>
       <a href="https://calendly.com/shimshon-amirahsr/interview-amira" class="btn" target="_blank" rel="noopener" style="padding:11px 24px;min-height:auto">Book a Call</a>
     </div>
     <button class="hamburger" popovertarget="mobMenu" aria-label="Menu">
@@ -407,7 +490,20 @@
     <a href="#how" class="link" onclick="document.getElementById('mobMenu').hidePopover()">How</a>
     <a href="#team" class="link" onclick="document.getElementById('mobMenu').hidePopover()">Team</a>
     <a href="https://api.amirahsr.org/demos/bluewhite" class="link" target="_blank" rel="noopener">Try Live</a>
+    <a href="https://royale.amirahsr.org" class="link" target="_blank" rel="noopener">Team Login</a>
     <a href="https://calendly.com/shimshon-amirahsr/interview-amira" class="btn filled" target="_blank" rel="noopener">Book a Call</a>
+  </div>
+
+  <!-- BIO MODAL — opens when any team card is clicked -->
+  <div popover class="bio-modal" id="bioModal" role="dialog" aria-labelledby="bioName">
+    <div class="bio-card">
+      <button class="bio-close" popovertarget="bioModal" popovertargetaction="hide" aria-label="Close bio">&times;</button>
+      <div class="bio-avatar" id="bioAvatar" data-initial="?"></div>
+      <div class="bio-name" id="bioName">—</div>
+      <div class="bio-role" id="bioRole">—</div>
+      <div class="bio-divider"></div>
+      <div class="bio-text" id="bioText">—</div>
+    </div>
   </div>
 
   <!-- HERO -->
@@ -583,38 +679,45 @@
     <div class="team-grid">
 
       <!-- SHIMSHON — to add photo, drop: <img src="/team/shimshon.jpg" alt="Shimshon"> inside .team-avatar -->
-      <div class="team-card sv sv-d1">
+      <div class="team-card sv sv-d1" data-bio-key="shimshon" role="button" tabindex="0" aria-label="View Shimshon's bio">
         <div class="team-avatar" data-initial="S"></div>
         <div class="team-name">Shimshon</div>
         <div class="team-role">Founder · Jerusalem</div>
       </div>
 
       <!-- TALI -->
-      <div class="team-card sv sv-d2">
+      <div class="team-card sv sv-d2" data-bio-key="tali" role="button" tabindex="0" aria-label="View Tali's bio">
         <div class="team-avatar" data-initial="T"></div>
         <div class="team-name">Tali</div>
         <div class="team-role">Sales · Johannesburg</div>
       </div>
 
       <!-- KIARA -->
-      <div class="team-card sv sv-d3">
+      <div class="team-card sv sv-d3" data-bio-key="kiara" role="button" tabindex="0" aria-label="View Kiara's bio">
         <div class="team-avatar" data-initial="K"></div>
         <div class="team-name">Kiara</div>
         <div class="team-role">Partnerships · Cape Town</div>
       </div>
 
       <!-- CHAIM -->
-      <div class="team-card sv sv-d4">
+      <div class="team-card sv sv-d4" data-bio-key="chaim" role="button" tabindex="0" aria-label="View Chaim's bio">
         <div class="team-avatar" data-initial="C"></div>
         <div class="team-name">Chaim</div>
-        <div class="team-role">Europe · Zürich</div>
+        <div class="team-role">Europe Lead · Zürich</div>
       </div>
 
       <!-- QUINN -->
-      <div class="team-card sv sv-d5">
+      <div class="team-card sv sv-d5" data-bio-key="quinn" role="button" tabindex="0" aria-label="View Quinn's bio">
         <div class="team-avatar" data-initial="Q"></div>
         <div class="team-name">Quinn</div>
-        <div class="team-role">North America · Canada</div>
+        <div class="team-role">Francophone Lead · Montréal</div>
+      </div>
+
+      <!-- VICTORIA -->
+      <div class="team-card sv sv-d6" data-bio-key="victoria" role="button" tabindex="0" aria-label="View Victoria's bio">
+        <div class="team-avatar" data-initial="V"></div>
+        <div class="team-name">Victoria</div>
+        <div class="team-role">North America Lead · Toronto</div>
       </div>
 
     </div>
@@ -643,6 +746,7 @@
     <div class="foot-links">
       <a href="mailto:shimshon@amirahsr.org" class="foot-link">Contact</a>
       <a href="https://calendly.com/shimshon-amirahsr/interview-amira" class="foot-link" target="_blank" rel="noopener">Book a Call</a>
+      <a href="https://royale.amirahsr.org" class="foot-link" target="_blank" rel="noopener">Team Login</a>
     </div>
     <div class="foot-copy">&copy; 2026 AMIRA</div>
   </footer>
@@ -678,6 +782,58 @@
     if (window.matchMedia('(min-width: 641px)').matches) {
       setTimeout(()=>{if(!o)fab.click()},4000);
     }
+
+    /* ─── BIO MODAL ─── */
+    const bios = {
+      shimshon: {
+        initial: 'S', name: 'Shimshon', role: 'Founder · Jerusalem',
+        text: 'Eccentric CompSci and Applied Math grad who had a diamond ring land on his head — and now wants to share the secret to expert communication and customer service with the world.'
+      },
+      tali: {
+        initial: 'T', name: 'Tali', role: 'Sales · Johannesburg',
+        text: '<em>Bio coming soon.</em>'
+      },
+      kiara: {
+        initial: 'K', name: 'Kiara', role: 'Partnerships · Cape Town',
+        text: '<em>Bio coming soon.</em>'
+      },
+      chaim: {
+        initial: 'C', name: 'Chaim', role: 'Europe Lead · Zürich',
+        text: '<em>Bio coming soon.</em>'
+      },
+      quinn: {
+        initial: 'Q', name: 'Quinn', role: 'Francophone Lead · Montréal',
+        text: '<em>Bio coming soon.</em>'
+      },
+      victoria: {
+        initial: 'V', name: 'Victoria', role: 'North America Lead · Toronto',
+        text: '<em>Bio coming soon.</em>'
+      }
+    };
+
+    const bioModal = document.getElementById('bioModal');
+    const bioAvatar = document.getElementById('bioAvatar');
+    const bioName = document.getElementById('bioName');
+    const bioRole = document.getElementById('bioRole');
+    const bioText = document.getElementById('bioText');
+
+    function openBio(key) {
+      const b = bios[key];
+      if (!b) return;
+      bioAvatar.setAttribute('data-initial', b.initial);
+      bioName.textContent = b.name;
+      bioRole.textContent = b.role;
+      bioText.innerHTML = b.text;
+      bioModal.showPopover();
+    }
+
+    document.querySelectorAll('.team-card[data-bio-key]').forEach(card => {
+      const key = card.getAttribute('data-bio-key');
+      card.addEventListener('click', () => openBio(key));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openBio(key); }
+      });
+    });
   </script>
 
 </body>

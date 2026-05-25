@@ -346,7 +346,7 @@
     const ROYALE_LOGIN = 'https://royale.amirahsr.org/api/auth/sign-in/email';
     const ROYALE_DEST  = 'https://royale.amirahsr.org';
     const JLIC_LOGIN   = 'https://secretary.amirahsr.org/api/auth/login';
-    const JLIC_DEST    = 'https://jlic.amirahsr.org';
+    const JLIC_DEST    = 'https://jlic.amirahsr.org/auth/handoff';
 
     const form     = document.getElementById('login-form');
     const btn      = document.getElementById('submit-btn');
@@ -430,7 +430,7 @@
       //    isn't sent to the server or logged in CDN/access logs)
       const jlicToken = await tryJlic(username, password);
       if (jlicToken) {
-        window.location.href = JLIC_DEST + '/#token=' + encodeURIComponent(jlicToken);
+        window.location.href = JLIC_DEST + '#token=' + encodeURIComponent(jlicToken);
         return;
       }
 

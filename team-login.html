@@ -24,6 +24,7 @@
       --dark:          #2C2420;
       --border:        #E8DFD0;
       --error:         #B53A30;
+      --success:       #4A7C59;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -43,8 +44,8 @@
       flex-direction: column;
       min-height: 100vh;
       background:
-        radial-gradient(circle at 20% 10%, rgba(184, 149, 106, 0.07), transparent 50%),
-        radial-gradient(circle at 80% 90%, rgba(184, 149, 106, 0.05), transparent 50%),
+        radial-gradient(ellipse at 20% 0%, rgba(184, 149, 106, 0.08), transparent 60%),
+        radial-gradient(ellipse at 80% 100%, rgba(184, 149, 106, 0.06), transparent 60%),
         var(--ivory);
     }
 
@@ -88,9 +89,7 @@
       transition: color 0.2s;
     }
 
-    .back-link:hover {
-      color: var(--dark);
-    }
+    .back-link:hover { color: var(--dark); }
 
     /* ─── main ─── */
     main {
@@ -155,13 +154,83 @@
       font-size: 16px;
       color: var(--taupe);
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 36px;
       font-style: italic;
     }
 
-    /* ─── form ─── */
-    .field {
+    /* ─── OAuth buttons ─── */
+    .oauth-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .oauth-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      padding: 15px 20px;
+      background: #fff;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--dark);
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .oauth-btn:hover {
+      background: var(--champ-pale);
+      border-color: var(--champagne);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px -4px rgba(184, 149, 106, 0.25);
+    }
+
+    .oauth-btn:active {
+      transform: translateY(0);
+      box-shadow: none;
+    }
+
+    .oauth-btn svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ─── divider ─── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
       margin-bottom: 28px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .divider span {
+      font-family: 'Outfit', sans-serif;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: var(--taupe);
+    }
+
+    /* ─── magic link form ─── */
+    .magic-section { position: relative; }
+
+    .field {
+      margin-bottom: 24px;
     }
 
     label {
@@ -192,10 +261,14 @@
       border-bottom-color: var(--champagne);
     }
 
+    input::placeholder {
+      color: var(--border);
+      font-style: italic;
+    }
+
     /* ─── button ─── */
-    button {
+    .btn-primary {
       width: 100%;
-      margin-top: 12px;
       padding: 16px;
       background: var(--dark);
       color: var(--ivory);
@@ -206,18 +279,21 @@
       text-transform: uppercase;
       letter-spacing: 0.32em;
       cursor: pointer;
-      transition: background 0.2s, transform 0.05s;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    button:hover:not(:disabled) {
+    .btn-primary:hover:not(:disabled) {
       background: var(--champagne-deep);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px -6px rgba(154, 122, 86, 0.4);
     }
 
-    button:active:not(:disabled) {
-      transform: translateY(1px);
+    .btn-primary:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: none;
     }
 
-    button:disabled {
+    .btn-primary:disabled {
       opacity: 0.6;
       cursor: not-allowed;
     }
@@ -235,6 +311,78 @@
     }
 
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ─── magic sent state ─── */
+    .magic-sent {
+      text-align: center;
+      padding: 20px 0;
+      animation: fadeUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .magic-sent .check-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--champ-pale), var(--cream));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .magic-sent .check-icon svg {
+      width: 22px;
+      height: 22px;
+      color: var(--champagne);
+      stroke-dasharray: 30;
+      stroke-dashoffset: 30;
+      animation: drawCheck 0.6s 0.3s ease forwards;
+    }
+
+    @keyframes drawCheck {
+      to { stroke-dashoffset: 0; }
+    }
+
+    .magic-sent h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .magic-sent p {
+      font-size: 15px;
+      color: var(--taupe);
+      font-style: italic;
+      margin-bottom: 4px;
+    }
+
+    .magic-sent .sent-email {
+      font-style: normal;
+      font-weight: 500;
+      color: var(--dark);
+    }
+
+    .text-btn {
+      background: none;
+      border: none;
+      font-family: 'Outfit', sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--champagne);
+      cursor: pointer;
+      margin-top: 20px;
+      padding: 8px 16px;
+      transition: color 0.2s;
+    }
+
+    .text-btn:hover { color: var(--champagne-deep); }
 
     /* ─── error ─── */
     .error {
@@ -260,6 +408,8 @@
       75%      { transform: translateX(4px); }
     }
 
+    .hidden { display: none !important; }
+
     /* ─── footer ─── */
     footer {
       padding: 24px 40px;
@@ -273,95 +423,204 @@
 
     footer span { color: var(--champagne); }
 
+    /* ─── ambient glow (purely decorative) ─── */
+    .ambient {
+      position: fixed;
+      top: -200px;
+      right: -200px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(184, 149, 106, 0.06), transparent 70%);
+      pointer-events: none;
+      animation: drift 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift {
+      from { transform: translate(0, 0); }
+      to   { transform: translate(-60px, 60px); }
+    }
+
+    /* ─── hummingbird ─── */
+    .hummingbird {
+      display: block;
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 18px;
+      animation: birdFloat 3s ease-in-out infinite;
+    }
+
+    .hummingbird .body {
+      fill: var(--champagne);
+      opacity: 0.9;
+    }
+
+    .hummingbird .wing {
+      fill: var(--champagne);
+      opacity: 0.7;
+      transform-origin: 12px 11px;
+      animation: flutter 0.3s ease-in-out infinite alternate;
+    }
+
+    .hummingbird .wing-back {
+      animation-delay: 0.05s;
+      opacity: 0.4;
+    }
+
+    @keyframes flutter {
+      from { transform: rotate(-15deg) scaleY(1); }
+      to   { transform: rotate(25deg) scaleY(0.85); }
+    }
+
+    @keyframes birdFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25%      { transform: translateY(-3px) rotate(1deg); }
+      75%      { transform: translateY(2px) rotate(-0.5deg); }
+    }
+
     /* ─── mobile ─── */
     @media (max-width: 520px) {
       header { padding: 20px 24px; }
       footer { padding: 20px 24px; }
       .card  { padding: 44px 28px 36px; }
       h1     { font-size: 28px; }
+      .oauth-btn { padding: 13px 16px; font-size: 12px; }
     }
   </style>
 </head>
 <body>
+  <div class="ambient"></div>
+
   <header>
     <a href="/" class="wordmark">
       AMIRA
       <em>Human Software Resources</em>
     </a>
-    <a href="/" class="back-link">← Back</a>
+    <a href="/" class="back-link">&larr; Back</a>
   </header>
 
   <main>
     <div class="card">
+      <!-- Golden hummingbird — flutters as you arrive -->
+      <svg class="hummingbird" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- back wing -->
+        <ellipse class="wing wing-back" cx="15" cy="14" rx="9" ry="4" transform="rotate(-20 15 14)"/>
+        <!-- body -->
+        <path class="body" d="M22 10c3 0 6 2 7 5 1 3 0 6-1 8l-4 6c-1 1.5-2.5 2-3.5 2s-2-.5-2.5-1.5l-2-4c-1-2-1-5 0-7 1-3 3.5-5 6-5z"/>
+        <!-- beak -->
+        <path class="body" d="M29 14.5l5-2.5c.5-.2.5.3.2.5l-4.5 3.5c-.3-.6-.5-1-.7-1.5z"/>
+        <!-- front wing -->
+        <ellipse class="wing" cx="18" cy="13" rx="10" ry="4.5" transform="rotate(-10 18 13)"/>
+        <!-- tail -->
+        <path class="body" d="M18 29l-2 4c-.3.6-.1 1 .3.8l3-2.5c-.4-.5-.9-1.3-1.3-2.3z" opacity="0.7"/>
+        <!-- eye -->
+        <circle cx="26" cy="13" r="1" fill="#2C2420"/>
+      </svg>
       <div class="eyebrow">Team Access</div>
       <h1>Welcome <em>back</em></h1>
       <p class="subhead">Sign in to continue.</p>
 
-      <form id="login-form" novalidate>
-        <div class="field">
-          <label for="username">Username</label>
-          <input type="text" id="username" name="username" autocomplete="username" required spellcheck="false" autocapitalize="off" />
-        </div>
-
-        <div class="field">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" autocomplete="current-password" required />
-        </div>
-
-        <button type="submit" id="submit-btn">
-          <span id="btn-text">Sign In</span>
+      <!-- OAuth buttons -->
+      <div class="oauth-group">
+        <button class="oauth-btn" id="btn-google" type="button">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Continue with Google
         </button>
 
-        <div id="error" class="error" role="alert" aria-live="polite"></div>
-      </form>
+        <button class="oauth-btn" id="btn-apple" type="button">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+          </svg>
+          Continue with Apple
+        </button>
+      </div>
+
+      <!-- Divider -->
+      <div class="divider"><span>or</span></div>
+
+      <!-- Magic Link -->
+      <div class="magic-section" id="magic-section">
+        <form id="magic-form">
+          <div class="field">
+            <label for="magic-email">Email Address</label>
+            <input
+              type="email"
+              id="magic-email"
+              name="email"
+              autocomplete="email"
+              required
+              spellcheck="false"
+              autocapitalize="off"
+              placeholder="you@yourteam.com"
+            />
+          </div>
+          <button type="submit" class="btn-primary" id="magic-btn">
+            <span id="magic-btn-text">Send Magic Link</span>
+          </button>
+        </form>
+
+        <!-- Sent confirmation (hidden initially) -->
+        <div id="magic-sent" class="magic-sent hidden">
+          <div class="check-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 12 10 16 18 8"/>
+            </svg>
+          </div>
+          <h2>Check your inbox</h2>
+          <p>We sent a sign-in link to</p>
+          <p class="sent-email" id="sent-email"></p>
+          <button type="button" class="text-btn" id="magic-retry">Use a different email</button>
+        </div>
+      </div>
+
+      <!-- Error display -->
+      <div id="error" class="error" role="alert" aria-live="polite"></div>
     </div>
   </main>
 
   <footer>
-    AMIRA <span>·</span> Human Software Resources
+    AMIRA <span>&middot;</span> Human Software Resources
   </footer>
 
   <script>
     /* ============================================================
-       Team login — routes users to their product
+       Team Login — Google, Apple, Magic Link
        ============================================================
-
-       Strategy: try Royale (Better Auth) first, then JLIC (custom
-       JWT). Whichever accepts the credentials wins.
-
-       Backend requirements before this works:
-
-       1. Royale (royale.amirahsr.org): Better Auth needs CORS to
-          allow origin 'https://amirahsr.org' WITH credentials.
-          In your better-auth config, set:
-            trustedOrigins: ['https://amirahsr.org']
-          (or add the CORS middleware that matches your setup)
-
-       2. JLIC (secretary.amirahsr.org): the auth route needs CORS
-          to allow origin 'https://amirahsr.org'. Add @hono/cors
-          middleware on that route (no credentials needed since it
-          returns a bearer JWT in the body).
-
-       3. (Future) jlic.amirahsr.org needs DNS + Caddy + the JLIC
-          web frontend to actually exist. Until then, JLIC users
-          will land on a broken page. That's fine — only you and the
-          coordinators (max_sylvie@amira) are in there right now.
+       All auth flows route through the Amira platform API.
+       OAuth: simple redirect (browser navigates to provider).
+       Magic Link: POST email → "check inbox" → click link → session.
     ============================================================ */
 
-    const ROYALE_LOGIN = 'https://royale.amirahsr.org/api/auth/sign-in/email';
-    const ROYALE_DEST  = 'https://royale.amirahsr.org';
-    const JLIC_LOGIN   = 'https://secretary.amirahsr.org/api/auth/login';
-    const JLIC_DEST    = 'https://jlic.amirahsr.org/auth/handoff';
+    const AUTH_BASE = 'https://app.amirahsr.org';
 
-    const form     = document.getElementById('login-form');
-    const btn      = document.getElementById('submit-btn');
-    const btnText  = document.getElementById('btn-text');
-    const errorEl  = document.getElementById('error');
+    const magicForm    = document.getElementById('magic-form');
+    const magicBtn     = document.getElementById('magic-btn');
+    const magicBtnText = document.getElementById('magic-btn-text');
+    const magicEmail   = document.getElementById('magic-email');
+    const magicSent    = document.getElementById('magic-sent');
+    const sentEmailEl  = document.getElementById('sent-email');
+    const errorEl      = document.getElementById('error');
+
+    // ─── OAuth redirects ───────────────────────────────────────────
+
+    document.getElementById('btn-google').addEventListener('click', () => {
+      window.location.href = AUTH_BASE + '/auth/signin/google';
+    });
+
+    document.getElementById('btn-apple').addEventListener('click', () => {
+      window.location.href = AUTH_BASE + '/auth/signin/apple';
+    });
+
+    // ─── Magic Link ────────────────────────────────────────────────
 
     function showError(msg) {
       errorEl.textContent = msg;
       errorEl.classList.remove('show');
-      // restart animation
       void errorEl.offsetWidth;
       errorEl.classList.add('show');
     }
@@ -370,79 +629,75 @@
       errorEl.classList.remove('show');
     }
 
-    function setLoading(loading) {
-      btn.disabled = loading;
-      btnText.innerHTML = loading
-        ? '<span class="spinner"></span>Signing in…'
-        : 'Sign In';
+    function setMagicLoading(loading) {
+      magicBtn.disabled = loading;
+      magicBtnText.innerHTML = loading
+        ? '<span class="spinner"></span>Sending...'
+        : 'Send Magic Link';
     }
 
-    async function tryRoyale(email, password) {
-      try {
-        const res = await fetch(ROYALE_LOGIN, {
-          method: 'POST',
-          credentials: 'include',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password }),
-        });
-        return res.ok;
-      } catch (e) {
-        console.warn('Royale auth network/CORS error:', e);
-        return false;
-      }
-    }
-
-    async function tryJlic(email, password) {
-      try {
-        const res = await fetch(JLIC_LOGIN, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password }),
-        });
-        if (!res.ok) return null;
-        const data = await res.json();
-        return data.token || null;
-      } catch (e) {
-        console.warn('JLIC auth network/CORS error:', e);
-        return null;
-      }
-    }
-
-    form.addEventListener('submit', async (e) => {
+    magicForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       clearError();
 
-      const username = document.getElementById('username').value.trim();
-      const password = document.getElementById('password').value;
-
-      if (!username || !password) {
-        showError('Please enter your username and password.');
+      const email = magicEmail.value.trim();
+      if (!email) {
+        showError('Please enter your email address.');
         return;
       }
 
-      setLoading(true);
+      setMagicLoading(true);
 
-      // Note: backends still call the field "email" in their JSON contract,
-      // so we send what the user typed as the `email` key regardless of
-      // what we labelled it on the UI.
-      // 1. Royale (Better Auth — sets session cookie on royale subdomain)
-      if (await tryRoyale(username, password)) {
-        window.location.href = ROYALE_DEST;
-        return;
+      try {
+        const res = await fetch(AUTH_BASE + '/auth/magic-link', {
+          method: 'POST',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email }),
+        });
+
+        if (!res.ok) {
+          const data = await res.json().catch(() => ({}));
+          throw new Error(data.error || 'Something went wrong');
+        }
+
+        // Show success state
+        magicForm.classList.add('hidden');
+        sentEmailEl.textContent = email;
+        magicSent.classList.remove('hidden');
+      } catch (err) {
+        showError('Could not send the magic link. Please try again.');
+      } finally {
+        setMagicLoading(false);
       }
-
-      // 2. JLIC (returns JWT in body — passed via URL fragment so it
-      //    isn't sent to the server or logged in CDN/access logs)
-      const jlicToken = await tryJlic(username, password);
-      if (jlicToken) {
-        window.location.href = JLIC_DEST + '#token=' + encodeURIComponent(jlicToken);
-        return;
-      }
-
-      // Neither accepted
-      setLoading(false);
-      showError("That username and password don't match anything we recognise. Try again, or check with your team admin.");
     });
+
+    // Retry: show form again
+    document.getElementById('magic-retry').addEventListener('click', () => {
+      magicSent.classList.add('hidden');
+      magicForm.classList.remove('hidden');
+      magicEmail.value = '';
+      magicEmail.focus();
+    });
+
+    // ─── Handle error params from OAuth redirects ──────────────────
+
+    const params = new URLSearchParams(window.location.search);
+    const authError = params.get('error');
+    if (authError) {
+      const messages = {
+        google_denied: 'Google sign-in was cancelled.',
+        apple_denied: 'Apple sign-in was cancelled.',
+        google_failed: 'Google sign-in failed. Please try again.',
+        apple_failed: 'Apple sign-in failed. Please try again.',
+        invalid_state: 'Session expired. Please try again.',
+        missing_token: 'Invalid magic link.',
+        invalid_token: 'This magic link has expired or was already used.',
+      };
+      showError(messages[authError] || 'Something went wrong. Please try again.');
+      // Clean URL
+      history.replaceState(null, '', window.location.pathname);
+    }
   </script>
 </body>
 </html>

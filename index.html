@@ -205,21 +205,6 @@
       .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
       .cta-terms { margin-top: 24px; font-family: var(--f-ui); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--taupe); }
 
-      /* CHAT WIDGET */
-      .chat-fab { position: fixed; bottom: 32px; right: 32px; z-index: 91; width: 52px; height: 52px; border-radius: 50%; background: var(--champagne); color: var(--ivory); display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 24px color-mix(in srgb, var(--champagne) 30%, transparent); transition: transform 0.25s var(--ease), opacity 0.25s; cursor: pointer; }
-      .chat-fab:hover { transform: scale(1.08); }
-      .chat-fab.hide { opacity: 0; pointer-events: none; }
-      .chat-widget { position: fixed; bottom: 32px; right: 32px; z-index: 90; width: 300px; background: var(--ivory); border: 1px solid var(--border); box-shadow: 0 16px 48px color-mix(in srgb, var(--dark) 10%, transparent); opacity: 0; translate: 0 16px; pointer-events: none; transition: opacity 0.35s var(--ease), translate 0.35s var(--ease); }
-      .chat-widget.show { opacity: 1; translate: 0 0; pointer-events: auto; }
-      .chat-head { padding: 14px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; background: var(--cream); }
-      .chat-dot { width: 6px; height: 6px; border-radius: 50%; background: #5cb85c; animation: pulse 2s ease infinite; }
-      @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
-      .chat-head span { font-family: var(--f-ui); font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--dark-soft); font-weight: 500; }
-      .chat-close { margin-left: auto; color: var(--taupe); padding: 4px; cursor: pointer; font-family: var(--f-ui); font-size: 18px; line-height: 1; transition: color 0.2s; }
-      .chat-close:hover { color: var(--dark); }
-      .chat-body { padding: 18px; }
-      .chat-bubble { background: var(--cream); padding: 14px 16px; font-family: var(--f-body); font-size: 15px; font-weight: 400; color: var(--dark-soft); line-height: 1.55; border: 1px solid var(--border); margin-bottom: 12px; }
-
       /* FOOTER */
       footer { padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 16px; }
       .foot-brand { font-family: var(--f-display); font-size: 14px; font-weight: 500; letter-spacing: 3px; }
@@ -485,9 +470,6 @@
         footer { flex-direction: column; text-align: center; padding: 36px 24px; gap: 20px; }
         .foot-links { justify-content: center; gap: 20px; }
 
-        /* Hide floating chat on mobile */
-        .chat-widget, .chat-fab { display: none; }
-
         /* Buttons, bigger tap targets */
         .btn { padding: 15px 28px; min-height: 48px; letter-spacing: 2.5px; font-size: 10px; }
       }
@@ -535,7 +517,6 @@
       <a href="#features" class="link">What</a>
       <a href="#how" class="link">How</a>
       <a href="#team" class="link">Team</a>
-      <a href="https://api.amirahsr.org/demos/bluewhite" class="link" target="_blank" rel="noopener">Try Live</a>
       <a href="https://calendly.com/shimshon-amirahsr/interview-amira" class="btn" target="_blank" rel="noopener" style="padding:11px 24px;min-height:auto">Book a Call</a>
     </div>
     <button class="hamburger" id="hamburgerBtn" popovertarget="mobMenu" aria-label="Menu" aria-expanded="false">
@@ -552,7 +533,6 @@
     <a href="#features" class="link" onclick="document.getElementById('mobMenu').hidePopover()">What</a>
     <a href="#how" class="link" onclick="document.getElementById('mobMenu').hidePopover()">How</a>
     <a href="#team" class="link" onclick="document.getElementById('mobMenu').hidePopover()">Team</a>
-    <a href="https://api.amirahsr.org/demos/bluewhite" class="link" target="_blank" rel="noopener">Try Live</a>
     <a href="https://calendly.com/shimshon-amirahsr/interview-amira" class="btn filled" target="_blank" rel="noopener">Book a Call</a>
   </div>
 
@@ -580,7 +560,7 @@
     <p class="hero-sub">Agentic software, voice solutions, and brand-trained digital concierges that speak in your voice, follow through across systems, and turn scattered work into elegant momentum.</p>
     <div class="hero-ctas">
       <a href="https://calendly.com/shimshon-amirahsr/interview-amira" class="btn filled" target="_blank" rel="noopener">Book a Call</a>
-      <a href="https://api.amirahsr.org/demos/bluewhite" class="btn" target="_blank" rel="noopener">Try AMIRA Live</a>
+      <a href="#product-film" class="btn">Watch the Film</a>
     </div>
     <div class="hero-trust">
       <span>Built for</span>
@@ -799,7 +779,7 @@
       <p class="cta-sub">Every visitor who leaves without buying is a conversation that never happened. Let's change&nbsp;that.</p>
       <div class="cta-buttons">
         <a href="https://calendly.com/shimshon-amirahsr/interview-amira" class="btn filled" target="_blank" rel="noopener">Book a Call</a>
-        <a href="https://api.amirahsr.org/demos/bluewhite" class="btn" target="_blank" rel="noopener">Try AMIRA Live</a>
+        <a href="#product-film" class="btn">Watch the Film</a>
       </div>
       <div class="cta-terms">Free pilot · No contracts · We only win when you do</div>
     </div>
@@ -820,24 +800,6 @@
     <div class="foot-copy">&copy; 2026 AMIRA HSR</div>
   </footer>
 
-  <!-- CHAT WIDGET (desktop only) -->
-  <div class="chat-fab" id="chatFab" title="Chat with AMIRA">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-    </svg>
-  </div>
-  <div class="chat-widget" id="chatWidget">
-    <div class="chat-head">
-      <div class="chat-dot"></div>
-      <span>AMIRA Agent</span>
-      <div class="chat-close" id="chatClose">&times;</div>
-    </div>
-    <div class="chat-body">
-      <div class="chat-bubble">Hi, I'm AMIRA. I can answer, route, follow up, and help move the next step forward, across chat, voice, and your internal workflows.</div>
-      <a href="https://api.amirahsr.org/demos/bluewhite" target="_blank" rel="noopener" class="btn" style="width:100%;margin-top:8px;padding:12px 20px;font-size:9px;min-height:auto">Try AMIRA live &rarr;</a>
-    </div>
-  </div>
-
   <script>
     const n=document.getElementById('nav');
     let p=0;
@@ -853,15 +815,6 @@
       };
       mobMenu.addEventListener('toggle', syncMenuState);
       syncMenuState();
-    }
-
-    const fab=document.getElementById('chatFab'),w=document.getElementById('chatWidget'),cl=document.getElementById('chatClose');
-    let o=false;
-    fab.onclick=()=>{o=true;w.classList.add('show');fab.classList.add('hide')};
-    cl.onclick=()=>{o=false;w.classList.remove('show');fab.classList.remove('hide')};
-    // Only auto-open on desktop, mobile hides the whole widget
-    if (window.matchMedia('(min-width: 641px)').matches) {
-      setTimeout(()=>{if(!o)fab.click()},4000);
     }
 
     /* ─── BIO MODAL ─── */
@@ -923,5 +876,6 @@
     });
   </script>
 
+  <script src="https://platform.amirahsr.org/widget.js" data-amira-site="wgt_amirahsr_686580f7b7b7" defer></script>
 </body>
 </html>

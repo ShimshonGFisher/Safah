@@ -199,7 +199,7 @@
       .chat-bubble { background: var(--cream); padding: 14px 16px; font-family: var(--f-body); font-size: 15px; font-weight: 400; color: var(--dark-soft); line-height: 1.55; border: 1px solid var(--border); margin-bottom: 12px; }
 
       /* FOOTER */
-      footer { padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 16px; }
+      footer { position: relative; z-index: 50; padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 16px; }
       .foot-brand { font-family: var(--f-display); font-size: 14px; font-weight: 500; letter-spacing: 3px; }
       .foot-sub { font-family: var(--f-ui); font-size: 10px; letter-spacing: 1px; color: var(--taupe); margin-top: 3px; }
       .foot-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
@@ -736,6 +736,7 @@
       <div class="foot-sub">Human Software Resources</div>
     </div>
     <div class="foot-links">
+      <a href="index.html" class="foot-link">Home</a>
       <a href="about.html" class="foot-link">About</a>
       <a href="privacy.html" class="foot-link">Privacy</a>
       <a href="mailto:shimshongfisher@gmail.com" class="foot-link">Contact</a>

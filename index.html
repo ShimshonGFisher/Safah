@@ -7,9 +7,14 @@
   <meta name="google-site-verification" content="exQWq753RJ-3JQa4ivIxZf7HzxFo_YTdpsrJ2BM7M0I" />
 
   <!-- 2. Optimized Meta Tags -->
-  <title>Amira Human Software Resources | Agentic AI London, Zurich, NYC, Johannesburg</title>
-  <meta name="description" content="Agentic AI and voice solutions for industry. We automate 'hidden work' in London, Zurich, California, Brooklyn, and Johannesburg. Lead response and digital concierges in 120+ languages." />
-  <meta name="keywords" content="Agentic AI, AI Voice Automation London, Zurich AI Privacy, Lead Response Brooklyn, California Tech Automation, Johannesburg AI Solutions" />
+  <title>Amira | The AI Receptionist Who Never Sleeps · Johannesburg, London, NYC</title>
+  <meta name="description" content="Amira answers your calls, WhatsApp, and website chat in your brand's voice. She books jobs, sets appointments, and captures leads for clinics, law firms, and trades. From Johannesburg to London to New York, she never sleeps." />
+  <meta name="keywords" content="AI receptionist, AI answering service, WhatsApp AI for business, appointment setting AI, lead capture AI, Johannesburg AI receptionist, AI for law firms, AI for medical practices, AI for plumbers" />
+  <meta property="og:title" content="Amira | The AI Receptionist Who Never Sleeps" />
+  <meta property="og:description" content="She answers, books, and follows up in your brand's voice. While you sleep." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://amirahsr.org/" />
+  <meta property="og:image" content="https://amirahsr.org/apple-touch-icon.png" />
 
   <!-- 3. Localized Schema.org Structured Data -->
   <script type="application/ld+json">
@@ -19,7 +24,7 @@
     "name": "Amira Human Software Resources",
     "url": "https://amirahsr.org/",
     "logo": "https://amirahsr.org/logo.png",
-    "description": "Amira Human Software Resources provides Agentic AI solutions for industry, focusing on voice automation, lead response, and digital concierges in London, Zurich, California, Brooklyn, and Johannesburg.",
+    "description": "Amira HSR builds AI receptionists and brand-trained digital concierges that answer, book, and follow up for service businesses in Johannesburg, London, Zurich, Brooklyn, and California.",
     "founder": {
       "@type": "Person",
       "name": "Shimshon Gavriel"
@@ -72,8 +77,8 @@
     }
 
     @layer base {
-      html { scroll-behavior: smooth; }
-      body { background: var(--ivory); color: var(--dark); font-family: var(--f-body); }
+      html { scroll-behavior: smooth; background: var(--ivory); }
+      body { background: transparent; color: var(--dark); font-family: var(--f-body); }
       ::selection { background: var(--champ-pale); color: var(--dark); }
       body::after {
         content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.018;
@@ -88,6 +93,90 @@
     }
 
     @layer components {
+      /* ─── AMBIENT ATMOSPHERE (slow gold weather behind everything) ─── */
+      .ambient { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; animation: amb-warm 44s ease-in-out infinite alternate; }
+      .ambient-orbs {
+        position: absolute; inset: -22%;
+        background:
+          radial-gradient(circle at 12% 18%, rgba(184, 149, 106, 0.32) 0%, transparent 42%),
+          radial-gradient(circle at 88% 78%, rgba(212, 188, 150, 0.34) 0%, transparent 42%),
+          radial-gradient(circle at 42% 62%, rgba(140, 123, 107, 0.16) 0%, transparent 52%),
+          radial-gradient(circle at 72% 24%, rgba(245, 237, 224, 0.5) 0%, transparent 48%),
+          radial-gradient(circle at 24% 86%, rgba(226, 190, 138, 0.2) 0%, transparent 45%);
+        filter: blur(64px);
+        animation: orb-drift 85s ease-in-out infinite alternate;
+      }
+      .ambient-stars {
+        position: absolute; inset: 0; opacity: 0.5;
+        background-image:
+          radial-gradient(rgba(184, 149, 106, 0.55) 0.9px, transparent 1.4px),
+          radial-gradient(rgba(184, 149, 106, 0.4) 0.7px, transparent 1.1px);
+        background-size: 340px 340px, 520px 520px;
+        background-position: 0 0, 140px 90px;
+        animation: star-drift 320s linear infinite;
+      }
+      .ambient-stars::after {
+        content: ''; position: absolute; inset: 0;
+        background-image: radial-gradient(rgba(212, 188, 150, 0.5) 0.8px, transparent 1.2px);
+        background-size: 260px 260px; background-position: 80px 40px;
+        animation: star-twinkle 9s ease-in-out infinite alternate;
+      }
+      .mote { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: radial-gradient(circle, #F0DCAE, rgba(200, 162, 107, 0.75)); box-shadow: 0 0 8px 2px rgba(200, 162, 107, 0.35); opacity: 0; }
+      .mo1 { left: 14%; animation: mote-rise 75s linear infinite; }
+      .mo2 { left: 58%; width: 2px; height: 2px; animation: mote-rise 105s linear infinite 18s; }
+      .mo3 { left: 84%; animation: mote-rise 90s linear infinite 40s; }
+      @keyframes amb-warm { from { filter: hue-rotate(0deg) saturate(1); } to { filter: hue-rotate(9deg) saturate(1.07); } }
+      @keyframes orb-drift {
+        0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+        50% { transform: translate(2.5vw, 3vh) rotate(3deg) scale(1.05); }
+        100% { transform: translate(-2vw, -2.5vh) rotate(-2.5deg) scale(1.08); }
+      }
+      @keyframes star-drift { to { background-position: 680px 340px, 660px 610px; } }
+      @keyframes star-twinkle { from { opacity: 0.15; } to { opacity: 0.6; } }
+      @keyframes mote-rise {
+        0% { transform: translateY(104vh); opacity: 0; }
+        5% { opacity: 0.55; } 55% { opacity: 0.3; } 92% { opacity: 0.5; }
+        100% { transform: translateY(-6vh); opacity: 0; }
+      }
+
+      /* ─── THE HUMMINGBIRD (blink and you miss her) ─── */
+      .bird { display: block; overflow: visible; }
+      .bird .b-body, .bird .b-beak { fill: url(#gld); }
+      .bird .b-eye { fill: var(--ivory); }
+      .bird .b-wing { fill: url(#gld); transform-origin: 26px 22px; }
+      .bird .b-wf { opacity: 0.95; animation: flap 0.24s ease-in-out infinite alternate; }
+      .bird .b-wb { opacity: 0.45; animation: flap 0.24s ease-in-out infinite alternate-reverse; }
+      .bird .b-tail { fill: none; stroke: url(#gld); stroke-width: 2; stroke-linecap: round; opacity: 0.7; }
+      .bird .t2 { opacity: 0.5; } .bird .t3 { opacity: 0.35; }
+      @keyframes flap { from { transform: rotate(-16deg); } to { transform: rotate(12deg); } }
+
+      .bird-flight { position: fixed; top: 15vh; left: -70px; z-index: 40; pointer-events: none; opacity: 0; animation: bird-pass 36s linear infinite 6s; }
+      .bird-flight .bird { width: 36px; height: 36px; }
+      .bird-bob { position: relative; animation: bird-bob 2.8s ease-in-out infinite; }
+      @keyframes bird-pass {
+        0% { transform: translateX(0); opacity: 0; }
+        1.2% { opacity: 0; }
+        3% { opacity: 0.95; }
+        17.5% { opacity: 0.95; }
+        19.5% { transform: translateX(calc(100vw + 140px)); opacity: 0; }
+        100% { transform: translateX(calc(100vw + 140px)); opacity: 0; }
+      }
+      @keyframes bird-bob { 0%, 100% { translate: 0 0; rotate: 2deg; } 50% { translate: 0 26px; rotate: -3deg; } }
+      .dust { position: absolute; top: 16px; left: 2px; width: 3px; height: 3px; border-radius: 50%; background: radial-gradient(circle, #EFD9A8, var(--champagne)); box-shadow: 0 0 6px 1px rgba(200, 162, 107, 0.8); animation: dust-fade 0.75s linear infinite; }
+      .d2 { animation-delay: 0.19s; top: 20px; } .d3 { animation-delay: 0.38s; top: 12px; } .d4 { animation-delay: 0.56s; top: 18px; }
+      @keyframes dust-fade { 0% { opacity: 0.9; transform: translate(0, 0) scale(1); } 100% { opacity: 0; transform: translate(-26px, 12px) scale(0.15); } }
+
+      .perch { display: inline-block; position: relative; margin-bottom: 6px; }
+      .perch .bird { width: 42px; height: 42px; animation: birdFloat 4.5s ease-in-out infinite; }
+      .perch .b-wf, .perch .b-wb { animation-duration: 0.5s; }
+      .p-dust { position: absolute; left: 8px; bottom: 6px; width: 2.5px; height: 2.5px; border-radius: 50%; background: var(--champ-light); box-shadow: 0 0 5px 1px rgba(200, 162, 107, 0.7); opacity: 0; animation: p-dust 8s linear infinite; }
+      .p-dust.pd2 { left: 14px; bottom: 11px; animation-delay: 4s; }
+      @keyframes p-dust { 0%, 88% { opacity: 0; transform: translate(0, 0) scale(1); } 91% { opacity: 0.85; } 100% { opacity: 0; transform: translate(-9px, 10px) scale(0.2); } }
+      @keyframes birdFloat { 0%, 100% { translate: 0 0; rotate: 0deg; } 25% { translate: 0 -4px; rotate: 1.5deg; } 75% { translate: 0 2px; rotate: -1deg; } }
+      .foot-bird { display: inline-block; margin-right: 10px; vertical-align: middle; }
+      .foot-bird .bird { width: 20px; height: 20px; opacity: 0.85; }
+      .foot-bird .b-wf, .foot-bird .b-wb { animation-duration: 0.6s; }
+
       /* NAV */
       .nav {
         position: fixed; inset-inline: 0; top: 0; z-index: 100;
@@ -136,43 +225,107 @@
       .heading em { font-style: italic; font-weight: 400; }
 
       /* HERO */
-      /* HERO */
-      .hero { min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 140px 24px 100px; text-align: center; position: relative; overflow: hidden; z-index: 0; }
-      .hero-silk-bg {
-        position: absolute; inset: -20%; width: 140%; height: 140%; z-index: -1;
-        background: 
-          radial-gradient(circle at 10% 20%, rgba(184, 149, 106, 0.35) 0%, transparent 40%),
-          radial-gradient(circle at 90% 80%, rgba(212, 188, 150, 0.35) 0%, transparent 40%),
-          radial-gradient(circle at 40% 60%, rgba(140, 123, 107, 0.2) 0%, transparent 50%),
-          radial-gradient(circle at 70% 30%, rgba(245, 237, 224, 0.5) 0%, transparent 50%);
-        filter: blur(60px);
-        animation: silk-flow 18s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
-      }
-      @keyframes silk-flow {
-        0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-        50% { transform: translate(2vw, 4vh) rotate(3deg) scale(1.05); }
-        100% { transform: translate(-2vw, -2vh) rotate(-2deg) scale(1.1); }
-      }
+      .hero { min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 150px 24px 100px; position: relative; overflow: hidden; z-index: 0; }
       .hero-glow { position: absolute; top: 50%; left: 50%; translate: -50% -50%; width: min(600px, 85vw); aspect-ratio: 1; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, color-mix(in srgb, var(--champagne) 10%, transparent) 0%, transparent 70%); }
-      .hero-label { display: flex; align-items: center; gap: 14px; justify-content: center; font-family: var(--f-ui); font-size: 10px; letter-spacing: 4.5px; text-transform: uppercase; color: var(--champagne); margin-bottom: 36px; }
+      .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 64px; align-items: center; max-width: 1140px; margin: 0 auto; width: 100%; }
+      .hero-copy { text-align: left; }
+      .hero-label { display: flex; align-items: center; gap: 14px; justify-content: flex-start; font-family: var(--f-ui); font-size: 10px; letter-spacing: 4.5px; text-transform: uppercase; color: var(--champagne); margin-bottom: 36px; }
       .hero-line { display: inline-block; height: 0.5px; background: linear-gradient(90deg, transparent, var(--champagne), transparent); animation: line-grow 1s var(--ease) 0.4s both; }
       @keyframes line-grow { to { width: 40px; } }
-      .hero h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(32px, 5.6vw, 62px); line-height: 1.12; letter-spacing: -0.3px; max-width: 820px; text-wrap: balance; }
+      .hero h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(32px, 4.6vw, 56px); line-height: 1.12; letter-spacing: -0.3px; max-width: 640px; text-wrap: balance; }
       .hero h1 em { font-style: italic; color: var(--champagne); font-weight: 400; }
-      .hero-sub { font-family: var(--f-body); font-size: clamp(17px, 2vw, 22px); font-weight: 300; color: var(--taupe); max-width: 540px; line-height: 1.7; margin-top: 28px; }
-      .hero-ctas { display: flex; gap: 16px; margin-top: 52px; flex-wrap: wrap; justify-content: center; width: 100%; max-width: 440px; }
-      .hero-trust { margin-top: 72px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
+      .hero-sub { font-family: var(--f-body); font-size: clamp(17px, 2vw, 21px); font-weight: 300; color: var(--taupe); max-width: 520px; line-height: 1.7; margin-top: 26px; }
+      .hero-ctas { display: flex; gap: 16px; margin-top: 44px; flex-wrap: wrap; justify-content: flex-start; }
+      .hero-trust { margin-top: 60px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: flex-start; }
       .hero-trust span { font-family: var(--f-ui); font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--taupe); }
       .hero-trust em { font-family: var(--f-display); font-size: 14px; font-style: italic; color: var(--dark-soft); }
       .trust-line { width: 24px; height: 0.5px; background: linear-gradient(90deg, transparent, var(--champ-light), transparent); }
-      .hero > * { animation: hero-in 0.8s var(--ease) both; }
-      .hero > :nth-child(1) { animation-delay: 0s; }
-      .hero > :nth-child(2) { animation-delay: 0.12s; }
-      .hero > :nth-child(3) { animation-delay: 0.24s; }
-      .hero > :nth-child(4) { animation-delay: 0.36s; }
-      .hero > :nth-child(5) { animation-delay: 0.48s; }
-      .hero > :nth-child(6) { animation-delay: 0.6s; }
+      .hero-copy > *, .hero-phone { animation: hero-in 0.8s var(--ease) both; }
+      .hero-copy > :nth-child(1) { animation-delay: 0.05s; }
+      .hero-copy > :nth-child(2) { animation-delay: 0.15s; }
+      .hero-copy > :nth-child(3) { animation-delay: 0.27s; }
+      .hero-copy > :nth-child(4) { animation-delay: 0.39s; }
+      .hero-copy > :nth-child(5) { animation-delay: 0.51s; }
+      .hero-phone { animation-delay: 0.58s; }
       @keyframes hero-in { from { opacity: 0; translate: 0 20px; } to { opacity: 1; translate: 0 0; } }
+
+      /* ─── THE PHONE (she demos herself, on a loop) ─── */
+      .hero-phone { position: relative; display: flex; justify-content: center; }
+      .hero-phone::before { content: ''; position: absolute; inset: -40px -30px; background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--champagne) 16%, transparent), transparent 65%); filter: blur(14px); }
+      .phone {
+        position: relative; width: min(340px, 88vw); border-radius: 34px; padding: 12px;
+        background: linear-gradient(160deg, #FFFDF9, #F4EAD9);
+        border: 1px solid var(--border);
+        box-shadow: 0 34px 90px color-mix(in srgb, var(--dark) 16%, transparent), inset 0 0 0 1px rgba(255,255,255,0.5);
+        animation: phone-float 7s ease-in-out infinite;
+      }
+      @keyframes phone-float { 0%, 100% { translate: 0 0; rotate: 0deg; } 50% { translate: 0 -8px; rotate: -0.4deg; } }
+      .ph-head { display: flex; align-items: center; gap: 11px; padding: 10px 8px 12px; }
+      .ph-ava { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--champ-light), var(--champagne)); color: var(--ivory); font-family: var(--f-display); font-size: 16px; flex-shrink: 0; }
+      .ph-id { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+      .ph-names { position: relative; height: 16px; }
+      .ph-name { position: absolute; inset: 0; font-family: var(--f-ui); font-style: normal; font-size: 12.5px; font-weight: 500; letter-spacing: 0.4px; color: var(--dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; animation: 27s linear infinite; }
+      .ph-name.n1 { animation-name: g1; } .ph-name.n2 { animation-name: g2; } .ph-name.n3 { animation-name: g3; }
+      .ph-status { font-family: var(--f-ui); font-size: 9px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--taupe); display: flex; align-items: center; gap: 5px; }
+      .ph-status i { width: 5px; height: 5px; border-radius: 50%; background: #8FAE8B; box-shadow: 0 0 6px #8FAE8B; }
+      .ph-screen { position: relative; height: 460px; border-radius: 24px; background: linear-gradient(180deg, #FBF5EA, #F6EDDD); border: 1px solid color-mix(in srgb, var(--border) 70%, transparent); overflow: hidden; }
+      .scene { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 9px; padding: 16px 14px 14px; opacity: 0; animation: 27s linear infinite; }
+      .scene.s1 { animation-name: g1; } .scene.s2 { animation-name: g2; } .scene.s3 { animation-name: g3; }
+      .sys { align-self: center; font-family: var(--f-ui); font-size: 8.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--taupe); background: rgba(44,36,32,0.05); padding: 5px 12px; border-radius: 100px; opacity: 0; translate: 0 6px; animation: 27s linear infinite; }
+      .msg { max-width: 82%; padding: 9px 13px; border-radius: 14px; font-family: var(--f-ui); font-size: 12.8px; font-weight: 300; line-height: 1.5; color: var(--dark); opacity: 0; translate: 0 10px; animation: 27s linear infinite; }
+      .msg.them { align-self: flex-start; background: #FFFFFF; border: 1px solid var(--border); border-bottom-left-radius: 4px; box-shadow: 0 2px 8px rgba(44,36,32,0.05); }
+      .msg.me { align-self: flex-end; background: color-mix(in srgb, var(--champagne) 26%, #FFFFFF); border-bottom-right-radius: 4px; }
+      .msg.typing { display: flex; gap: 4px; padding: 12px 14px; translate: 0 0; }
+      .msg.typing i { width: 5px; height: 5px; border-radius: 50%; background: var(--taupe); animation: dot-b 1s ease-in-out infinite; }
+      .msg.typing i:nth-child(2) { animation-delay: 0.15s; }
+      .msg.typing i:nth-child(3) { animation-delay: 0.3s; }
+      .slot { display: grid; align-self: flex-start; max-width: 82%; }
+      .slot .msg { grid-area: 1 / 1; max-width: 100%; align-self: end; }
+      .slot .msg.typing { align-self: start; justify-self: start; }
+      @keyframes dot-b { 0%, 60%, 100% { translate: 0 0; opacity: 0.4; } 30% { translate: 0 -4px; opacity: 0.9; } }
+      .res { margin-top: auto; align-self: center; text-align: center; font-family: var(--f-display); font-style: italic; font-size: 15.5px; color: var(--champagne); opacity: 0; animation: 27s linear infinite; padding-top: 8px; }
+      .res::before { content: ''; display: block; width: 38px; height: 0.5px; margin: 0 auto 9px; background: linear-gradient(90deg, transparent, var(--champ-light), transparent); }
+
+      /* scene gates: three 9s acts inside one 27s loop */
+      @keyframes g1 { 0% { opacity: 0; } 1.5% { opacity: 1; } 31.5% { opacity: 1; } 33.3% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes g2 { 0%, 33.8% { opacity: 0; } 35.3% { opacity: 1; } 64.8% { opacity: 1; } 66.6% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes g3 { 0%, 67.1% { opacity: 0; } 68.6% { opacity: 1; } 98.2% { opacity: 1; } 100% { opacity: 0; } }
+
+      /* act one: the burst geyser */
+      @keyframes e11 { 0%, 2.5% { opacity: 0; translate: 0 6px; } 3.7% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+      @keyframes t1  { 0%, 4% { opacity: 0; } 4.8% { opacity: 1; } 8% { opacity: 1; } 8.8% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes e12 { 0%, 8.8% { opacity: 0; translate: 0 10px; } 10% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+      @keyframes e13 { 0%, 11.8% { opacity: 0; translate: 0 10px; } 13% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+      @keyframes e14 { 0%, 15% { opacity: 0; translate: 0 10px; } 16.2% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+      @keyframes e15 { 0%, 18% { opacity: 0; translate: 0 10px; } 19.2% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+      @keyframes e16 { 0%, 20.8% { opacity: 0; translate: 0 10px; } 22% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+      @keyframes e17 { 0%, 24% { opacity: 0; scale: 0.96; } 25.5% { opacity: 1; scale: 1; } 100% { opacity: 1; scale: 1; } }
+      .m11 { animation-name: e11; } .t1x { animation-name: t1; }
+      .m12 { animation-name: e12; } .m13 { animation-name: e13; }
+      .m14 { animation-name: e14; } .m15 { animation-name: e15; }
+      .m16 { animation-name: e16; } .m17 { animation-name: e17; }
+
+      /* act two: the ear at dawn */
+      @keyframes e21 { 0%, 36.3% { opacity: 0; translate: 0 6px; } 37.5% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+      @keyframes e22 { 0%, 38.3% { opacity: 0; translate: 0 10px; } 39.5% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+      @keyframes t2  { 0%, 40.3% { opacity: 0; } 41.1% { opacity: 1; } 43% { opacity: 1; } 43.8% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes e23 { 0%, 43.8% { opacity: 0; translate: 0 10px; } 45% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+      @keyframes e24 { 0%, 46.5% { opacity: 0; translate: 0 10px; } 47.7% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+      @keyframes e25 { 0%, 49% { opacity: 0; translate: 0 10px; } 50.2% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+      @keyframes e26 { 0%, 52% { opacity: 0; scale: 0.96; } 53.5% { opacity: 1; scale: 1; } 100% { opacity: 1; scale: 1; } }
+      .m21 { animation-name: e21; } .m22 { animation-name: e22; } .t2x { animation-name: t2; }
+      .m23 { animation-name: e23; } .m24 { animation-name: e24; }
+      .m25 { animation-name: e25; } .m26 { animation-name: e26; }
+
+      /* act three: the midnight case */
+      @keyframes e31 { 0%, 69.6% { opacity: 0; translate: 0 6px; } 70.8% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+      @keyframes e32 { 0%, 71.6% { opacity: 0; translate: 0 10px; } 72.8% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+      @keyframes t3  { 0%, 73.6% { opacity: 0; } 74.4% { opacity: 1; } 76.3% { opacity: 1; } 77.1% { opacity: 0; } 100% { opacity: 0; } }
+      @keyframes e33 { 0%, 77.1% { opacity: 0; translate: 0 10px; } 78.3% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+      @keyframes e34 { 0%, 79.8% { opacity: 0; translate: 0 10px; } 81% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+      @keyframes e35 { 0%, 82.8% { opacity: 0; scale: 0.96; } 84.3% { opacity: 1; scale: 1; } 100% { opacity: 1; scale: 1; } }
+      .m31 { animation-name: e31; } .m32 { animation-name: e32; } .t3x { animation-name: t3; }
+      .m33 { animation-name: e33; } .m34 { animation-name: e34; } .m35 { animation-name: e35; }
 
       /* STATS */
       .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 56px; }
@@ -182,47 +335,42 @@
       .stat-text { font-family: var(--f-body); font-size: 16px; color: var(--dark); line-height: 1.45; margin-bottom: 6px; }
       .stat-src { font-family: var(--f-ui); font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--taupe); }
 
-      /* QUOTE */
+      /* VERTICALS: THIS IS YOU */
+      .verts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 56px; }
+      .vert { background: var(--ivory); padding: 46px 36px 40px; display: flex; flex-direction: column; transition: background 0.25s; }
+      .vert:hover { background: color-mix(in srgb, var(--cream) 50%, var(--ivory)); }
+      .vert-kicker { font-family: var(--f-ui); font-size: 9.5px; letter-spacing: 3px; text-transform: uppercase; color: var(--champagne); margin-bottom: 18px; }
+      .vert-pain { font-family: var(--f-display); font-size: 21px; line-height: 1.35; font-weight: 400; margin-bottom: 14px; }
+      .vert-pain em { font-style: italic; color: var(--champagne); }
+      .vert-body { font-family: var(--f-body); font-size: 16.5px; font-weight: 300; color: var(--taupe); line-height: 1.62; margin-bottom: 22px; }
+      .vert-does { margin-top: auto; font-family: var(--f-ui); font-size: 9px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--dark-soft); padding-top: 14px; border-top: 1px solid var(--border); line-height: 1.9; }
+      .verts-foot { margin-top: 32px; text-align: center; font-family: var(--f-body); font-size: 18px; font-style: italic; font-weight: 300; color: var(--taupe); }
+
+      /* QUOTE / PROOF */
       .quote-band { padding: 100px 24px; text-align: center; background: linear-gradient(180deg, transparent 0%, var(--cream) 25%, var(--cream) 75%, transparent 100%); }
-      .quote { font-family: var(--f-display); font-style: italic; font-weight: 400; font-size: clamp(18px, 2.5vw, 28px); line-height: 1.6; max-width: 680px; margin: 0 auto; color: var(--dark-soft); }
-      .diamond { display: inline-block; margin-bottom: 24px; }
+      .quote { font-family: var(--f-display); font-style: italic; font-weight: 400; font-size: clamp(19px, 2.6vw, 30px); line-height: 1.55; max-width: 720px; margin: 0 auto; color: var(--dark-soft); }
+      .quote-who { margin-top: 28px; font-family: var(--f-ui); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--taupe); }
+      .quote-who b { color: var(--champagne); font-weight: 500; }
 
       /* FEATURES */
-      .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); margin-top: 56px; }
+      .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 56px; }
       .feat { background: var(--ivory); padding: 44px 36px; transition: background 0.25s; }
       .feat:hover { background: color-mix(in srgb, var(--cream) 50%, var(--ivory)); }
-      .feat-icon {   display: block; margin-bottom: 22px;   width: 32px; height: 32px;   color: var(--champagne); } .feat-icon svg { width: 100%; height: 100%; display: block; }  /* features grid, now 3 columns for 6 cards */ .features { grid-template-columns: repeat(3, 1fr) !important; } .feat-group {   grid-column: 1 / -1;   background: var(--ivory);   padding: 32px 36px 8px;   font-family: var(--f-ui); font-size: 9.5px;   letter-spacing: 3.5px; text-transform: uppercase;   color: var(--champagne);   display: flex; align-items: center; gap: 14px; } .feat-group::before, .feat-group::after {   content: ''; flex: 1; height: 0.5px;   background: linear-gradient(90deg, transparent, var(--champ-light), transparent); }
+      .feat-icon { display: block; margin-bottom: 22px; width: 32px; height: 32px; color: var(--champagne); }
+      .feat-icon svg { width: 100%; height: 100%; display: block; }
+      .feat-group { grid-column: 1 / -1; background: var(--ivory); padding: 32px 36px 8px; font-family: var(--f-ui); font-size: 9.5px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--champagne); display: flex; align-items: center; gap: 14px; }
+      .feat-group::before, .feat-group::after { content: ''; flex: 1; height: 0.5px; background: linear-gradient(90deg, transparent, var(--champ-light), transparent); }
       .feat-title { font-family: var(--f-display); font-size: 20px; font-weight: 500; margin-bottom: 10px; }
       .feat-desc { font-family: var(--f-body); font-size: 17px; font-weight: 300; color: var(--taupe); line-height: 1.6; }
 
-
-      /* PRODUCT FILM */
-      .film-section { padding: 120px 24px; background: linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--cream) 42%, var(--ivory)) 100%); }
-      .film-shell { max-width: 980px; margin: 56px auto 0; position: relative; }
-      .film-shell::before {
-        content: ''; position: absolute; inset: -28px; pointer-events: none;
-        background: radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--champagne) 12%, transparent), transparent 62%);
-        filter: blur(10px); opacity: 0.9;
-      }
-      .film-frame {
-        position: relative; overflow: hidden; border: 1px solid var(--border);
-        background: var(--ivory); box-shadow: 0 28px 80px color-mix(in srgb, var(--dark) 13%, transparent);
-      }
-      .film-frame::before {
-        content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 2;
-        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.28), inset 0 -80px 120px rgba(44,36,32,0.08);
-      }
-      .film-video { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: var(--dark); }
-      .film-caption {
-        display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;
-        padding: 22px 26px; border-top: 1px solid var(--border); background: rgba(253,251,247,0.92);
-      }
-      .film-caption p { font-family: var(--f-body); font-size: 18px; font-weight: 300; color: var(--dark-soft); line-height: 1.55; max-width: 620px; }
-      .film-link { font-family: var(--f-ui); font-size: 10px; letter-spacing: 2.4px; text-transform: uppercase; color: var(--champagne); transition: color 0.2s; }
-      .film-link:hover { color: var(--dark); }
-
       /* HOW */
-      .how-band { padding: 120px 24px; background: var(--dark); color: var(--ivory); }
+      .how-band {
+        padding: 120px 24px; color: var(--ivory);
+        background:
+          radial-gradient(rgba(212, 188, 150, 0.14) 1px, transparent 1.6px) 0 0 / 300px 300px,
+          radial-gradient(rgba(184, 149, 106, 0.1) 0.8px, transparent 1.3px) 130px 80px / 420px 420px,
+          var(--dark);
+      }
       .how-band .label { color: var(--champ-light); }
       .how-band .heading { color: var(--ivory); }
       .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 56px; max-width: 1100px; margin-inline: auto; }
@@ -230,36 +378,15 @@
       .step-title { font-family: var(--f-display); font-size: 20px; font-weight: 500; color: var(--ivory); margin-bottom: 12px; }
       .step-desc { font-family: var(--f-body); font-size: 17px; font-weight: 300; color: var(--champ-light); line-height: 1.6; }
 
-      /* TEAM, 3 cards across */
-      .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 24px; margin-top: 56px; max-width: 820px; margin-inline: auto; }
-      .team-card { text-align: center; }
-.team-avatar {
-        width: 88px; height: 88px; border-radius: 50%;
-        border: 1px solid var(--border); background: var(--cream);
-        display: flex; align-items: center; justify-content: center;
-        margin: 0 auto 18px; position: relative; overflow: hidden;
-        transition: all 0.3s var(--ease);
-      }
-      .team-avatar::before {
-        content: attr(data-initial);
-        font-family: var(--f-display); font-size: 28px; font-weight: 400;
-        color: var(--champagne); letter-spacing: 1px;
-      }
-      .team-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-      .team-card:hover .team-avatar { background: var(--champagne); border-color: var(--champagne); box-shadow: 0 10px 36px color-mix(in srgb, var(--champagne) 25%, transparent); }
-      .team-card:hover .team-avatar::before { color: var(--ivory); }
-      .team-name { font-family: var(--f-display); font-size: 17px; font-weight: 500; margin-bottom: 6px; }
-      .team-role { font-family: var(--f-ui); font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--taupe); line-height: 1.5; }
-
       /* CTA */
       .cta-section { padding: 120px 24px; text-align: center; background: linear-gradient(180deg, transparent, var(--cream)); }
-      .cta-sub { font-family: var(--f-body); font-size: 19px; font-weight: 300; color: var(--taupe); max-width: 460px; margin: 16px auto 44px; line-height: 1.6; }
+      .cta-sub { font-family: var(--f-body); font-size: 19px; font-weight: 300; color: var(--taupe); max-width: 480px; margin: 16px auto 44px; line-height: 1.6; }
       .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
       .cta-terms { margin-top: 24px; font-family: var(--f-ui); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--taupe); }
 
       /* FOOTER */
-      footer { padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 16px; }
-      .foot-brand { font-family: var(--f-display); font-size: 14px; font-weight: 500; letter-spacing: 3px; }
+      footer { position: relative; z-index: 50; padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 16px; }
+      .foot-brand { font-family: var(--f-display); font-size: 14px; font-weight: 500; letter-spacing: 3px; display: flex; align-items: center; }
       .foot-sub { font-family: var(--f-ui); font-size: 10px; letter-spacing: 1px; color: var(--taupe); margin-top: 3px; }
       .foot-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
       .foot-link { font-family: var(--f-ui); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--taupe); transition: color 0.2s; }
@@ -290,92 +417,6 @@
       [popover].mob-menu:popover-open { opacity: 1; translate: 0 0; }
       [popover].mob-menu .link { font-size: 13px; letter-spacing: 3.5px; }
       @starting-style { [popover].mob-menu:popover-open { opacity: 0; translate: 0 -8px; } }
-
-      /* ─── BIO MODAL ─── */
-      .team-card { cursor: pointer; }
-      [popover].bio-modal {
-        inset: 0;
-        border: none;
-        background: rgba(44, 36, 32, 0.55);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        padding: 24px;
-        width: 100%; height: 100%;
-        display: flex; align-items: center; justify-content: center;
-        opacity: 0;
-        transition: opacity 0.3s var(--ease), display 0.3s allow-discrete, overlay 0.3s allow-discrete;
-      }
-      [popover].bio-modal:popover-open { opacity: 1; }
-      @starting-style { [popover].bio-modal:popover-open { opacity: 0; } }
-      [popover].bio-modal::backdrop { background: transparent; }
-
-      .bio-card {
-        background: var(--ivory);
-        border: 1px solid var(--border);
-        max-width: 520px; width: 100%;
-        padding: 56px 48px 48px;
-        position: relative;
-        text-align: center;
-        box-shadow: 0 32px 80px rgba(44, 36, 32, 0.25);
-        transform: scale(0.96);
-        transition: transform 0.35s var(--ease);
-      }
-      [popover].bio-modal:popover-open .bio-card { transform: scale(1); }
-      @starting-style { [popover].bio-modal:popover-open .bio-card { transform: scale(0.96); } }
-
-      .bio-close {
-        position: absolute; top: 16px; right: 16px;
-        width: 36px; height: 36px;
-        border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        color: var(--taupe); background: transparent;
-        font-family: var(--f-ui); font-size: 22px; line-height: 1;
-        transition: background 0.2s, color 0.2s;
-      }
-      .bio-close:hover { background: var(--cream); color: var(--dark); }
-
-      .bio-avatar {
-        width: 120px; height: 120px; border-radius: 50%;
-        border: 1px solid var(--champ-light); background: var(--cream);
-        display: flex; align-items: center; justify-content: center;
-        margin: 0 auto 24px; position: relative; overflow: hidden;
-      }
-      .bio-avatar::before {
-        content: attr(data-initial);
-        font-family: var(--f-display); font-size: 40px; font-weight: 400;
-        color: var(--champagne); letter-spacing: 1px;
-      }
-      .bio-avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; }
-
-      .bio-name {
-        font-family: var(--f-display); font-size: 26px; font-weight: 500;
-        color: var(--dark); margin-bottom: 8px;
-      }
-      .bio-role {
-        font-family: var(--f-ui); font-size: 10px; letter-spacing: 3px;
-        text-transform: uppercase; color: var(--champagne); margin-bottom: 28px;
-      }
-      .bio-divider {
-        width: 40px; height: 0.5px;
-        background: linear-gradient(90deg, transparent, var(--champ-light), transparent);
-        margin: 0 auto 28px;
-      }
-      .bio-text {
-        font-family: var(--f-body); font-size: 17px; font-weight: 300;
-        line-height: 1.7; color: var(--dark-soft);
-        max-width: 400px; margin: 0 auto;
-      }
-      .bio-text em {
-        font-style: italic; color: var(--taupe);
-      }
-
-      @media (max-width: 640px) {
-        .bio-card { padding: 48px 28px 36px; }
-        .bio-avatar { width: 96px; height: 96px; margin-bottom: 20px; }
-        .bio-avatar::before { font-size: 32px; }
-        .bio-name { font-size: 22px; }
-        .bio-text { font-size: 16px; line-height: 1.6; }
-      }
     }
 
     @layer scroll-driven {
@@ -398,13 +439,21 @@
     /* ═══ RESPONSIVE, MOBILE-FIRST OVERHAUL ═══ */
     @layer responsive {
 
+      /* Hero collapses to a single column before tablet */
+      @media (max-width: 1020px) {
+        .hero { padding-top: 130px; }
+        .hero-grid { grid-template-columns: 1fr; gap: 56px; }
+        .hero-copy { text-align: center; }
+        .hero-copy .hero-label, .hero-copy .hero-ctas, .hero-copy .hero-trust { justify-content: center; }
+        .hero h1, .hero-sub { margin-inline: auto; }
+      }
+
       /* Tablet landscape */
       @media (max-width: 1024px) {
         .nav { padding: 18px 32px; }
         .section { padding: 96px 24px; }
         .how-band { padding: 96px 24px; }
         .cta-section { padding: 96px 24px; }
-        .team-grid { grid-template-columns: repeat(3, 1fr); gap: 40px 20px; max-width: 720px; }
       }
 
       /* Tablet / large mobile, collapse nav, stack grids */
@@ -412,10 +461,10 @@
         .nav .links { display: none; }
         .hamburger { display: flex; }
         .stats { grid-template-columns: 1fr; }
-        .features { grid-template-columns: 1fr !important; }
+        .features { grid-template-columns: 1fr; }
+        .verts { grid-template-columns: 1fr; }
         .feat-group { padding: 24px 28px 4px; font-size: 9px; letter-spacing: 3px; }
         .steps { grid-template-columns: 1fr; gap: 44px; }
-        .team-grid { grid-template-columns: repeat(3, 1fr); gap: 32px 16px; max-width: 600px; }
         .quote-band { padding: 80px 24px; }
         .hero-trust { margin-top: 56px; }
       }
@@ -437,9 +486,13 @@
         .hero h1 { font-size: clamp(30px, 8.5vw, 44px); line-height: 1.14; letter-spacing: -0.2px; }
         .hero-sub { font-size: 17px; margin-top: 22px; line-height: 1.6; padding: 0 4px; }
         .hero-label { font-size: 9px; letter-spacing: 3.8px; margin-bottom: 28px; gap: 12px; }
-        .hero-ctas { margin-top: 40px; gap: 12px; flex-direction: column; width: 100%; max-width: 320px; }
-        .hero-ctas .btn { width: 100%; }
-        .hero-trust { margin-top: 56px; gap: 12px; }
+        .hero-ctas { margin-top: 40px; gap: 12px; flex-direction: column; align-items: center; width: 100%; }
+        .hero-ctas .btn { width: 100%; max-width: 320px; }
+        .hero-trust { margin-top: 48px; gap: 12px; }
+        .hero-grid { gap: 48px; }
+        .phone { width: min(316px, 92vw); border-radius: 30px; padding: 10px; }
+        .ph-screen { height: 430px; }
+        .bird-flight { top: 11vh; }
 
         /* Headings */
         .heading { font-size: clamp(24px, 7.5vw, 36px); line-height: 1.2; }
@@ -452,25 +505,24 @@
         .stat-text { font-size: 15px; }
         .stat-src { font-size: 8.5px; }
 
+        /* Verticals */
+        .verts { margin-top: 40px; }
+        .vert { padding: 36px 28px 32px; }
+        .vert-pain { font-size: 19px; }
+        .vert-body { font-size: 16px; }
+        .verts-foot { font-size: 16px; padding: 0 8px; }
+
         /* Quote */
-        .quote { font-size: 18px; line-height: 1.55; padding: 0 4px; }
-        .diamond { margin-bottom: 20px; }
+        .quote { font-size: 19px; line-height: 1.5; padding: 0 4px; }
+        .quote-who { font-size: 9px; letter-spacing: 2.4px; }
+        .perch .bird { width: 36px; height: 36px; }
 
         /* Features */
         .features { margin-top: 40px; }
         .feat { padding: 36px 28px; }
-        .feat-icon { font-size: 24px; margin-bottom: 14px; }
+        .feat-icon { margin-bottom: 14px; }
         .feat-title { font-size: 19px; margin-bottom: 8px; }
         .feat-desc { font-size: 16px; line-height: 1.55; }
-
-
-        /* Product film */
-        .film-section { padding: 72px 20px; }
-        .film-shell { margin-top: 40px; }
-        .film-shell::before { inset: -14px; }
-        .film-caption { padding: 18px 20px; justify-content: center; text-align: center; }
-        .film-caption p { font-size: 16px; }
-        .film-link { font-size: 9px; letter-spacing: 2px; }
 
         /* How, horizontal layout on mobile so number sits beside title */
         .steps { margin-top: 40px; gap: 32px; }
@@ -500,18 +552,6 @@
           grid-column: 2;
         }
 
-        /* Team, single column on mobile for elegance with 3 members */
-        .team-grid {
-          grid-template-columns: 1fr;
-          gap: 36px;
-          max-width: 280px;
-          margin-top: 44px;
-        }
-        .team-avatar { width: 100px; height: 100px; margin-bottom: 16px; }
-        .team-avatar::before { font-size: 30px; }
-        .team-name { font-size: 18px; margin-bottom: 4px; }
-        .team-role { font-size: 9px; letter-spacing: 1.8px; }
-
         /* CTA */
         .cta-sub { font-size: 17px; margin: 14px auto 36px; padding: 0 8px; }
         .cta-buttons { flex-direction: column; align-items: center; gap: 12px; width: 100%; }
@@ -521,9 +561,13 @@
         /* Footer */
         footer { flex-direction: column; text-align: center; padding: 36px 24px; gap: 20px; }
         .foot-links { justify-content: center; gap: 20px; }
+        .foot-brand { justify-content: center; }
 
         /* Buttons, bigger tap targets */
         .btn { padding: 15px 28px; min-height: 48px; letter-spacing: 2.5px; font-size: 10px; }
+
+        /* Ambient, slightly lighter on small screens */
+        .ambient-orbs { filter: blur(48px); }
       }
 
       /* Very small phones */
@@ -539,10 +583,10 @@
         .wrap { padding: 0 18px; }
         .stat { padding: 32px 20px; }
         .feat { padding: 32px 22px; }
-        .team-grid { gap: 28px; max-width: 240px; }
-        .team-avatar { width: 92px; height: 92px; }
-        .team-avatar::before { font-size: 28px; }
-        .team-name { font-size: 17px; }
+        .vert { padding: 32px 22px 28px; }
+        .phone { width: 94vw; }
+        .ph-screen { height: 414px; }
+        .msg { font-size: 12px; }
       }
 
       /* Reduced motion */
@@ -553,6 +597,11 @@
           transition-duration: 0.01ms !important;
           scroll-behavior: auto !important;
         }
+        .bird-flight, .mote, .ambient-stars::after { display: none; }
+        .scene, .ph-name { animation: none !important; }
+        .scene.s1, .ph-name.n1 { opacity: 1 !important; }
+        .msg, .res, .sys { animation: none !important; opacity: 1 !important; translate: 0 0 !important; scale: 1 !important; }
+        .msg.typing { display: none !important; }
       }
     }
   </style>
@@ -569,17 +618,52 @@
 </head>
 <body>
 
+  <!-- SHARED GOLD GRADIENT for every hummingbird on the page -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="gld" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#E9D2A4"/>
+        <stop offset="0.5" stop-color="#C8A26B"/>
+        <stop offset="1" stop-color="#9A7440"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <!-- AMBIENT ATMOSPHERE -->
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient-orbs"></div>
+    <div class="ambient-stars"></div>
+    <span class="mote mo1"></span><span class="mote mo2"></span><span class="mote mo3"></span>
+  </div>
+
+  <!-- THE HUMMINGBIRD, passing through -->
+  <div class="bird-flight" aria-hidden="true">
+    <div class="bird-bob">
+      <svg class="bird" viewBox="0 0 64 64">
+        <path class="b-wing b-wb" d="M30 14 C40 4 52 6 49 13 C46 20 36 26 27 27 C23 27.5 22 24 24 20 C26 17 28 16 30 14 Z"/>
+        <path class="b-body" d="M43 19 C48 17 52 21 50 27 C48 33 41 40 31 44 C25 46 19 44 17 40 C24 40 30 35 33 29 C36 23 38 21 43 19 Z"/>
+        <path class="b-beak" d="M49 21 L63 17 L50 25 Z"/>
+        <circle class="b-eye" cx="47" cy="22" r="1.2"/>
+        <path class="b-wing b-wf" d="M28 12 C36 4 46 5 44 12 C42 18 33 24 25 25 C21 25.5 20 22 22 18 C24 15 26 14 28 12 Z"/>
+        <path class="b-tail t1" d="M20 41 C12 47 8 55 6 61"/>
+        <path class="b-tail t2" d="M23 43 C17 51 15 58 14 62"/>
+        <path class="b-tail t3" d="M26 44 C22 52 21 58 21 63"/>
+      </svg>
+      <span class="dust d1"></span><span class="dust d2"></span><span class="dust d3"></span><span class="dust d4"></span>
+    </div>
+  </div>
+
   <!-- NAV -->
   <nav class="nav" id="nav">
     <a href="index.html" class="logo">AMIRA</a>
     <div class="links">
       <a href="#why" class="link">Why</a>
+      <a href="#this-is-you" class="link">Who It's For</a>
       <a href="about.html" class="link">About</a>
-      <a href="#product-film" class="link">Film</a>
       <a href="#features" class="link">What</a>
       <a href="#how" class="link">How</a>
       <a href="team-login.html" class="link">Team Login</a>
-      <a href="#" class="btn" style="padding:11px 24px;min-height:auto" data-amira-voice>Talk to Us</a>
+      <a href="#" class="btn" style="padding:11px 24px;min-height:auto" data-amira-voice>Talk to Amira</a>
     </div>
     <button class="hamburger" id="hamburgerBtn" popovertarget="mobMenu" aria-label="Menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -590,34 +674,88 @@
   <div popover class="mob-menu" id="mobMenu">
     <button class="mob-close" popovertarget="mobMenu" popovertargetaction="hide" aria-label="Close menu">&times;</button>
     <a href="#why" class="link" onclick="document.getElementById('mobMenu').hidePopover()">Why</a>
+    <a href="#this-is-you" class="link" onclick="document.getElementById('mobMenu').hidePopover()">Who It's For</a>
     <a href="about.html" class="link">About</a>
-    <a href="#product-film" class="link" onclick="document.getElementById('mobMenu').hidePopover()">Film</a>
     <a href="#features" class="link" onclick="document.getElementById('mobMenu').hidePopover()">What</a>
     <a href="#how" class="link" onclick="document.getElementById('mobMenu').hidePopover()">How</a>
     <a href="team-login.html" class="link">Team Login</a>
-    <a href="#" class="btn filled" data-amira-voice>Talk to Us</a>
+    <a href="#" class="btn filled" data-amira-voice>Talk to Amira</a>
   </div>
 
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-silk-bg"></div>
     <div class="hero-glow"></div>
-    <div class="hero-label">
-      <span class="hero-line"></span>
-      Agentic AI for Industry
-      <span class="hero-line"></span>
-    </div>
-    <h1>Every business has hidden work. <em>AMIRA makes it move.</em></h1>
-    <p class="hero-sub">Agentic software, voice solutions, and brand-trained digital concierges that speak in your voice, follow through across systems, and turn scattered work into elegant momentum.</p>
-    <div class="hero-ctas">
-      <a href="#" class="btn filled" data-amira-voice>🎙 Talk to Us</a>
-      <a href="#product-film" class="btn">Watch the Film</a>
-    </div>
-    <div class="hero-trust">
-      <span>Built for</span>
-      <span class="trust-line"></span>
-      <em>the next generation of service businesses</em>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <div class="hero-label">
+          <span class="hero-line"></span>
+          Meet Amira
+          <span class="hero-line"></span>
+        </div>
+        <h1>Every missed call is a customer <em>someone else just won.</em></h1>
+        <p class="hero-sub">Amira answers your calls, WhatsApps, and website chats in your brand's voice. She books the job, fills the diary, and follows up while you work, sleep, or finally take a Sunday off.</p>
+        <div class="hero-ctas">
+          <a href="#" class="btn filled" data-amira-voice>🎙 Talk to Amira Now</a>
+          <a href="#this-is-you" class="btn">See Who She Works For</a>
+        </div>
+        <div class="hero-trust">
+          <span>On the phones right now</span>
+          <span class="trust-line"></span>
+          <em>for clinics, law firms, and the trades</em>
+        </div>
+      </div>
+
+      <div class="hero-phone" aria-label="Live demonstration of Amira handling customer conversations">
+        <div class="phone">
+          <div class="ph-head">
+            <span class="ph-ava">A</span>
+            <span class="ph-id">
+              <span class="ph-names">
+                <em class="ph-name n1">Bramley Plumbers</em>
+                <em class="ph-name n2">Naidoo Family Practice</em>
+                <em class="ph-name n3">Meyer &amp; Associates</em>
+              </span>
+              <span class="ph-status"><i></i>Amira &middot; replies instantly</span>
+            </span>
+          </div>
+          <div class="ph-screen">
+            <div class="scene s1">
+              <span class="sys m11">Missed call &middot; 21:47</span>
+              <div class="slot">
+                <div class="msg them typing t1x"><i></i><i></i><i></i></div>
+                <div class="msg them m12">Hi, it's Amira from Bramley Plumbers. I saw we just missed your call. What's going on?</div>
+              </div>
+              <div class="msg me m13">geyser burst, water everywhere 😭</div>
+              <div class="msg them m14">That's an emergency. Thabo can be at yours at 07:00, and I'm sending you the mains shut-off steps right now. Book him?</div>
+              <div class="msg me m15">yes please!!</div>
+              <div class="msg them m16">✓ Booked. Reminder at 06:30. Try get some sleep.</div>
+              <div class="res m17">R4,500 job. Saved at 21:47.</div>
+            </div>
+            <div class="scene s2">
+              <span class="sys m21">New WhatsApp &middot; 06:12</span>
+              <div class="msg me m22">hi, any chance dr naidoo can see me today? bad ear pain</div>
+              <div class="slot">
+                <div class="msg them typing t2x"><i></i><i></i><i></i></div>
+                <div class="msg them m23">Morning! Dr Naidoo has 09:20 or 11:45 open today. Which suits you?</div>
+              </div>
+              <div class="msg me m24">9:20 please</div>
+              <div class="msg them m25">✓ Booked. I've sent your intake form, so you can skip the clipboard. Feel better soon.</div>
+              <div class="res m26">Empty slot filled before reception opened.</div>
+            </div>
+            <div class="scene s3">
+              <span class="sys m31">Website chat &middot; 23:05</span>
+              <div class="msg me m32">I was in an accident last week. do you take these cases?</div>
+              <div class="slot">
+                <div class="msg them typing t3x"><i></i><i></i><i></i></div>
+                <div class="msg them m33">I'm sorry to hear that. We do. May I take a few details so the right attorney calls you at 09:00 sharp?</div>
+              </div>
+              <div class="msg me m34">yes thank you 🙏</div>
+              <div class="res m35">Case captured. Consult booked for 09:00.</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -625,7 +763,7 @@
   <section class="section" id="why">
     <div class="wrap text-center sv">
       <div class="label">The Quiet Problem</div>
-      <h2 class="heading">Beautiful brands. <em>Disconnected systems.</em></h2>
+      <h2 class="heading">The leak is quiet. <em>The numbers are not.</em></h2>
     </div>
     <div class="wrap">
       <div class="stats">
@@ -648,45 +786,63 @@
     </div>
   </section>
 
-  <!-- QUOTE -->
-  <section class="quote-band">
-    <div class="sv">
-      <div class="diamond">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--champagne)" stroke-width="1">
-          <polygon points="12,2 22,9 12,22 2,9"/><line x1="2" y1="9" x2="22" y2="9"/>
-          <line x1="12" y1="2" x2="8" y2="9"/><line x1="12" y1="2" x2="16" y2="9"/>
-          <line x1="8" y1="9" x2="12" y2="22"/><line x1="16" y1="9" x2="12" y2="22"/>
-        </svg>
+  <!-- THIS IS YOU -->
+  <section class="section" id="this-is-you" style="padding-top:40px">
+    <div class="wrap text-center sv">
+      <div class="label">This Is You</div>
+      <h2 class="heading">You are not losing customers to competitors. <em>You are losing them to voicemail.</em></h2>
+    </div>
+    <div class="wrap">
+      <div class="verts">
+        <div class="vert sv sv-d1">
+          <div class="vert-kicker">For Doctors &amp; Clinics</div>
+          <h3 class="vert-pain">Your receptionist is excellent. She is also <em>human, off at five, and one person.</em></h3>
+          <p class="vert-body">Patients call at 21:00 about tomorrow's emergency, and somebody asks about medical aid for the hundredth time. Amira answers instantly, books the appointment, refills cancelled slots, and knows exactly what is urgent enough to escalate.</p>
+          <div class="vert-does">Appointments booked &middot; No&#8209;shows chased &middot; Diary full</div>
+        </div>
+        <div class="vert sv sv-d2">
+          <div class="vert-kicker">For Law Firms</div>
+          <h3 class="vert-pain">The client who could not reach you <em>hired the firm that answered.</em></h3>
+          <p class="vert-body">Nobody shops for a lawyer calmly. They call down a list at 22:00 and stop at the first real answer. Amira captures the matter, asks the intake questions you would ask, and books the consult while the other firms ring.</p>
+          <div class="vert-does">Leads captured &middot; Cases qualified &middot; Consults booked</div>
+        </div>
+        <div class="vert sv sv-d3">
+          <div class="vert-kicker">For Plumbers &amp; Trades</div>
+          <h3 class="vert-pain">Geysers do not burst <em>during office hours.</em></h3>
+          <p class="vert-body">The first company to answer wins the job. Amira picks up at 21:47, reassures your customer, quotes the callout, and books the morning slot before they try the next number on Google.</p>
+          <div class="vert-does">Calls answered &middot; Jobs booked &middot; Nights saved</div>
+        </div>
       </div>
-      <p class="quote">The next wave of software will not just answer questions. It will listen, reason, call, message, update records, and carry work forward while still sounding unmistakably human.</p>
+      <p class="verts-foot sv">Salons, vets, agencies, gyms. If your phone makes you money, Amira belongs on it.</p>
     </div>
   </section>
 
-
-  <!-- PRODUCT FILM -->
-  <section class="film-section" id="product-film">
-    <div class="wrap text-center sv">
-      <div class="label">See AMIRA Move</div>
-      <h2 class="heading">From conversation to action. <em>Quietly, beautifully, automatically.</em></h2>
-    </div>
-    <div class="film-shell sv sv-d1">
-      <div class="film-frame">
-        <video class="film-video" controls playsinline preload="metadata" poster="" aria-label="AMIRA product film showing how agentic AI handles business workflows">
-          <source src="gorgeous_lets_make_its_with_re.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <div class="film-caption">
-          <p>A short look at how AMIRA listens, answers, routes, follows up, and carries work forward across chat, voice, and business systems.</p>
-          <a href="gorgeous_lets_make_its_with_re.mp4" class="film-link" target="_blank" rel="noopener">Open film</a>
-        </div>
-      </div>
+  <!-- PROOF -->
+  <section class="quote-band" id="proof">
+    <div class="sv">
+      <span class="perch" aria-hidden="true">
+        <svg class="bird" viewBox="0 0 64 64">
+          <path class="b-wing b-wb" d="M30 14 C40 4 52 6 49 13 C46 20 36 26 27 27 C23 27.5 22 24 24 20 C26 17 28 16 30 14 Z"/>
+          <path class="b-body" d="M43 19 C48 17 52 21 50 27 C48 33 41 40 31 44 C25 46 19 44 17 40 C24 40 30 35 33 29 C36 23 38 21 43 19 Z"/>
+          <path class="b-beak" d="M49 21 L63 17 L50 25 Z"/>
+          <circle class="b-eye" cx="47" cy="22" r="1.2"/>
+          <path class="b-wing b-wf" d="M28 12 C36 4 46 5 44 12 C42 18 33 24 25 25 C21 25.5 20 22 22 18 C24 15 26 14 28 12 Z"/>
+          <path class="b-tail t1" d="M20 41 C12 47 8 55 6 61"/>
+          <path class="b-tail t2" d="M23 43 C17 51 15 58 14 62"/>
+          <path class="b-tail t3" d="M26 44 C22 52 21 58 21 63"/>
+        </svg>
+        <span class="p-dust"></span><span class="p-dust pd2"></span>
+      </span>
+      <div class="label" style="margin-bottom:26px">Real Customer &middot; Real Rands</div>
+      <p class="quote">&ldquo;Amira saved me legit thousands of Rands. I had no idea how these missed jobs add up. And my customers have never been more satisfied.&rdquo;</p>
+      <div class="quote-who"><b>Rochelle</b> &middot; Bramley Plumbers &middot; Johannesburg</div>
     </div>
   </section>
 
   <!-- FEATURES -->
 <section class="section" id="features">
   <div class="wrap text-center sv">
-    <div class="label">What AMIRA Does</div>
+    <div class="label">What Amira Handles</div>
     <h2 class="heading">Your finest operator, <em>available at every&nbsp;hour.</em></h2>
   </div>
   <div class="wrap">
@@ -785,29 +941,42 @@
     </div>
   </section>
 
-  <!-- TEAM -->
-
   <!-- CTA -->
   <section class="cta-section">
     <div class="sv">
       <div class="label" style="margin-bottom:24px">Get Started</div>
       <h2 class="heading">Your competitors' customers are being helped <em>right&nbsp;now.</em></h2>
-      <p class="cta-sub">Every visitor who leaves without buying is a conversation that never happened. Let's change&nbsp;that.</p>
+      <p class="cta-sub">Every missed call today is revenue in someone else's account tomorrow. Talk to Amira and hear exactly what your customers would hear.</p>
       <div class="cta-buttons">
-        <a href="#" class="btn filled" data-amira-voice>🎙 Talk to Us</a>
-        <a href="#product-film" class="btn">Watch the Film</a>
+        <a href="#" class="btn filled" data-amira-voice>🎙 Talk to Amira Now</a>
+        <a href="https://wa.me/972506484887?text=Hi%20Amira%20team,%20I'd%20like%20to%20learn%20more!" class="btn" target="_blank" rel="noopener">WhatsApp Us</a>
       </div>
-      <div class="cta-terms">No setup fee · Bespoke solutions ·Excellent customer care</div>
+      <div class="cta-terms">No setup fee &middot; Bespoke to your business &middot; Live in days</div>
     </div>
   </section>
 
   <!-- FOOTER -->
   <footer>
     <div>
-      <div class="foot-brand">AMIRA</div>
+      <div class="foot-brand">
+        <span class="foot-bird" aria-hidden="true">
+          <svg class="bird" viewBox="0 0 64 64">
+            <path class="b-wing b-wb" d="M30 14 C40 4 52 6 49 13 C46 20 36 26 27 27 C23 27.5 22 24 24 20 C26 17 28 16 30 14 Z"/>
+            <path class="b-body" d="M43 19 C48 17 52 21 50 27 C48 33 41 40 31 44 C25 46 19 44 17 40 C24 40 30 35 33 29 C36 23 38 21 43 19 Z"/>
+            <path class="b-beak" d="M49 21 L63 17 L50 25 Z"/>
+            <circle class="b-eye" cx="47" cy="22" r="1.2"/>
+            <path class="b-wing b-wf" d="M28 12 C36 4 46 5 44 12 C42 18 33 24 25 25 C21 25.5 20 22 22 18 C24 15 26 14 28 12 Z"/>
+            <path class="b-tail t1" d="M20 41 C12 47 8 55 6 61"/>
+            <path class="b-tail t2" d="M23 43 C17 51 15 58 14 62"/>
+            <path class="b-tail t3" d="M26 44 C22 52 21 58 21 63"/>
+          </svg>
+        </span>
+        AMIRA
+      </div>
       <div class="foot-sub">Human Software Resources</div>
     </div>
     <div class="foot-links">
+      <a href="index.html" class="foot-link">Home</a>
       <a href="about.html" class="foot-link">About</a>
       <a href="privacy.html" class="foot-link">Privacy</a>
       <a href="mailto:shimshongfisher@gmail.com" class="foot-link">Contact</a>

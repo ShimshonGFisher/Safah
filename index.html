@@ -42,107 +42,146 @@
     ]
   }
   </script>
-  <meta name="theme-color" content="#FDFBF7" />
+  <meta name="theme-color" content="#0A0F1E" />
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..620;1,9..144,300..620&family=Newsreader:ital,opsz,wght@0,6..72,300..500;1,6..72,300..500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
-    @property --glow-scale { syntax: '<number>'; inherits: false; initial-value: 1; }
+    /* ══════════════════════════════════════════════════════════════════
+       THE NIGHT SHIFT
+       One page = one night. You land at 21:00. You scroll through the
+       hours Amira works. Dawn breaks at the testimonial. The final
+       sections sit in morning light. Zero design JavaScript.
+       ══════════════════════════════════════════════════════════════════ */
 
-    @layer reset, tokens, base, layout, components, scroll-driven, responsive;
+    @property --mins { syntax: '<integer>'; inherits: true; initial-value: 0; }
+
+    @layer reset, tokens, base, atmosphere, nav, hero, night, incidents, dawn, morning, buttons, reveal, responsive, fallbacks;
 
     @layer reset {
       *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-      html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: hidden; }
-      body { overflow-x: hidden; }
+      /* clip, not hidden: hidden creates a scroll container and kills the
+         sticky incident theatre; clip only clips. */
+      html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; overflow-x: clip; }
+      body { overflow-x: clip; }
       a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
       button { font: inherit; border: none; background: none; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-      img { display: block; max-width: 100%; }
+      img, svg { display: block; max-width: 100%; }
     }
 
     @layer tokens {
       :root {
+        color-scheme: dark;
+        /* night */
+        --ink: #080B14; --dusk: #111A33; --night-line: rgba(233, 228, 214, 0.1);
+        --star: #E8ECF8; --moonlight: #F4EFE2;
+        --n-text: #EFE9DB; --n-sub: #A2AABF; --n-faint: #6E7690;
+        /* the lamplight golds (shared with morning) */
+        --gold: #C8A26B; --gold-hi: #E9D2A4; --gold-deep: #9A7440; --amber: #E4B769;
+        /* morning (the old site's palette, kept as the sunrise) */
         --ivory: #FDFBF7; --cream: #F5EDE0; --champagne: #B8956A;
-        --champ-light: #D4BC96; --champ-pale: #F0E6D6;
-        --taupe: #8C7B6B; --dark: #2C2420; --dark-soft: #4A3F37; --border: #E8DFD0;
-        --f-display: 'Playfair Display', 'Georgia', serif;
-        --f-body: 'Cormorant Garamond', 'Georgia', serif;
-        --f-ui: 'Outfit', -apple-system, sans-serif;
+        --champ-light: #D4BC96; --taupe: #8C7B6B; --m-dark: #2C2420;
+        --m-soft: #4A3F37; --m-border: #E8DFD0;
+        /* type */
+        --f-display: 'Fraunces', 'Georgia', serif;
+        --f-body: 'Newsreader', 'Georgia', serif;
+        --f-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', monospace;
         --ease: cubic-bezier(0.22, 1, 0.36, 1);
       }
     }
 
     @layer base {
-      html { scroll-behavior: smooth; background: var(--ivory); }
-      body { background: transparent; color: var(--dark); font-family: var(--f-body); }
-      ::selection { background: var(--champ-pale); color: var(--dark); }
+      html { scroll-behavior: smooth; background: var(--ink); }
+      body { background: var(--ink); color: var(--n-text); font-family: var(--f-body); }
+      ::selection { background: rgba(200, 162, 107, 0.4); color: #FFF6E6; }
+      /* film grain over everything, both night and morning */
       body::after {
-        content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.018;
+        content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 9999; opacity: 0.022;
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       }
-    }
-
-    @layer layout {
-      .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
-      .section { padding: 120px 24px; }
+      .wrap { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
       .text-center { text-align: center; }
+
+      /* mono chrome: labels, timestamps, log lines */
+      .label { font-family: var(--f-mono); font-size: 10px; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 22px; }
+      .timechip {
+        display: inline-flex; align-items: center; gap: 8px;
+        font-family: var(--f-mono); font-size: 10px; letter-spacing: 2.5px; color: var(--n-faint);
+        border: 1px solid var(--night-line); border-radius: 100px; padding: 6px 14px; margin-bottom: 26px;
+      }
+      .timechip i { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 8px 1px rgba(200, 162, 107, 0.8); }
+      .heading { font-family: var(--f-display); font-weight: 380; font-variation-settings: 'opsz' 90; font-size: clamp(28px, 4.4vw, 48px); line-height: 1.16; letter-spacing: -0.4px; text-wrap: balance; }
+      .heading em { font-style: italic; font-weight: 400; color: var(--gold-hi); }
     }
 
-    @layer components {
-      /* ─── AMBIENT ATMOSPHERE (slow gold weather behind everything) ─── */
-      .ambient { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; animation: amb-warm 44s ease-in-out infinite alternate; }
-      .ambient-orbs {
-        position: absolute; inset: -22%;
-        background:
-          radial-gradient(circle at 12% 18%, rgba(184, 149, 106, 0.32) 0%, transparent 42%),
-          radial-gradient(circle at 88% 78%, rgba(212, 188, 150, 0.34) 0%, transparent 42%),
-          radial-gradient(circle at 42% 62%, rgba(140, 123, 107, 0.16) 0%, transparent 52%),
-          radial-gradient(circle at 72% 24%, rgba(245, 237, 224, 0.5) 0%, transparent 48%),
-          radial-gradient(circle at 24% 86%, rgba(226, 190, 138, 0.2) 0%, transparent 45%);
-        filter: blur(64px);
-        animation: orb-drift 85s ease-in-out infinite alternate;
+    @layer atmosphere {
+      /* ─── THE SKY: one enormous gradient, dusk to daybreak.
+             Plain CSS. Works in every browser ever shipped this decade. ─── */
+      .night-shift { position: relative; z-index: 0; overflow: clip;
+        background: linear-gradient(180deg,
+          #111A33 0%, #0C1226 9%, #080B14 24%,
+          #080B14 72%, #0D1330 79%, #2B2547 84.5%,
+          #5C3E52 88.5%, #A66A5E 91.8%, #DDA377 94.6%,
+          #F2DCBC 97.2%, #FDFBF7 100%);
       }
-      .ambient-stars {
-        position: absolute; inset: 0; opacity: 0.5;
+      /* stars live only in the night part, and dissolve before dawn */
+      .stars { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.85;
         background-image:
-          radial-gradient(rgba(184, 149, 106, 0.55) 0.9px, transparent 1.4px),
-          radial-gradient(rgba(184, 149, 106, 0.4) 0.7px, transparent 1.1px);
-        background-size: 340px 340px, 520px 520px;
-        background-position: 0 0, 140px 90px;
-        animation: star-drift 320s linear infinite;
+          radial-gradient(rgba(232, 236, 248, 0.75) 0.8px, transparent 1.3px),
+          radial-gradient(rgba(232, 236, 248, 0.45) 0.6px, transparent 1px),
+          radial-gradient(rgba(233, 210, 164, 0.5) 0.9px, transparent 1.4px);
+        background-size: 310px 310px, 190px 190px, 520px 520px;
+        background-position: 0 0, 90px 130px, 200px 60px;
+        mask-image: linear-gradient(180deg, black 0%, black 72%, transparent 84%);
+        -webkit-mask-image: linear-gradient(180deg, black 0%, black 72%, transparent 84%);
       }
-      .ambient-stars::after {
+      .stars::after {
         content: ''; position: absolute; inset: 0;
-        background-image: radial-gradient(rgba(212, 188, 150, 0.5) 0.8px, transparent 1.2px);
-        background-size: 260px 260px; background-position: 80px 40px;
-        animation: star-twinkle 9s ease-in-out infinite alternate;
+        background-image: radial-gradient(rgba(244, 239, 226, 0.7) 0.7px, transparent 1.2px);
+        background-size: 240px 240px; background-position: 60px 30px;
+        animation: twinkle 7s ease-in-out infinite alternate;
       }
-      .mote { position: absolute; width: 3px; height: 3px; border-radius: 50%; background: radial-gradient(circle, #F0DCAE, rgba(200, 162, 107, 0.75)); box-shadow: 0 0 8px 2px rgba(200, 162, 107, 0.35); opacity: 0; }
-      .mo1 { left: 14%; animation: mote-rise 75s linear infinite; }
-      .mo2 { left: 58%; width: 2px; height: 2px; animation: mote-rise 105s linear infinite 18s; }
-      .mo3 { left: 84%; animation: mote-rise 90s linear infinite 40s; }
-      @keyframes amb-warm { from { filter: hue-rotate(0deg) saturate(1); } to { filter: hue-rotate(9deg) saturate(1.07); } }
-      @keyframes orb-drift {
-        0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-        50% { transform: translate(2.5vw, 3vh) rotate(3deg) scale(1.05); }
-        100% { transform: translate(-2vw, -2.5vh) rotate(-2.5deg) scale(1.08); }
+      @keyframes twinkle { from { opacity: 0.1; } to { opacity: 0.7; } }
+
+      /* the moon, up since dusk */
+      .moon { position: absolute; top: clamp(90px, 12vh, 150px); right: clamp(20px, 11vw, 160px); width: 84px; aspect-ratio: 1; border-radius: 50%; z-index: 0; pointer-events: none;
+        background: radial-gradient(circle at 38% 34%, #FFFDF4, #EDE3C8 58%, #D9CBA6 100%);
+        box-shadow: 0 0 60px 18px rgba(244, 239, 226, 0.13), 0 0 140px 60px rgba(244, 239, 226, 0.05), inset -8px -10px 24px rgba(154, 116, 64, 0.18);
+        animation: moon-breathe 9s ease-in-out infinite alternate;
       }
-      @keyframes star-drift { to { background-position: 680px 340px, 660px 610px; } }
-      @keyframes star-twinkle { from { opacity: 0.15; } to { opacity: 0.6; } }
-      @keyframes mote-rise {
-        0% { transform: translateY(104vh); opacity: 0; }
-        5% { opacity: 0.55; } 55% { opacity: 0.3; } 92% { opacity: 0.5; }
-        100% { transform: translateY(-6vh); opacity: 0; }
+      .moon::before, .moon::after { content: ''; position: absolute; border-radius: 50%; background: rgba(190, 172, 132, 0.18); }
+      .moon::before { width: 14px; height: 14px; top: 26%; left: 24%; box-shadow: inset 1px 2px 3px rgba(120, 100, 60, 0.35); }
+      .moon::after { width: 9px; height: 9px; top: 56%; left: 58%; box-shadow: inset 1px 1px 2px rgba(120, 100, 60, 0.35); }
+      @keyframes moon-breathe { from { box-shadow: 0 0 60px 18px rgba(244,239,226,0.11), 0 0 140px 60px rgba(244,239,226,0.045), inset -8px -10px 24px rgba(154,116,64,0.18); }
+        to { box-shadow: 0 0 74px 24px rgba(244,239,226,0.16), 0 0 170px 70px rgba(244,239,226,0.06), inset -8px -10px 24px rgba(154,116,64,0.18); } }
+
+      /* shooting stars, rare and quick */
+      .shoot { position: absolute; height: 1px; width: 120px; z-index: 0; pointer-events: none; opacity: 0;
+        background: linear-gradient(90deg, transparent, #EAF0FF 55%, transparent);
+        rotate: -26deg; }
+      .sh1 { top: 14%; left: 64%; animation: shoot 13s linear infinite 5s; }
+      .sh2 { top: 7%; left: 22%; width: 90px; rotate: -19deg; animation: shoot 17s linear infinite 11s; }
+      @keyframes shoot {
+        0% { translate: 0 0; opacity: 0; }
+        0.6% { opacity: 0.9; }
+        3.2% { translate: -240px 118px; opacity: 0; }
+        100% { translate: -240px 118px; opacity: 0; }
       }
 
-      /* ─── THE HUMMINGBIRD (blink and you miss her) ─── */
+      /* the sun, half-risen behind the testimonial */
+      .sunrise { position: absolute; left: 50%; translate: -50% 0; bottom: 4.6%; width: min(680px, 92vw); aspect-ratio: 2 / 1; z-index: 0; pointer-events: none;
+        background: radial-gradient(ellipse at 50% 100%, rgba(255, 236, 200, 0.85) 0%, rgba(255, 214, 156, 0.5) 28%, rgba(226, 152, 110, 0.22) 52%, transparent 72%);
+        filter: blur(2px);
+      }
+
+      /* ─── THE HUMMINGBIRD: the only thing awake ─── */
       .bird { display: block; overflow: visible; }
       .bird .b-body, .bird .b-beak { fill: url(#gld); }
-      .bird .b-eye { fill: var(--ivory); }
+      .bird .b-eye { fill: var(--ink); }
       .bird .b-wing { fill: url(#gld); transform-origin: 26px 22px; }
       .bird .b-wf { opacity: 0.95; animation: flap 0.24s ease-in-out infinite alternate; }
       .bird .b-wb { opacity: 0.45; animation: flap 0.24s ease-in-out infinite alternate-reverse; }
@@ -150,446 +189,489 @@
       .bird .t2 { opacity: 0.5; } .bird .t3 { opacity: 0.35; }
       @keyframes flap { from { transform: rotate(-16deg); } to { transform: rotate(12deg); } }
 
-      .bird-flight { position: fixed; top: 15vh; left: -70px; z-index: 40; pointer-events: none; opacity: 0; animation: bird-pass 36s linear infinite 6s; }
-      .bird-flight .bird { width: 36px; height: 36px; }
+      .bird-flight { position: fixed; top: 17vh; left: -70px; z-index: 40; pointer-events: none; opacity: 0; animation: bird-pass 41s linear infinite 7s; filter: drop-shadow(0 0 6px rgba(233, 210, 164, 0.55)); }
+      .bird-flight .bird { width: 34px; height: 34px; }
       .bird-bob { position: relative; animation: bird-bob 2.8s ease-in-out infinite; }
       @keyframes bird-pass {
         0% { transform: translateX(0); opacity: 0; }
-        1.2% { opacity: 0; }
-        3% { opacity: 0.95; }
-        17.5% { opacity: 0.95; }
-        19.5% { transform: translateX(calc(100vw + 140px)); opacity: 0; }
+        1% { opacity: 0; }
+        2.6% { opacity: 0.95; }
+        15.4% { opacity: 0.95; }
+        17.2% { transform: translateX(calc(100vw + 140px)); opacity: 0; }
         100% { transform: translateX(calc(100vw + 140px)); opacity: 0; }
       }
-      @keyframes bird-bob { 0%, 100% { translate: 0 0; rotate: 2deg; } 50% { translate: 0 26px; rotate: -3deg; } }
-      .dust { position: absolute; top: 16px; left: 2px; width: 3px; height: 3px; border-radius: 50%; background: radial-gradient(circle, #EFD9A8, var(--champagne)); box-shadow: 0 0 6px 1px rgba(200, 162, 107, 0.8); animation: dust-fade 0.75s linear infinite; }
+      @keyframes bird-bob { 0%, 100% { translate: 0 0; rotate: 2deg; } 50% { translate: 0 24px; rotate: -3deg; } }
+      .dust { position: absolute; top: 16px; left: 2px; width: 3px; height: 3px; border-radius: 50%; background: radial-gradient(circle, #EFD9A8, rgba(200, 162, 107, 0.75)); box-shadow: 0 0 6px 1px rgba(200, 162, 107, 0.8); animation: dust-fade 0.75s linear infinite; }
       .d2 { animation-delay: 0.19s; top: 20px; } .d3 { animation-delay: 0.38s; top: 12px; } .d4 { animation-delay: 0.56s; top: 18px; }
       @keyframes dust-fade { 0% { opacity: 0.9; transform: translate(0, 0) scale(1); } 100% { opacity: 0; transform: translate(-26px, 12px) scale(0.15); } }
 
-      .perch { display: inline-block; position: relative; margin-bottom: 6px; }
-      .perch .bird { width: 42px; height: 42px; animation: birdFloat 4.5s ease-in-out infinite; }
+      .perch { display: inline-block; position: relative; margin-bottom: 8px; filter: drop-shadow(0 0 8px rgba(233, 210, 164, 0.4)); }
+      .perch .bird { width: 44px; height: 44px; animation: birdFloat 4.5s ease-in-out infinite; }
       .perch .b-wf, .perch .b-wb { animation-duration: 0.5s; }
-      .p-dust { position: absolute; left: 8px; bottom: 6px; width: 2.5px; height: 2.5px; border-radius: 50%; background: var(--champ-light); box-shadow: 0 0 5px 1px rgba(200, 162, 107, 0.7); opacity: 0; animation: p-dust 8s linear infinite; }
-      .p-dust.pd2 { left: 14px; bottom: 11px; animation-delay: 4s; }
-      @keyframes p-dust { 0%, 88% { opacity: 0; transform: translate(0, 0) scale(1); } 91% { opacity: 0.85; } 100% { opacity: 0; transform: translate(-9px, 10px) scale(0.2); } }
       @keyframes birdFloat { 0%, 100% { translate: 0 0; rotate: 0deg; } 25% { translate: 0 -4px; rotate: 1.5deg; } 75% { translate: 0 2px; rotate: -1deg; } }
       .foot-bird { display: inline-block; margin-right: 10px; vertical-align: middle; }
       .foot-bird .bird { width: 20px; height: 20px; opacity: 0.85; }
       .foot-bird .b-wf, .foot-bird .b-wb { animation-duration: 0.6s; }
+      .foot-bird .b-eye { fill: var(--ivory); }
 
-      /* NAV */
+      /* gold embers drifting up through the dark */
+      .mote { position: absolute; width: 3px; height: 3px; border-radius: 50%; z-index: 0; pointer-events: none; background: radial-gradient(circle, #F0DCAE, rgba(200, 162, 107, 0.75)); box-shadow: 0 0 8px 2px rgba(200, 162, 107, 0.35); opacity: 0; }
+      .mo1 { left: 12%; animation: mote-rise 68s linear infinite; }
+      .mo2 { left: 55%; width: 2px; height: 2px; animation: mote-rise 96s linear infinite 20s; }
+      .mo3 { left: 86%; animation: mote-rise 82s linear infinite 44s; }
+      @keyframes mote-rise {
+        0% { transform: translateY(0); opacity: 0; }
+        4% { opacity: 0.5; } 55% { opacity: 0.25; } 92% { opacity: 0.45; }
+        100% { transform: translateY(-160vh); opacity: 0; }
+      }
+    }
+
+    @layer nav {
+      /* dark glass chrome. she is always on shift, so the bar never lightens. */
       .nav {
         position: fixed; inset-inline: 0; top: 0; z-index: 100;
         display: flex; align-items: center; justify-content: space-between;
         padding: 20px 48px;
-        background: rgba(253,251,247,0.82);
-        backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+        background: rgba(8, 11, 20, 0.6);
+        backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
         border-bottom: 1px solid transparent;
-        transition: padding 0.3s var(--ease), border-color 0.3s;
       }
-      .nav.scrolled { padding-block: 13px; border-bottom-color: var(--border); }
-      .nav .logo { font-family: var(--f-display); font-size: 21px; font-weight: 500; letter-spacing: 5px; transition: opacity 0.2s; }
-      .nav .logo:hover { opacity: 0.65; }
-      .nav .links { display: flex; align-items: center; gap: 32px; }
-      .nav .link, .link {
-        font-family: var(--f-ui); font-size: 10.5px; font-weight: 400;
-        letter-spacing: 2.8px; text-transform: uppercase;
-        color: var(--taupe); position: relative; padding-bottom: 2px;
+      .nav .logo { font-family: var(--f-display); font-size: 20px; font-weight: 440; letter-spacing: 6px; color: var(--n-text); transition: opacity 0.2s; }
+      .nav .logo:hover { opacity: 0.7; }
+      .nav .links { display: flex; align-items: center; gap: 30px; }
+      .link {
+        font-family: var(--f-mono); font-size: 10px; font-weight: 400;
+        letter-spacing: 2.6px; text-transform: uppercase;
+        color: var(--n-sub); position: relative; padding-bottom: 2px;
         transition: color 0.2s;
       }
-      .nav .link::after {
+      .link::after {
         content: ''; position: absolute; bottom: 0; left: 0;
-        width: 0; height: 0.5px; background: var(--champagne);
+        width: 0; height: 1px; background: var(--gold);
         transition: width 0.3s var(--ease);
       }
-      .nav .link:hover { color: var(--champagne); }
-      .nav .link:hover::after { width: 100%; }
+      .link:hover { color: var(--gold-hi); }
+      .link:hover::after { width: 100%; }
 
-      /* BUTTONS */
-      .btn {
-        display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-        padding: 14px 34px; min-height: 46px;
-        font-family: var(--f-ui); font-size: 10px; font-weight: 400;
-        letter-spacing: 3px; text-transform: uppercase;
-        border: 1px solid var(--champagne); color: var(--dark); background: transparent;
-        transition: all 0.3s var(--ease);
-        white-space: nowrap;
-      }
-      .btn:hover { background: var(--champagne); color: var(--ivory); box-shadow: 0 6px 28px color-mix(in srgb, var(--champagne) 22%, transparent); }
-      .btn.filled { background: var(--champagne); color: var(--ivory); }
-      .btn.filled:hover { background: var(--dark-soft); border-color: var(--dark-soft); box-shadow: 0 6px 28px color-mix(in srgb, var(--dark) 18%, transparent); }
+      /* the clock in the corner: scrubbed by scroll, 21:00 to 09:00.
+         chromium gets it; everyone else never knows it existed. */
+      .clock { display: none; }
 
-      /* LABELS & HEADINGS */
-      .label { font-family: var(--f-ui); font-size: 10px; letter-spacing: 4.5px; text-transform: uppercase; color: var(--champagne); margin-bottom: 20px; }
-      .heading { font-family: var(--f-display); font-weight: 400; font-size: clamp(26px, 4.2vw, 44px); line-height: 1.22; text-wrap: balance; }
-      .heading em { font-style: italic; font-weight: 400; }
-
-      /* HERO */
-      .hero { min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 150px 24px 100px; position: relative; overflow: hidden; z-index: 0; }
-      .hero-glow { position: absolute; top: 50%; left: 50%; translate: -50% -50%; width: min(600px, 85vw); aspect-ratio: 1; border-radius: 50%; pointer-events: none; background: radial-gradient(circle, color-mix(in srgb, var(--champagne) 10%, transparent) 0%, transparent 70%); }
-      .hero-grid { display: grid; grid-template-columns: 1.08fr 0.92fr; gap: 64px; align-items: center; max-width: 1140px; margin: 0 auto; width: 100%; }
-      .hero-copy { text-align: left; }
-      .hero-label { display: flex; align-items: center; gap: 14px; justify-content: flex-start; font-family: var(--f-ui); font-size: 10px; letter-spacing: 4.5px; text-transform: uppercase; color: var(--champagne); margin-bottom: 36px; }
-      .hero-line { display: inline-block; height: 0.5px; background: linear-gradient(90deg, transparent, var(--champagne), transparent); animation: line-grow 1s var(--ease) 0.4s both; }
-      @keyframes line-grow { to { width: 40px; } }
-      .hero h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(32px, 4.6vw, 56px); line-height: 1.12; letter-spacing: -0.3px; max-width: 640px; text-wrap: balance; }
-      .hero h1 em { font-style: italic; color: var(--champagne); font-weight: 400; }
-      .hero-sub { font-family: var(--f-body); font-size: clamp(17px, 2vw, 21px); font-weight: 300; color: var(--taupe); max-width: 520px; line-height: 1.7; margin-top: 26px; }
-      .hero-ctas { display: flex; gap: 16px; margin-top: 44px; flex-wrap: wrap; justify-content: flex-start; }
-      .hero-trust { margin-top: 60px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: flex-start; }
-      .hero-trust span { font-family: var(--f-ui); font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--taupe); }
-      .hero-trust em { font-family: var(--f-display); font-size: 14px; font-style: italic; color: var(--dark-soft); }
-      .trust-line { width: 24px; height: 0.5px; background: linear-gradient(90deg, transparent, var(--champ-light), transparent); }
-      .hero-copy > *, .hero-phone { animation: hero-in 0.8s var(--ease) both; }
-      .hero-copy > :nth-child(1) { animation-delay: 0.05s; }
-      .hero-copy > :nth-child(2) { animation-delay: 0.15s; }
-      .hero-copy > :nth-child(3) { animation-delay: 0.27s; }
-      .hero-copy > :nth-child(4) { animation-delay: 0.39s; }
-      .hero-copy > :nth-child(5) { animation-delay: 0.51s; }
-      .hero-phone { animation-delay: 0.58s; }
-      @keyframes hero-in { from { opacity: 0; translate: 0 20px; } to { opacity: 1; translate: 0 0; } }
-
-      /* ─── THE PHONE (she demos herself, on a loop) ─── */
-      .hero-phone { position: relative; display: flex; justify-content: center; }
-      .hero-phone::before { content: ''; position: absolute; inset: -40px -30px; background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--champagne) 16%, transparent), transparent 65%); filter: blur(14px); }
-      .phone {
-        position: relative; width: min(340px, 88vw); border-radius: 34px; padding: 12px;
-        background: linear-gradient(160deg, #FFFDF9, #F4EAD9);
-        border: 1px solid var(--border);
-        box-shadow: 0 34px 90px color-mix(in srgb, var(--dark) 16%, transparent), inset 0 0 0 1px rgba(255,255,255,0.5);
-        animation: phone-float 7s ease-in-out infinite;
-      }
-      @keyframes phone-float { 0%, 100% { translate: 0 0; rotate: 0deg; } 50% { translate: 0 -8px; rotate: -0.4deg; } }
-      .ph-head { display: flex; align-items: center; gap: 11px; padding: 10px 8px 12px; }
-      .ph-ava { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--champ-light), var(--champagne)); color: var(--ivory); font-family: var(--f-display); font-size: 16px; flex-shrink: 0; }
-      .ph-id { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
-      .ph-names { position: relative; height: 16px; }
-      .ph-name { position: absolute; inset: 0; font-family: var(--f-ui); font-style: normal; font-size: 12.5px; font-weight: 500; letter-spacing: 0.4px; color: var(--dark); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; opacity: 0; animation: 27s linear infinite; }
-      .ph-name.n1 { animation-name: g1; } .ph-name.n2 { animation-name: g2; } .ph-name.n3 { animation-name: g3; }
-      .ph-status { font-family: var(--f-ui); font-size: 9px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--taupe); display: flex; align-items: center; gap: 5px; }
-      .ph-status i { width: 5px; height: 5px; border-radius: 50%; background: #8FAE8B; box-shadow: 0 0 6px #8FAE8B; }
-      .ph-screen { position: relative; height: 460px; border-radius: 24px; background: linear-gradient(180deg, #FBF5EA, #F6EDDD); border: 1px solid color-mix(in srgb, var(--border) 70%, transparent); overflow: hidden; }
-      .scene { position: absolute; inset: 0; display: flex; flex-direction: column; gap: 9px; padding: 16px 14px 14px; opacity: 0; animation: 27s linear infinite; }
-      .scene.s1 { animation-name: g1; } .scene.s2 { animation-name: g2; } .scene.s3 { animation-name: g3; }
-      .sys { align-self: center; font-family: var(--f-ui); font-size: 8.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--taupe); background: rgba(44,36,32,0.05); padding: 5px 12px; border-radius: 100px; opacity: 0; translate: 0 6px; animation: 27s linear infinite; }
-      .msg { max-width: 82%; padding: 9px 13px; border-radius: 14px; font-family: var(--f-ui); font-size: 12.8px; font-weight: 300; line-height: 1.5; color: var(--dark); opacity: 0; translate: 0 10px; animation: 27s linear infinite; }
-      .msg.them { align-self: flex-start; background: #FFFFFF; border: 1px solid var(--border); border-bottom-left-radius: 4px; box-shadow: 0 2px 8px rgba(44,36,32,0.05); }
-      .msg.me { align-self: flex-end; background: color-mix(in srgb, var(--champagne) 26%, #FFFFFF); border-bottom-right-radius: 4px; }
-      .msg.typing { display: flex; gap: 4px; padding: 12px 14px; translate: 0 0; }
-      .msg.typing i { width: 5px; height: 5px; border-radius: 50%; background: var(--taupe); animation: dot-b 1s ease-in-out infinite; }
-      .msg.typing i:nth-child(2) { animation-delay: 0.15s; }
-      .msg.typing i:nth-child(3) { animation-delay: 0.3s; }
-      .slot { display: grid; align-self: flex-start; max-width: 82%; }
-      .slot .msg { grid-area: 1 / 1; max-width: 100%; align-self: end; }
-      .slot .msg.typing { align-self: start; justify-self: start; }
-      @keyframes dot-b { 0%, 60%, 100% { translate: 0 0; opacity: 0.4; } 30% { translate: 0 -4px; opacity: 0.9; } }
-      .res { margin-top: auto; align-self: center; text-align: center; font-family: var(--f-display); font-style: italic; font-size: 15.5px; color: var(--champagne); opacity: 0; animation: 27s linear infinite; padding-top: 8px; }
-      .res::before { content: ''; display: block; width: 38px; height: 0.5px; margin: 0 auto 9px; background: linear-gradient(90deg, transparent, var(--champ-light), transparent); }
-
-      /* scene gates: three 9s acts inside one 27s loop */
-      @keyframes g1 { 0% { opacity: 0; } 1.5% { opacity: 1; } 31.5% { opacity: 1; } 33.3% { opacity: 0; } 100% { opacity: 0; } }
-      @keyframes g2 { 0%, 33.8% { opacity: 0; } 35.3% { opacity: 1; } 64.8% { opacity: 1; } 66.6% { opacity: 0; } 100% { opacity: 0; } }
-      @keyframes g3 { 0%, 67.1% { opacity: 0; } 68.6% { opacity: 1; } 98.2% { opacity: 1; } 100% { opacity: 0; } }
-
-      /* act one: the burst geyser */
-      @keyframes e11 { 0%, 2.5% { opacity: 0; translate: 0 6px; } 3.7% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
-      @keyframes t1  { 0%, 4% { opacity: 0; } 4.8% { opacity: 1; } 8% { opacity: 1; } 8.8% { opacity: 0; } 100% { opacity: 0; } }
-      @keyframes e12 { 0%, 8.8% { opacity: 0; translate: 0 10px; } 10% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
-      @keyframes e13 { 0%, 11.8% { opacity: 0; translate: 0 10px; } 13% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
-      @keyframes e14 { 0%, 15% { opacity: 0; translate: 0 10px; } 16.2% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
-      @keyframes e15 { 0%, 18% { opacity: 0; translate: 0 10px; } 19.2% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
-      @keyframes e16 { 0%, 20.8% { opacity: 0; translate: 0 10px; } 22% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
-      @keyframes e17 { 0%, 24% { opacity: 0; scale: 0.96; } 25.5% { opacity: 1; scale: 1; } 100% { opacity: 1; scale: 1; } }
-      .m11 { animation-name: e11; } .t1x { animation-name: t1; }
-      .m12 { animation-name: e12; } .m13 { animation-name: e13; }
-      .m14 { animation-name: e14; } .m15 { animation-name: e15; }
-      .m16 { animation-name: e16; } .m17 { animation-name: e17; }
-
-      /* act two: the ear at dawn */
-      @keyframes e21 { 0%, 36.3% { opacity: 0; translate: 0 6px; } 37.5% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
-      @keyframes e22 { 0%, 38.3% { opacity: 0; translate: 0 10px; } 39.5% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
-      @keyframes t2  { 0%, 40.3% { opacity: 0; } 41.1% { opacity: 1; } 43% { opacity: 1; } 43.8% { opacity: 0; } 100% { opacity: 0; } }
-      @keyframes e23 { 0%, 43.8% { opacity: 0; translate: 0 10px; } 45% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
-      @keyframes e24 { 0%, 46.5% { opacity: 0; translate: 0 10px; } 47.7% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
-      @keyframes e25 { 0%, 49% { opacity: 0; translate: 0 10px; } 50.2% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
-      @keyframes e26 { 0%, 52% { opacity: 0; scale: 0.96; } 53.5% { opacity: 1; scale: 1; } 100% { opacity: 1; scale: 1; } }
-      .m21 { animation-name: e21; } .m22 { animation-name: e22; } .t2x { animation-name: t2; }
-      .m23 { animation-name: e23; } .m24 { animation-name: e24; }
-      .m25 { animation-name: e25; } .m26 { animation-name: e26; }
-
-      /* act three: the midnight case */
-      @keyframes e31 { 0%, 69.6% { opacity: 0; translate: 0 6px; } 70.8% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
-      @keyframes e32 { 0%, 71.6% { opacity: 0; translate: 0 10px; } 72.8% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
-      @keyframes t3  { 0%, 73.6% { opacity: 0; } 74.4% { opacity: 1; } 76.3% { opacity: 1; } 77.1% { opacity: 0; } 100% { opacity: 0; } }
-      @keyframes e33 { 0%, 77.1% { opacity: 0; translate: 0 10px; } 78.3% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
-      @keyframes e34 { 0%, 79.8% { opacity: 0; translate: 0 10px; } 81% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
-      @keyframes e35 { 0%, 82.8% { opacity: 0; scale: 0.96; } 84.3% { opacity: 1; scale: 1; } 100% { opacity: 1; scale: 1; } }
-      .m31 { animation-name: e31; } .m32 { animation-name: e32; } .t3x { animation-name: t3; }
-      .m33 { animation-name: e33; } .m34 { animation-name: e34; } .m35 { animation-name: e35; }
-
-      /* STATS */
-      .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 56px; }
-      .stat { background: var(--ivory); padding: 48px 28px; text-align: center; transition: background 0.25s; }
-      .stat:hover { background: var(--cream); }
-      .stat-num { font-family: var(--f-display); font-size: clamp(34px, 4vw, 48px); font-weight: 400; color: var(--champagne); margin-bottom: 10px; }
-      .stat-text { font-family: var(--f-body); font-size: 16px; color: var(--dark); line-height: 1.45; margin-bottom: 6px; }
-      .stat-src { font-family: var(--f-ui); font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--taupe); }
-
-      /* VERTICALS: THIS IS YOU */
-      .verts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 56px; }
-      .vert { background: var(--ivory); padding: 46px 36px 40px; display: flex; flex-direction: column; transition: background 0.25s; }
-      .vert:hover { background: color-mix(in srgb, var(--cream) 50%, var(--ivory)); }
-      .vert-kicker { font-family: var(--f-ui); font-size: 9.5px; letter-spacing: 3px; text-transform: uppercase; color: var(--champagne); margin-bottom: 18px; }
-      .vert-pain { font-family: var(--f-display); font-size: 21px; line-height: 1.35; font-weight: 400; margin-bottom: 14px; }
-      .vert-pain em { font-style: italic; color: var(--champagne); }
-      .vert-body { font-family: var(--f-body); font-size: 16.5px; font-weight: 300; color: var(--taupe); line-height: 1.62; margin-bottom: 22px; }
-      .vert-does { margin-top: auto; font-family: var(--f-ui); font-size: 9px; letter-spacing: 1.8px; text-transform: uppercase; color: var(--dark-soft); padding-top: 14px; border-top: 1px solid var(--border); line-height: 1.9; }
-      .verts-foot { margin-top: 32px; text-align: center; font-family: var(--f-body); font-size: 18px; font-style: italic; font-weight: 300; color: var(--taupe); }
-
-      /* QUOTE / PROOF */
-      .quote-band { padding: 100px 24px; text-align: center; background: linear-gradient(180deg, transparent 0%, var(--cream) 25%, var(--cream) 75%, transparent 100%); }
-      .quote { font-family: var(--f-display); font-style: italic; font-weight: 400; font-size: clamp(19px, 2.6vw, 30px); line-height: 1.55; max-width: 720px; margin: 0 auto; color: var(--dark-soft); }
-      .quote-who { margin-top: 28px; font-family: var(--f-ui); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--taupe); }
-      .quote-who b { color: var(--champagne); font-weight: 500; }
-
-      /* FEATURES */
-      .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); margin-top: 56px; }
-      .feat { background: var(--ivory); padding: 44px 36px; transition: background 0.25s; }
-      .feat:hover { background: color-mix(in srgb, var(--cream) 50%, var(--ivory)); }
-      .feat-icon { display: block; margin-bottom: 22px; width: 32px; height: 32px; color: var(--champagne); }
-      .feat-icon svg { width: 100%; height: 100%; display: block; }
-      .feat-group { grid-column: 1 / -1; background: var(--ivory); padding: 32px 36px 8px; font-family: var(--f-ui); font-size: 9.5px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--champagne); display: flex; align-items: center; gap: 14px; }
-      .feat-group::before, .feat-group::after { content: ''; flex: 1; height: 0.5px; background: linear-gradient(90deg, transparent, var(--champ-light), transparent); }
-      .feat-title { font-family: var(--f-display); font-size: 20px; font-weight: 500; margin-bottom: 10px; }
-      .feat-desc { font-family: var(--f-body); font-size: 17px; font-weight: 300; color: var(--taupe); line-height: 1.6; }
-
-      /* HOW */
-      .how-band {
-        padding: 120px 24px; color: var(--ivory);
-        background:
-          radial-gradient(rgba(212, 188, 150, 0.14) 1px, transparent 1.6px) 0 0 / 300px 300px,
-          radial-gradient(rgba(184, 149, 106, 0.1) 0.8px, transparent 1.3px) 130px 80px / 420px 420px,
-          var(--dark);
-      }
-      .how-band .label { color: var(--champ-light); }
-      .how-band .heading { color: var(--ivory); }
-      .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 56px; max-width: 1100px; margin-inline: auto; }
-      .step-num { font-family: var(--f-display); font-size: 52px; font-weight: 400; color: var(--champagne); line-height: 1; margin-bottom: 18px; }
-      .step-title { font-family: var(--f-display); font-size: 20px; font-weight: 500; color: var(--ivory); margin-bottom: 12px; }
-      .step-desc { font-family: var(--f-body); font-size: 17px; font-weight: 300; color: var(--champ-light); line-height: 1.6; }
-
-      /* CTA */
-      .cta-section { padding: 120px 24px; text-align: center; background: linear-gradient(180deg, transparent, var(--cream)); }
-      .cta-sub { font-family: var(--f-body); font-size: 19px; font-weight: 300; color: var(--taupe); max-width: 480px; margin: 16px auto 44px; line-height: 1.6; }
-      .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-      .cta-terms { margin-top: 24px; font-family: var(--f-ui); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--taupe); }
-
-      /* FOOTER */
-      footer { position: relative; z-index: 50; padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 16px; }
-      .foot-brand { font-family: var(--f-display); font-size: 14px; font-weight: 500; letter-spacing: 3px; display: flex; align-items: center; }
-      .foot-sub { font-family: var(--f-ui); font-size: 10px; letter-spacing: 1px; color: var(--taupe); margin-top: 3px; }
-      .foot-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
-      .foot-link { font-family: var(--f-ui); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--taupe); transition: color 0.2s; }
-      .foot-link:hover { color: var(--champagne); }
-      .foot-copy { font-family: var(--f-ui); font-size: 10px; color: var(--taupe); letter-spacing: 1px; }
-
-      /* HAMBURGER + POPOVER MENU */
+      /* ─── MOBILE MENU: pure :target, zero JS.
+             navigating to any section changes the fragment, which
+             closes the menu by itself. ─── */
       .hamburger { display: none; flex-direction: column; gap: 5px; padding: 10px; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; }
-      .hamburger span { width: 22px; height: 1px; background: var(--dark); display: block; transition: all 0.3s var(--ease); }
-      .hamburger.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-      .hamburger.is-open span:nth-child(2) { opacity: 0; }
-      .hamburger.is-open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+      .hamburger span { width: 22px; height: 1px; background: var(--n-text); display: block; transition: all 0.3s var(--ease); }
+      body:has(.mob-menu:target) .hamburger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+      body:has(.mob-menu:target) .hamburger span:nth-child(2) { opacity: 0; }
+      body:has(.mob-menu:target) .hamburger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+      .menu-anchor { position: fixed; top: 0; left: 0; width: 1px; height: 1px; }
+      .mob-menu {
+        position: fixed; inset: 0; z-index: 200; background: rgba(8, 11, 20, 0.97);
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 34px;
+        padding: 40px;
+        opacity: 0; visibility: hidden; translate: 0 -10px;
+        transition: opacity 0.3s var(--ease), translate 0.3s var(--ease), visibility 0.3s;
+      }
+      .mob-menu:target { opacity: 1; visibility: visible; translate: 0 0; }
+      .mob-menu .link { font-size: 13px; letter-spacing: 3.5px; }
       .mob-close {
         position: absolute; top: 22px; right: 26px;
         width: 44px; height: 44px;
         display: flex; align-items: center; justify-content: center;
-        color: var(--dark); font-family: var(--f-ui); font-size: 28px; line-height: 1;
-        background: transparent; transition: color 0.2s, transform 0.25s var(--ease);
+        color: var(--n-text); font-family: var(--f-mono); font-size: 26px; line-height: 1;
+        transition: color 0.2s, transform 0.25s var(--ease);
       }
-      .mob-close:hover { color: var(--champagne); transform: rotate(90deg); }
-      [popover].mob-menu {
-        inset: 0; border: none; width: 100%; height: 100%; background: var(--ivory);
-        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 36px;
-        padding: 40px;
-        opacity: 0; translate: 0 -8px;
-        transition: opacity 0.3s var(--ease), translate 0.3s var(--ease), display 0.3s allow-discrete, overlay 0.3s allow-discrete;
-      }
-      [popover].mob-menu:popover-open { opacity: 1; translate: 0 0; }
-      [popover].mob-menu .link { font-size: 13px; letter-spacing: 3.5px; }
-      @starting-style { [popover].mob-menu:popover-open { opacity: 0; translate: 0 -8px; } }
+      .mob-close:hover { color: var(--gold); transform: rotate(90deg); }
     }
 
-    @layer scroll-driven {
-      .sv { animation: scroll-reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 28%; }
-      @keyframes scroll-reveal { from { opacity: 0; translate: 0 24px; } to { opacity: 1; translate: 0 0; } }
-      .sv-d1 { animation-range: entry 2% entry 30%; }
-      .sv-d2 { animation-range: entry 4% entry 32%; }
-      .sv-d3 { animation-range: entry 6% entry 34%; }
-      .sv-d4 { animation-range: entry 8% entry 36%; }
-      .sv-d5 { animation-range: entry 10% entry 38%; }
-      .sv-d6 { animation-range: entry 12% entry 40%; }
-      .hero-glow { animation: glow-drift linear both; animation-timeline: scroll(); animation-range: 0vh 100vh; }
-      @keyframes glow-drift { from { translate: -50% -50%; scale: 1; opacity: 1; } to { translate: -50% -20%; scale: 1.15; opacity: 0.25; } }
+    @layer hero {
+      .hero { min-height: 100dvh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 150px 24px 140px; position: relative; z-index: 1; }
+      .hero-label { display: flex; align-items: center; gap: 14px; font-family: var(--f-mono); font-size: 10px; letter-spacing: 4.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 34px; }
+      .hero-line { display: inline-block; width: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); animation: line-grow 1s var(--ease) 0.4s both; }
+      @keyframes line-grow { to { width: 44px; } }
+      .hero h1 { font-family: var(--f-display); font-weight: 350; font-variation-settings: 'opsz' 144; font-size: clamp(38px, 7.2vw, 92px); line-height: 1.04; letter-spacing: -1px; max-width: 1000px; text-wrap: balance; color: var(--n-text); }
+      .hero h1 em { font-style: italic; font-weight: 400; color: transparent; background: linear-gradient(115deg, var(--gold-hi), var(--gold) 55%, var(--gold-deep)); -webkit-background-clip: text; background-clip: text; }
+      .hero-sub { font-family: var(--f-body); font-size: clamp(17px, 2vw, 21px); font-weight: 300; color: var(--n-sub); max-width: 580px; line-height: 1.75; margin-top: 30px; }
+      .hero-ctas { display: flex; gap: 16px; margin-top: 48px; flex-wrap: wrap; justify-content: center; }
+      .hero-trust { margin-top: 58px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: center; }
+      .hero-trust span { font-family: var(--f-mono); font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--n-faint); }
+      .hero-trust em { font-family: var(--f-display); font-size: 15px; font-style: italic; color: var(--gold-hi); }
+      .trust-line { width: 24px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+      .hero > * { animation: hero-in 0.9s var(--ease) both; }
+      .hero > :nth-child(2) { animation-delay: 0.1s; }
+      .hero > :nth-child(3) { animation-delay: 0.22s; }
+      .hero > :nth-child(4) { animation-delay: 0.34s; }
+      .hero > :nth-child(5) { animation-delay: 0.46s; }
+      .hero > :nth-child(6) { animation-delay: 0.6s; }
+      @keyframes hero-in { from { opacity: 0; translate: 0 22px; } to { opacity: 1; translate: 0 0; } }
+      /* the foreshadow: the first incident is minutes away */
+      .hero-cue { position: absolute; bottom: 30px; left: 50%; translate: -50% 0; display: flex; flex-direction: column; align-items: center; gap: 10px; font-family: var(--f-mono); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--n-faint); animation: hero-in 0.9s var(--ease) 1s both; }
+      .hero-cue::after { content: ''; width: 1px; height: 34px; background: linear-gradient(180deg, var(--gold), transparent); animation: cue-drop 2.2s var(--ease) infinite; }
+      @keyframes cue-drop { 0% { transform: scaleY(0); transform-origin: top; } 45% { transform: scaleY(1); transform-origin: top; } 46% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+    }
+
+    @layer night {
+      .section { padding: 130px 24px; position: relative; z-index: 1; }
+
+      /* ─── THE COST OF THE DARK: stats as glowing numerals ─── */
+      .stats { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 64px; }
+      .stat { padding: 20px 32px; text-align: center; position: relative; }
+      .stat + .stat { border-left: 1px solid var(--night-line); }
+      .stat-num { font-family: var(--f-display); font-weight: 340; font-size: clamp(44px, 5.6vw, 76px); line-height: 1; margin-bottom: 16px; color: transparent; background: linear-gradient(160deg, var(--gold-hi) 10%, var(--gold) 55%, var(--gold-deep)); -webkit-background-clip: text; background-clip: text; filter: drop-shadow(0 0 22px rgba(200, 162, 107, 0.28)); }
+      .stat-text { font-family: var(--f-body); font-size: 16.5px; font-weight: 300; color: var(--n-sub); line-height: 1.55; margin-bottom: 12px; max-width: 270px; margin-inline: auto; }
+      .stat-src { font-family: var(--f-mono); font-size: 8.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--n-faint); }
+
+      /* the log intro + closing line */
+      .log-foot { margin-top: 20px; padding-bottom: 110px; text-align: center; font-family: var(--f-body); font-size: 19px; font-style: italic; font-weight: 300; color: var(--n-sub); position: relative; z-index: 1; }
+    }
+
+    @layer incidents {
+      /* ══ THE NIGHT LOG ══
+         Three incidents. Each one pins to the screen while the visitor's
+         scroll scrubs the conversation, message by message. The phone is
+         the only light on the street. */
+      .incident { position: relative; z-index: 1; view-timeline: --inc block; }
+      .inc-sticky { position: sticky; top: 0; min-height: 100dvh; display: grid; place-items: center; padding: 90px 24px 60px; }
+      .inc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(40px, 6vw, 90px); align-items: center; max-width: 1080px; width: 100%; }
+      .incident.flip .inc-copy { order: 2; }
+      .incident.flip .inc-phone { order: 1; }
+
+      .inc-time { display: flex; align-items: center; gap: 16px; font-family: var(--f-mono); font-size: clamp(30px, 3.4vw, 44px); font-weight: 400; letter-spacing: 2px; color: var(--gold-hi); margin-bottom: 30px; text-shadow: 0 0 30px rgba(233, 210, 164, 0.35); }
+      .inc-time::after { content: ''; flex: 1; max-width: 120px; height: 1px; background: linear-gradient(90deg, var(--gold-deep), transparent); }
+      .inc-kicker { font-family: var(--f-mono); font-size: 10px; letter-spacing: 3.4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+      .inc-pain { font-family: var(--f-display); font-weight: 380; font-variation-settings: 'opsz' 60; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.25; color: var(--n-text); margin-bottom: 18px; text-wrap: balance; }
+      .inc-pain em { font-style: italic; color: var(--gold-hi); font-weight: 400; }
+      .inc-body { font-family: var(--f-body); font-size: 17.5px; font-weight: 300; color: var(--n-sub); line-height: 1.72; margin-bottom: 26px; max-width: 460px; }
+      .inc-does { font-family: var(--f-mono); font-size: 9px; letter-spacing: 2.2px; text-transform: uppercase; color: var(--gold); padding-top: 16px; border-top: 1px solid var(--night-line); line-height: 2; max-width: 460px; }
+
+      /* the phone: one lit window in a dark city */
+      .inc-phone { position: relative; display: flex; justify-content: center; }
+      .inc-phone::before { content: ''; position: absolute; inset: -70px -50px; background: radial-gradient(circle at 50% 42%, rgba(228, 183, 105, 0.17), rgba(228, 183, 105, 0.05) 45%, transparent 68%); filter: blur(10px); }
+      .phone {
+        position: relative; width: min(340px, 88vw); border-radius: 36px; padding: 12px;
+        background: linear-gradient(165deg, #1A2033, #0C0F1B);
+        border: 1px solid rgba(200, 162, 107, 0.26);
+        box-shadow: 0 44px 110px rgba(0, 0, 0, 0.65), inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+        animation: phone-float 8s ease-in-out infinite;
+      }
+      @keyframes phone-float { 0%, 100% { translate: 0 0; rotate: 0deg; } 50% { translate: 0 -8px; rotate: -0.4deg; } }
+      .ph-head { display: flex; align-items: center; gap: 11px; padding: 10px 8px 12px; }
+      .ph-ava { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--gold-hi), var(--gold-deep)); color: #14100C; font-family: var(--f-display); font-size: 16px; font-weight: 500; flex-shrink: 0; box-shadow: 0 0 16px rgba(200, 162, 107, 0.35); }
+      .ph-id { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
+      .ph-name { font-family: var(--f-mono); font-style: normal; font-size: 11.5px; font-weight: 500; letter-spacing: 0.6px; color: var(--n-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .ph-status { font-family: var(--f-mono); font-size: 8.5px; letter-spacing: 1.4px; text-transform: uppercase; color: var(--n-faint); display: flex; align-items: center; gap: 6px; }
+      .ph-status i { width: 5px; height: 5px; border-radius: 50%; background: #8FD49B; box-shadow: 0 0 7px #8FD49B; }
+      .ph-screen { position: relative; border-radius: 26px; min-height: 440px; padding: 18px 14px 16px;
+        background: linear-gradient(180deg, #131A2E, #0D1120);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        display: flex; flex-direction: column; gap: 10px; overflow: hidden;
+      }
+      .ph-screen::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(120% 60% at 50% 0%, rgba(228, 183, 105, 0.07), transparent 60%); }
+      .sys { align-self: center; font-family: var(--f-mono); font-size: 8.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--n-faint); background: rgba(255, 255, 255, 0.05); padding: 5px 12px; border-radius: 100px; }
+      .msg { max-width: 84%; padding: 10px 13px; border-radius: 15px; font-family: var(--f-mono); font-size: 12px; font-weight: 400; line-height: 1.55; }
+      .msg.them { align-self: flex-start; background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.08); border-bottom-left-radius: 4px; color: #EDE8DB; }
+      .msg.me { align-self: flex-end; background: linear-gradient(135deg, rgba(228, 183, 105, 0.28), rgba(200, 162, 107, 0.16)); border: 1px solid rgba(228, 183, 105, 0.22); border-bottom-right-radius: 4px; color: #F4E9CF; }
+      /* typing dots exist only in the scrubbed theatre; everywhere else the
+         conversation is shown played-out, so the dots would overlap the
+         message sharing their slot */
+      .msg.typing { display: none; gap: 4px; padding: 12px 14px; }
+      .msg.typing i { width: 5px; height: 5px; border-radius: 50%; background: var(--n-faint); animation: dot-b 1s ease-in-out infinite; }
+      .msg.typing i:nth-child(2) { animation-delay: 0.15s; }
+      .msg.typing i:nth-child(3) { animation-delay: 0.3s; }
+      @keyframes dot-b { 0%, 60%, 100% { translate: 0 0; opacity: 0.4; } 30% { translate: 0 -4px; opacity: 0.9; } }
+      .slot { display: grid; align-self: flex-start; max-width: 84%; }
+      .slot .msg { grid-area: 1 / 1; max-width: 100%; align-self: end; }
+      .slot .msg.typing { align-self: start; justify-self: start; }
+      .res { margin-top: auto; align-self: center; text-align: center; font-family: var(--f-display); font-style: italic; font-size: 16px; color: var(--gold-hi); padding-top: 10px; text-shadow: 0 0 24px rgba(233, 210, 164, 0.45); }
+      .res::before { content: ''; display: block; width: 40px; height: 1px; margin: 0 auto 10px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    }
+
+    @layer dawn {
+      /* first light: Rochelle. dark text works here, the sky is peach. */
+      .dawn-quote { position: relative; z-index: 1; padding: 46vh 24px 140px; text-align: center; }
+      .dawn-quote .label { color: #8A5B3E; }
+      .quote { font-family: var(--f-display); font-style: italic; font-weight: 380; font-size: clamp(21px, 2.8vw, 34px); line-height: 1.5; max-width: 760px; margin: 0 auto; color: #46312A; text-wrap: balance; }
+      .quote-who { margin-top: 30px; font-family: var(--f-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #7A5B43; }
+      .quote-who b { color: #8A5B3E; font-weight: 500; }
+      .dawn-quote .perch { filter: drop-shadow(0 2px 6px rgba(90, 55, 30, 0.25)); }
+    }
+
+    @layer morning {
+      /* ══ 09:00. THE OLD SITE'S IVORY WAS THE MORNING ALL ALONG. ══ */
+      .morning { position: relative; z-index: 1; background: var(--ivory); color: var(--m-dark); }
+      .morning .label { color: var(--champagne); }
+      .morning .heading { color: var(--m-dark); font-weight: 400; }
+      .morning .heading em { color: var(--champagne); }
+      .morning .timechip { color: var(--taupe); border-color: var(--m-border); }
+      .morning .timechip i { background: var(--champagne); box-shadow: 0 0 8px 1px rgba(184, 149, 106, 0.7); }
+
+      /* FEATURES: the classic hairline grid, now in daylight */
+      .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--m-border); margin-top: 56px; border: 1px solid var(--m-border); }
+      .feat { background: var(--ivory); padding: 44px 36px; transition: background 0.25s; }
+      .feat:hover { background: color-mix(in srgb, var(--cream) 50%, var(--ivory)); }
+      .feat-icon { display: block; margin-bottom: 22px; width: 32px; height: 32px; color: var(--champagne); }
+      .feat-icon svg { width: 100%; height: 100%; display: block; }
+      .feat-group { grid-column: 1 / -1; background: var(--ivory); padding: 32px 36px 8px; font-family: var(--f-mono); font-size: 9.5px; letter-spacing: 3.5px; text-transform: uppercase; color: var(--champagne); display: flex; align-items: center; gap: 14px; }
+      .feat-group::before, .feat-group::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--champ-light), transparent); }
+      .feat-title { font-family: var(--f-display); font-size: 20px; font-weight: 450; color: var(--m-dark); margin-bottom: 10px; }
+      .feat-desc { font-family: var(--f-body); font-size: 16.5px; font-weight: 300; color: var(--taupe); line-height: 1.62; }
+
+      /* HOW: a strip of night kept in the morning page, the machinery behind it */
+      .how-band {
+        padding: 130px 24px; color: var(--n-text); position: relative; z-index: 1;
+        background:
+          radial-gradient(rgba(212, 188, 150, 0.13) 1px, transparent 1.6px) 0 0 / 300px 300px,
+          radial-gradient(rgba(184, 149, 106, 0.09) 0.8px, transparent 1.3px) 130px 80px / 420px 420px,
+          linear-gradient(180deg, #0D1120, #080B14);
+      }
+      .how-band .label { color: var(--gold); }
+      .how-band .heading { color: var(--n-text); }
+      .how-band .heading em { color: var(--gold-hi); }
+      .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 60px; max-width: 1100px; margin-inline: auto; }
+      .step-num { font-family: var(--f-mono); font-size: 13px; letter-spacing: 3px; color: var(--gold); margin-bottom: 20px; display: flex; align-items: center; gap: 14px; }
+      .step-num::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, rgba(200, 162, 107, 0.4), transparent); }
+      .step-title { font-family: var(--f-display); font-size: 21px; font-weight: 420; color: var(--n-text); margin-bottom: 12px; }
+      .step-desc { font-family: var(--f-body); font-size: 17px; font-weight: 300; color: var(--n-sub); line-height: 1.65; }
+
+      /* CTA in full daylight */
+      .cta-section { padding: 130px 24px 140px; text-align: center; background: linear-gradient(180deg, var(--ivory), var(--cream)); position: relative; z-index: 1; }
+      .cta-sub { font-family: var(--f-body); font-size: 19px; font-weight: 300; color: var(--taupe); max-width: 500px; margin: 18px auto 46px; line-height: 1.65; }
+      .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+      .cta-terms { margin-top: 26px; font-family: var(--f-mono); font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--taupe); }
+
+      /* FOOTER */
+      /* extra bottom padding: the fixed clock and WhatsApp pills live down there */
+      footer { position: relative; z-index: 1; padding: 44px 48px 96px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--m-border); flex-wrap: wrap; gap: 16px; background: var(--cream); color: var(--m-dark); }
+      .foot-brand { font-family: var(--f-display); font-size: 14px; font-weight: 500; letter-spacing: 3px; display: flex; align-items: center; }
+      .foot-sub { font-family: var(--f-mono); font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--taupe); margin-top: 4px; }
+      .foot-links { display: flex; gap: 24px; flex-wrap: wrap; justify-content: center; }
+      .foot-link { font-family: var(--f-mono); font-size: 9.5px; letter-spacing: 2px; text-transform: uppercase; color: var(--taupe); transition: color 0.2s; }
+      .foot-link:hover { color: var(--champagne); }
+      .foot-copy { font-family: var(--f-mono); font-size: 9.5px; color: var(--taupe); letter-spacing: 1px; }
+    }
+
+    @layer buttons {
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+        padding: 15px 34px; min-height: 48px;
+        font-family: var(--f-mono); font-size: 10px; font-weight: 400;
+        letter-spacing: 3px; text-transform: uppercase;
+        border: 1px solid rgba(200, 162, 107, 0.55); color: var(--n-text); background: transparent;
+        border-radius: 2px;
+        transition: all 0.3s var(--ease);
+        white-space: nowrap;
+      }
+      .btn:hover { background: var(--gold); border-color: var(--gold); color: #14100C; box-shadow: 0 8px 34px rgba(200, 162, 107, 0.3); }
+      .btn.filled { background: var(--gold); border-color: var(--gold); color: #14100C; box-shadow: 0 6px 28px rgba(200, 162, 107, 0.22); }
+      .btn.filled:hover { background: var(--gold-hi); border-color: var(--gold-hi); box-shadow: 0 10px 40px rgba(233, 210, 164, 0.35); }
+      /* on light morning ground */
+      .morning .btn, .cta-section .btn { color: var(--m-dark); border-color: var(--champagne); }
+      .morning .btn:hover, .cta-section .btn:hover { background: var(--champagne); color: var(--ivory); box-shadow: 0 6px 28px rgba(184, 149, 106, 0.3); }
+      .morning .btn.filled, .cta-section .btn.filled { background: var(--champagne); color: var(--ivory); }
+      .morning .btn.filled:hover, .cta-section .btn.filled:hover { background: var(--m-soft); border-color: var(--m-soft); }
+
+      /* WhatsApp float, dark glass at night */
+      .wa-float { position: fixed; left: 22px; bottom: 22px; z-index: 1000; display: inline-flex; align-items: center; gap: 9px; padding: 11px 20px; background: rgba(10, 14, 26, 0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); color: var(--n-text); border: 1px solid rgba(200, 162, 107, 0.5); border-radius: 100px; font-family: var(--f-mono); font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45); transition: all 0.25s ease; }
+      .wa-float svg path { fill: var(--gold-hi); transition: fill 0.25s ease; }
+      .wa-float:hover { background: var(--gold); color: #14100C; border-color: var(--gold); box-shadow: 0 10px 34px rgba(200, 162, 107, 0.35); }
+      .wa-float:hover svg path { fill: #14100C; }
+    }
+
+    @layer reveal {
+      /* one-shot scroll reveals for calm sections */
+      .sv { animation: scroll-reveal linear both; animation-timeline: view(); animation-range: entry 0% entry 30%; }
+      @keyframes scroll-reveal { from { opacity: 0; translate: 0 26px; } to { opacity: 1; translate: 0 0; } }
+      .sv-d1 { animation-range: entry 3% entry 33%; }
+      .sv-d2 { animation-range: entry 6% entry 36%; }
+      .sv-d3 { animation-range: entry 9% entry 39%; }
       @supports not (animation-timeline: view()) {
-        .sv { opacity: 1; translate: 0 0; animation: none; }
-        .hero-glow { animation: none; translate: -50% -50%; }
+        .sv { animation: none; }
       }
     }
 
-    /* ═══ RESPONSIVE, MOBILE-FIRST OVERHAUL ═══ */
-    @layer responsive {
+    /* ══════════ THE SCROLL MACHINERY (Chromium gets the theatre) ══════════ */
+    @supports (animation-timeline: view()) {
+      /* nav tightens as the night begins */
+      .nav { animation: nav-tight linear both; animation-timeline: scroll(root); animation-range: 0 160px; }
+      @keyframes nav-tight { to { padding-block: 12px; background: rgba(8, 11, 20, 0.86); border-bottom-color: rgba(200, 162, 107, 0.16); } }
 
-      /* Hero collapses to a single column before tablet */
-      @media (max-width: 1020px) {
-        .hero { padding-top: 130px; }
-        .hero-grid { grid-template-columns: 1fr; gap: 56px; }
-        .hero-copy { text-align: center; }
-        .hero-copy .hero-label, .hero-copy .hero-ctas, .hero-copy .hero-trust { justify-content: center; }
-        .hero h1, .hero-sub { margin-inline: auto; }
+      /* the corner clock, scrubbed from 21:00 to 09:00 by your scrollbar */
+      @supports (width: calc(mod(3px, 2px))) {
+        /* bottom-center: WhatsApp owns the left corner, the widget owns the right */
+        .clock { display: flex; align-items: center; gap: 8px; position: fixed; left: 50%; translate: -50% 0; bottom: 22px; z-index: 95;
+          font-family: var(--f-mono); font-size: 11px; font-weight: 500; letter-spacing: 3px; color: var(--n-sub);
+          background: rgba(10, 14, 26, 0.66); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+          border: 1px solid rgba(200, 162, 107, 0.28); border-radius: 100px; padding: 9px 16px;
+          animation: night-pass linear both; animation-timeline: scroll(root);
+        }
+        .clock i { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 8px 1px rgba(200, 162, 107, 0.8); }
+        .clock b { font-weight: 500; }
+        .clock b::after {
+          counter-reset: ch calc(mod(21 + (var(--mins) - mod(var(--mins), 60)) / 60, 24)) cm calc(mod(var(--mins), 60));
+          content: counter(ch, decimal-leading-zero) ':' counter(cm, decimal-leading-zero);
+        }
+        /* waypoints anchored to where the incidents pin on the page;
+           between 23:xx and 06:xx the small hours fly past; nothing rang. */
+        @keyframes night-pass {
+          0% { --mins: 0; opacity: 0; }    /* 21:00, still on the hero */
+          6% { opacity: 1; }
+          14% { --mins: 40; }              /* 21:40, something is coming */
+          18.9% { --mins: 45; }            /* the geyser: pinned at 21:47 */
+          28.6% { --mins: 56; }
+          37.4% { --mins: 121; }           /* the accident: pinned at 23:05 */
+          47.2% { --mins: 130; }
+          56% { --mins: 548; }             /* the ear: pinned at 06:12 */
+          65.8% { --mins: 560; }
+          76.1% { --mins: 590; }           /* first light */
+          84.4% { --mins: 660; }           /* morning */
+          100% { --mins: 720; }            /* 09:00 */
+        }
       }
+    }
 
-      /* Tablet landscape */
+    /* the incident theatre needs room: only on screens tall+wide enough */
+    @media (min-width: 1021px) {
+      @supports (animation-timeline: view()) {
+        .incident { min-height: 210vh; }
+        .incident .inc-copy > *, .incident .sys, .incident .msg:not(.typing), .incident .res { animation-timeline: --inc; animation-fill-mode: both; animation-timing-function: linear; }
+        .incident .msg.typing { display: flex; animation-timeline: --inc; animation-fill-mode: both; animation-timing-function: linear; }
+
+        /* the copy settles in first */
+        .inc-copy > * { animation-name: inc-copy-in; }
+        @keyframes inc-copy-in { 0%, 12% { opacity: 0; translate: 0 26px; } 19% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+
+        /* conversation gates, as % of the section's journey through the
+           viewport. the card is pinned from ~32% to ~68%: the whole
+           conversation plays inside that window. */
+        .sys  { animation-name: g-sys; }
+        @keyframes g-sys { 0%, 27% { opacity: 0; translate: 0 8px; } 30% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+        .ga   { animation-name: g-a; }
+        @keyframes g-a { 0%, 31% { opacity: 0; translate: 0 12px; } 34% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+        .gta  { animation-name: g-ta; }
+        @keyframes g-ta { 0%, 35% { opacity: 0; } 37% { opacity: 1; } 40% { opacity: 1; } 41.5% { opacity: 0; } 100% { opacity: 0; } }
+        .gb   { animation-name: g-b; }
+        @keyframes g-b { 0%, 41.5% { opacity: 0; translate: 0 12px; } 44% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+        .gc   { animation-name: g-c; }
+        @keyframes g-c { 0%, 47% { opacity: 0; translate: 0 12px; } 50% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+        .gd   { animation-name: g-d; }
+        @keyframes g-d { 0%, 52% { opacity: 0; translate: 0 12px; } 55% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+        .ge   { animation-name: g-e; }
+        @keyframes g-e { 0%, 57% { opacity: 0; translate: 0 12px; } 60% { opacity: 1; translate: 0 0; } 100% { opacity: 1; translate: 0 0; } }
+        .gres { animation-name: g-res; }
+        @keyframes g-res { 0%, 62% { opacity: 0; scale: 0.96; } 65.5% { opacity: 1; scale: 1; } 100% { opacity: 1; scale: 1; } }
+      }
+    }
+
+    /* ═══ RESPONSIVE ═══ */
+    @layer responsive {
       @media (max-width: 1024px) {
         .nav { padding: 18px 32px; }
-        .section { padding: 96px 24px; }
-        .how-band { padding: 96px 24px; }
-        .cta-section { padding: 96px 24px; }
+        .section { padding: 100px 24px; }
+        .how-band { padding: 100px 24px; }
+        .cta-section { padding: 100px 24px; }
       }
 
-      /* Tablet / large mobile, collapse nav, stack grids */
+      /* below the theatre threshold: incidents are calm, stacked, fully lit */
+      @media (max-width: 1020px) {
+        .inc-grid { grid-template-columns: 1fr; gap: 44px; }
+        .incident.flip .inc-copy { order: 1; }
+        .incident.flip .inc-phone { order: 2; }
+        .inc-sticky { position: static; min-height: auto; padding: 70px 24px; }
+        .inc-copy { text-align: center; }
+        .inc-time { justify-content: center; }
+        .inc-time::after { display: none; }
+        .inc-body, .inc-does { margin-inline: auto; }
+      }
+
       @media (max-width: 880px) {
         .nav .links { display: none; }
         .hamburger { display: flex; }
-        .stats { grid-template-columns: 1fr; }
+        .stats { grid-template-columns: 1fr; gap: 0; }
+        .stat { padding: 34px 20px; }
+        .stat + .stat { border-left: none; border-top: 1px solid var(--night-line); }
         .features { grid-template-columns: 1fr; }
-        .verts { grid-template-columns: 1fr; }
         .feat-group { padding: 24px 28px 4px; font-size: 9px; letter-spacing: 3px; }
         .steps { grid-template-columns: 1fr; gap: 44px; }
-        .quote-band { padding: 80px 24px; }
-        .hero-trust { margin-top: 56px; }
+        .moon { width: 62px; right: 8vw; }
       }
 
-      /* Mobile */
       @media (max-width: 640px) {
         .nav { padding: 14px 20px; }
-        .nav.scrolled { padding-block: 10px; }
-        .nav .logo { font-size: 17px; letter-spacing: 4px; }
-
-        .section { padding: 72px 20px; }
-        .how-band { padding: 72px 20px; }
-        .cta-section { padding: 80px 20px 88px; }
-        .quote-band { padding: 60px 20px; }
+        .nav .logo { font-size: 17px; letter-spacing: 4.5px; }
+        .section { padding: 80px 20px; }
+        .how-band { padding: 80px 20px; }
+        .cta-section { padding: 88px 20px 96px; }
         .wrap { padding: 0 20px; }
 
-        /* Hero */
-        .hero { min-height: auto; padding: 120px 20px 80px; }
-        .hero h1 { font-size: clamp(30px, 8.5vw, 44px); line-height: 1.14; letter-spacing: -0.2px; }
-        .hero-sub { font-size: 17px; margin-top: 22px; line-height: 1.6; padding: 0 4px; }
+        .hero { min-height: 100dvh; padding: 120px 20px 130px; }
+        .hero h1 { font-size: clamp(34px, 10vw, 48px); line-height: 1.08; letter-spacing: -0.5px; }
+        .hero-sub { font-size: 17px; margin-top: 24px; line-height: 1.65; }
         .hero-label { font-size: 9px; letter-spacing: 3.8px; margin-bottom: 28px; gap: 12px; }
-        .hero-ctas { margin-top: 40px; gap: 12px; flex-direction: column; align-items: center; width: 100%; }
+        .hero-ctas { margin-top: 42px; gap: 12px; flex-direction: column; align-items: center; width: 100%; }
         .hero-ctas .btn { width: 100%; max-width: 320px; }
         .hero-trust { margin-top: 48px; gap: 12px; }
-        .hero-grid { gap: 48px; }
-        .phone { width: min(316px, 92vw); border-radius: 30px; padding: 10px; }
-        .ph-screen { height: 430px; }
-        .bird-flight { top: 11vh; }
+        .hero-cue { display: none; }
 
-        /* Headings */
-        .heading { font-size: clamp(24px, 7.5vw, 36px); line-height: 1.2; }
+        .heading { font-size: clamp(25px, 7.8vw, 36px); line-height: 1.18; }
         .label { font-size: 9px; letter-spacing: 3.5px; margin-bottom: 16px; }
+        .timechip { margin-bottom: 20px; }
 
-        /* Stats */
         .stats { margin-top: 40px; }
-        .stat { padding: 36px 24px; }
-        .stat-num { font-size: 38px; margin-bottom: 8px; }
-        .stat-text { font-size: 15px; }
-        .stat-src { font-size: 8.5px; }
+        .stat-num { font-size: 46px; margin-bottom: 10px; }
+        .stat-text { font-size: 15.5px; }
 
-        /* Verticals */
-        .verts { margin-top: 40px; }
-        .vert { padding: 36px 28px 32px; }
-        .vert-pain { font-size: 19px; }
-        .vert-body { font-size: 16px; }
-        .verts-foot { font-size: 16px; padding: 0 8px; }
+        .inc-sticky { padding: 60px 20px; }
+        .inc-time { font-size: 28px; margin-bottom: 22px; }
+        .inc-pain { font-size: 22px; }
+        .inc-body { font-size: 16px; }
+        .phone { width: min(320px, 92vw); border-radius: 32px; padding: 10px; }
+        .ph-screen { min-height: 410px; }
+        .log-foot { font-size: 16.5px; padding-inline: 24px; }
 
-        /* Quote */
-        .quote { font-size: 19px; line-height: 1.5; padding: 0 4px; }
+        .dawn-quote { padding: 38vh 20px 110px; }
+        .quote { font-size: 20px; line-height: 1.5; }
         .quote-who { font-size: 9px; letter-spacing: 2.4px; }
-        .perch .bird { width: 36px; height: 36px; }
+        .perch .bird { width: 38px; height: 38px; }
 
-        /* Features */
         .features { margin-top: 40px; }
         .feat { padding: 36px 28px; }
         .feat-icon { margin-bottom: 14px; }
         .feat-title { font-size: 19px; margin-bottom: 8px; }
         .feat-desc { font-size: 16px; line-height: 1.55; }
 
-        /* How, horizontal layout on mobile so number sits beside title */
-        .steps { margin-top: 40px; gap: 32px; }
-        .steps > div {
-          display: grid;
-          grid-template-columns: auto 1fr;
-          column-gap: 18px;
-          row-gap: 0;
-          align-items: baseline;
-        }
-        .step-num {
-          font-size: 36px;
-          margin-bottom: 0;
-          grid-row: 1 / 3;
-          align-self: start;
-          line-height: 0.95;
-          padding-top: 2px;
-        }
-        .step-title {
-          font-size: 18px;
-          margin-bottom: 8px;
-          grid-column: 2;
-        }
-        .step-desc {
-          font-size: 16px;
-          line-height: 1.55;
-          grid-column: 2;
-        }
+        .steps { margin-top: 44px; gap: 36px; }
+        .step-title { font-size: 19px; }
+        .step-desc { font-size: 16px; line-height: 1.58; }
 
-        /* CTA */
-        .cta-sub { font-size: 17px; margin: 14px auto 36px; padding: 0 8px; }
+        .cta-sub { font-size: 17px; margin: 14px auto 38px; }
         .cta-buttons { flex-direction: column; align-items: center; gap: 12px; width: 100%; }
         .cta-buttons .btn { width: 100%; max-width: 320px; }
-        .cta-terms { margin-top: 22px; font-size: 9px; letter-spacing: 1.5px; padding: 0 16px; }
+        .cta-terms { margin-top: 22px; font-size: 8.5px; letter-spacing: 1.5px; padding: 0 16px; }
 
-        /* Footer */
-        footer { flex-direction: column; text-align: center; padding: 36px 24px; gap: 20px; }
+        footer { flex-direction: column; text-align: center; padding: 36px 24px 96px; gap: 20px; }
         .foot-links { justify-content: center; gap: 20px; }
         .foot-brand { justify-content: center; }
 
-        /* Buttons, bigger tap targets */
-        .btn { padding: 15px 28px; min-height: 48px; letter-spacing: 2.5px; font-size: 10px; }
-
-        /* Ambient, slightly lighter on small screens */
-        .ambient-orbs { filter: blur(48px); }
+        .btn { padding: 15px 28px; letter-spacing: 2.5px; }
+        .clock { display: none !important; }
+        .moon { top: 84px; width: 52px; }
+        .wa-float { left: 16px; bottom: 16px; padding: 10px 16px; }
       }
 
-      /* Very small phones */
       @media (max-width: 380px) {
-        .nav .logo { font-size: 16px; letter-spacing: 3.5px; }
-        .hero { padding: 110px 18px 72px; }
-        .hero h1 { font-size: 28px; }
+        .hero h1 { font-size: 31px; }
         .hero-sub { font-size: 16px; }
-        .heading { font-size: 23px; }
-        .section { padding: 64px 18px; }
-        .how-band { padding: 64px 18px; }
-        .cta-section { padding: 72px 18px 80px; }
-        .wrap { padding: 0 18px; }
-        .stat { padding: 32px 20px; }
-        .feat { padding: 32px 22px; }
-        .vert { padding: 32px 22px 28px; }
+        .heading { font-size: 24px; }
+        .section { padding: 70px 18px; }
         .phone { width: 94vw; }
-        .ph-screen { height: 414px; }
-        .msg { font-size: 12px; }
+        .ph-screen { min-height: 396px; }
+        .msg { font-size: 11.5px; }
       }
+    }
 
-      /* Reduced motion */
+    @layer fallbacks {
+      /* Reduced motion: the whole night, standing still */
       @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
           animation-duration: 0.01ms !important;
@@ -597,11 +679,13 @@
           transition-duration: 0.01ms !important;
           scroll-behavior: auto !important;
         }
-        .bird-flight, .mote, .ambient-stars::after { display: none; }
-        .scene, .ph-name { animation: none !important; }
-        .scene.s1, .ph-name.n1 { opacity: 1 !important; }
-        .msg, .res, .sys { animation: none !important; opacity: 1 !important; translate: 0 0 !important; scale: 1 !important; }
+        .bird-flight, .shoot, .mote, .stars::after { display: none; }
+        .incident { min-height: auto !important; }
+        .inc-sticky { position: static !important; min-height: auto !important; }
+        .inc-copy > *, .sys, .msg, .res { animation: none !important; opacity: 1 !important; translate: 0 0 !important; scale: 1 !important; }
         .msg.typing { display: none !important; }
+        .clock { display: none !important; }
+        .sv { animation: none !important; opacity: 1 !important; translate: 0 0 !important; }
       }
     }
   </style>
@@ -629,14 +713,7 @@
     </defs>
   </svg>
 
-  <!-- AMBIENT ATMOSPHERE -->
-  <div class="ambient" aria-hidden="true">
-    <div class="ambient-orbs"></div>
-    <div class="ambient-stars"></div>
-    <span class="mote mo1"></span><span class="mote mo2"></span><span class="mote mo3"></span>
-  </div>
-
-  <!-- THE HUMMINGBIRD, passing through -->
+  <!-- THE HUMMINGBIRD, the only thing awake out there -->
   <div class="bird-flight" aria-hidden="true">
     <div class="bird-bob">
       <svg class="bird" viewBox="0 0 64 64">
@@ -665,301 +742,212 @@
       <a href="team-login.html" class="link">Team Login</a>
       <a href="#" class="btn" style="padding:11px 24px;min-height:auto" data-amira-voice>Talk to Amira</a>
     </div>
-    <button class="hamburger" id="hamburgerBtn" popovertarget="mobMenu" aria-label="Menu" aria-expanded="false">
+    <a href="#mobMenu" class="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
-    </button>
+    </a>
   </nav>
 
-  <!-- MOBILE MENU -->
-  <div popover class="mob-menu" id="mobMenu">
-    <button class="mob-close" popovertarget="mobMenu" popovertargetaction="hide" aria-label="Close menu">&times;</button>
-    <a href="#why" class="link" onclick="document.getElementById('mobMenu').hidePopover()">Why</a>
-    <a href="#this-is-you" class="link" onclick="document.getElementById('mobMenu').hidePopover()">Who It's For</a>
+  <!-- MOBILE MENU (pure :target, closes itself when you navigate) -->
+  <span class="menu-anchor" id="menu-closed" aria-hidden="true"></span>
+  <div class="mob-menu" id="mobMenu" role="dialog" aria-label="Menu">
+    <a href="#menu-closed" class="mob-close" aria-label="Close menu">&times;</a>
+    <a href="#why" class="link">Why</a>
+    <a href="#this-is-you" class="link">Who It's For</a>
     <a href="about.html" class="link">About</a>
-    <a href="#features" class="link" onclick="document.getElementById('mobMenu').hidePopover()">What</a>
-    <a href="#how" class="link" onclick="document.getElementById('mobMenu').hidePopover()">How</a>
+    <a href="#features" class="link">What</a>
+    <a href="#how" class="link">How</a>
     <a href="team-login.html" class="link">Team Login</a>
     <a href="#" class="btn filled" data-amira-voice>Talk to Amira</a>
   </div>
 
+  <!-- THE CLOCK: your scrollbar moves it from 21:00 to 09:00 -->
+  <div class="clock" aria-hidden="true"><i></i><b></b></div>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-glow"></div>
-    <div class="hero-grid">
-      <div class="hero-copy">
-        <div class="hero-label">
-          <span class="hero-line"></span>
-          Meet Amira
-          <span class="hero-line"></span>
-        </div>
-        <h1>Every missed call is a customer <em>someone else just won.</em></h1>
-        <p class="hero-sub">Amira answers your calls, WhatsApps, and website chats in your brand's voice. She books the job, fills the diary, and follows up while you work, sleep, or finally take a Sunday off.</p>
-        <div class="hero-ctas">
-          <a href="#" class="btn filled" data-amira-voice>🎙 Talk to Amira Now</a>
-          <a href="#this-is-you" class="btn">See Who She Works For</a>
-        </div>
-        <div class="hero-trust">
-          <span>On the phones right now</span>
-          <span class="trust-line"></span>
-          <em>for clinics, law firms, and the trades</em>
-        </div>
+  <!-- ═══════════════ THE NIGHT ═══════════════ -->
+  <div class="night-shift">
+    <div class="stars" aria-hidden="true"></div>
+    <div class="moon" aria-hidden="true"></div>
+    <span class="shoot sh1" aria-hidden="true"></span>
+    <span class="shoot sh2" aria-hidden="true"></span>
+    <span class="mote mo1" aria-hidden="true"></span>
+    <span class="mote mo2" aria-hidden="true"></span>
+    <span class="mote mo3" aria-hidden="true"></span>
+
+    <!-- HERO · 21:00 -->
+    <section class="hero">
+      <div class="timechip"><i></i>21:00 &middot; She never sleeps</div>
+      <div class="hero-label">
+        <span class="hero-line"></span>
+        Meet Amira
+        <span class="hero-line"></span>
       </div>
-
-      <div class="hero-phone" aria-label="Live demonstration of Amira handling customer conversations">
-        <div class="phone">
-          <div class="ph-head">
-            <span class="ph-ava">A</span>
-            <span class="ph-id">
-              <span class="ph-names">
-                <em class="ph-name n1">Bramley Plumbers</em>
-                <em class="ph-name n2">Naidoo Family Practice</em>
-                <em class="ph-name n3">Meyer &amp; Associates</em>
-              </span>
-              <span class="ph-status"><i></i>Amira &middot; replies instantly</span>
-            </span>
-          </div>
-          <div class="ph-screen">
-            <div class="scene s1">
-              <span class="sys m11">Missed call &middot; 21:47</span>
-              <div class="slot">
-                <div class="msg them typing t1x"><i></i><i></i><i></i></div>
-                <div class="msg them m12">Hi, it's Amira from Bramley Plumbers. I saw we just missed your call. What's going on?</div>
-              </div>
-              <div class="msg me m13">geyser burst, water everywhere 😭</div>
-              <div class="msg them m14">That's an emergency. Thabo can be at yours at 07:00, and I'm sending you the mains shut-off steps right now. Book him?</div>
-              <div class="msg me m15">yes please!!</div>
-              <div class="msg them m16">✓ Booked. Reminder at 06:30. Try get some sleep.</div>
-              <div class="res m17">R4,500 job. Saved at 21:47.</div>
-            </div>
-            <div class="scene s2">
-              <span class="sys m21">New WhatsApp &middot; 06:12</span>
-              <div class="msg me m22">hi, any chance dr naidoo can see me today? bad ear pain</div>
-              <div class="slot">
-                <div class="msg them typing t2x"><i></i><i></i><i></i></div>
-                <div class="msg them m23">Morning! Dr Naidoo has 09:20 or 11:45 open today. Which suits you?</div>
-              </div>
-              <div class="msg me m24">9:20 please</div>
-              <div class="msg them m25">✓ Booked. I've sent your intake form, so you can skip the clipboard. Feel better soon.</div>
-              <div class="res m26">Empty slot filled before reception opened.</div>
-            </div>
-            <div class="scene s3">
-              <span class="sys m31">Website chat &middot; 23:05</span>
-              <div class="msg me m32">I was in an accident last week. do you take these cases?</div>
-              <div class="slot">
-                <div class="msg them typing t3x"><i></i><i></i><i></i></div>
-                <div class="msg them m33">I'm sorry to hear that. We do. May I take a few details so the right attorney calls you at 09:00 sharp?</div>
-              </div>
-              <div class="msg me m34">yes thank you 🙏</div>
-              <div class="res m35">Case captured. Consult booked for 09:00.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WHY -->
-  <section class="section" id="why">
-    <div class="wrap text-center sv">
-      <div class="label">The Quiet Problem</div>
-      <h2 class="heading">The leak is quiet. <em>The numbers are not.</em></h2>
-    </div>
-    <div class="wrap">
-      <div class="stats">
-        <div class="stat sv sv-d1">
-          <div class="stat-num">70%</div>
-          <div class="stat-text">of leads, tasks, and customer moments go cold without fast follow&#8209;up</div>
-          <div class="stat-src">Service Gap</div>
-        </div>
-        <div class="stat sv sv-d2">
-          <div class="stat-num">5 min</div>
-          <div class="stat-text">the window before a hot lead grows cold</div>
-          <div class="stat-src">Harvard Business Review</div>
-        </div>
-        <div class="stat sv sv-d3">
-          <div class="stat-num">21&times;</div>
-          <div class="stat-text">conversion lift when you reply inside it</div>
-          <div class="stat-src">Lead Response Study</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- THIS IS YOU -->
-  <section class="section" id="this-is-you" style="padding-top:40px">
-    <div class="wrap text-center sv">
-      <div class="label">This Is You</div>
-      <h2 class="heading">You are not losing customers to competitors. <em>You are losing them to voicemail.</em></h2>
-    </div>
-    <div class="wrap">
-      <div class="verts">
-        <div class="vert sv sv-d1">
-          <div class="vert-kicker">For Doctors &amp; Clinics</div>
-          <h3 class="vert-pain">Your receptionist is excellent. She is also <em>human, off at five, and one person.</em></h3>
-          <p class="vert-body">Patients call at 21:00 about tomorrow's emergency, and somebody asks about medical aid for the hundredth time. Amira answers instantly, books the appointment, refills cancelled slots, and knows exactly what is urgent enough to escalate.</p>
-          <div class="vert-does">Appointments booked &middot; No&#8209;shows chased &middot; Diary full</div>
-        </div>
-        <div class="vert sv sv-d2">
-          <div class="vert-kicker">For Law Firms</div>
-          <h3 class="vert-pain">The client who could not reach you <em>hired the firm that answered.</em></h3>
-          <p class="vert-body">Nobody shops for a lawyer calmly. They call down a list at 22:00 and stop at the first real answer. Amira captures the matter, asks the intake questions you would ask, and books the consult while the other firms ring.</p>
-          <div class="vert-does">Leads captured &middot; Cases qualified &middot; Consults booked</div>
-        </div>
-        <div class="vert sv sv-d3">
-          <div class="vert-kicker">For Plumbers &amp; Trades</div>
-          <h3 class="vert-pain">Geysers do not burst <em>during office hours.</em></h3>
-          <p class="vert-body">The first company to answer wins the job. Amira picks up at 21:47, reassures your customer, quotes the callout, and books the morning slot before they try the next number on Google.</p>
-          <div class="vert-does">Calls answered &middot; Jobs booked &middot; Nights saved</div>
-        </div>
-      </div>
-      <p class="verts-foot sv">Salons, vets, agencies, gyms. If your phone makes you money, Amira belongs on it.</p>
-    </div>
-  </section>
-
-  <!-- PROOF -->
-  <section class="quote-band" id="proof">
-    <div class="sv">
-      <span class="perch" aria-hidden="true">
-        <svg class="bird" viewBox="0 0 64 64">
-          <path class="b-wing b-wb" d="M30 14 C40 4 52 6 49 13 C46 20 36 26 27 27 C23 27.5 22 24 24 20 C26 17 28 16 30 14 Z"/>
-          <path class="b-body" d="M43 19 C48 17 52 21 50 27 C48 33 41 40 31 44 C25 46 19 44 17 40 C24 40 30 35 33 29 C36 23 38 21 43 19 Z"/>
-          <path class="b-beak" d="M49 21 L63 17 L50 25 Z"/>
-          <circle class="b-eye" cx="47" cy="22" r="1.2"/>
-          <path class="b-wing b-wf" d="M28 12 C36 4 46 5 44 12 C42 18 33 24 25 25 C21 25.5 20 22 22 18 C24 15 26 14 28 12 Z"/>
-          <path class="b-tail t1" d="M20 41 C12 47 8 55 6 61"/>
-          <path class="b-tail t2" d="M23 43 C17 51 15 58 14 62"/>
-          <path class="b-tail t3" d="M26 44 C22 52 21 58 21 63"/>
-        </svg>
-        <span class="p-dust"></span><span class="p-dust pd2"></span>
-      </span>
-      <div class="label" style="margin-bottom:26px">Real Customer &middot; Real Rands</div>
-      <p class="quote">&ldquo;Amira saved me legit thousands of Rands. I had no idea how these missed jobs add up. And my customers have never been more satisfied.&rdquo;</p>
-      <div class="quote-who"><b>Rochelle</b> &middot; Bramley Plumbers &middot; Johannesburg</div>
-    </div>
-  </section>
-
-  <!-- FEATURES -->
-<section class="section" id="features">
-  <div class="wrap text-center sv">
-    <div class="label">What Amira Handles</div>
-    <h2 class="heading">Your finest operator, <em>available at every&nbsp;hour.</em></h2>
-  </div>
-  <div class="wrap">
-    <div class="features">
-
-      <div class="feat-group sv">Before the Handoff</div>
-
-      <div class="feat sv sv-d1">
-        <span class="feat-icon">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 8h22l-2 14H7L5 8z"/><circle cx="12" cy="27" r="1.5"/><circle cx="22" cy="27" r="1.5"/><path d="M5 8L4 4H1"/>
-          </svg>
-        </span>
-        <h3 class="feat-title">The Lead Left Hanging</h3>
-        <p class="feat-desc">AMIRA follows up by name, over WhatsApp, email, or voice, within minutes, so warm interest does not disappear into yesterday's inbox.</p>
-      </div>
-
-      <div class="feat sv sv-d2">
-        <span class="feat-icon">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 18a8 8 0 1 1-8-12 6 6 0 0 0 8 12z"/>
-          </svg>
-        </span>
-        <h3 class="feat-title">The After-Hours Customer</h3>
-        <p class="feat-desc">Questions arrive after hours, between meetings, and while your team is busy. AMIRA answers in seconds, in your voice, and knows when to escalate.</p>
-      </div>
-
-      <div class="feat sv sv-d3">
-        <span class="feat-icon">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
-            <polygon points="16,4 26,12 16,28 6,12"/><line x1="6" y1="12" x2="26" y2="12"/><line x1="16" y1="4" x2="11" y2="12"/><line x1="16" y1="4" x2="21" y2="12"/>
-          </svg>
-        </span>
-        <h3 class="feat-title">The Missed Next Step</h3>
-        <p class="feat-desc">A conversation should not end with one answer. AMIRA guides people to the next useful action, from sending an email to completing a form to receiving a tailored recommendation.</p>
-      </div>
-
-      <div class="feat-group sv">After the Interaction</div>
-
-      <div class="feat sv sv-d1">
-        <span class="feat-icon">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="4" y="10" width="18" height="14"/><path d="M22 14h5l3 4v6h-8"/><circle cx="10" cy="26" r="2"/><circle cx="24" cy="26" r="2"/>
-          </svg>
-        </span>
-        <h3 class="feat-title">The Status Chase</h3>
-        <p class="feat-desc">The question that floods every inbox: what happened next? AMIRA checks systems, updates people, and gives clean answers before small gaps become noisy problems.</p>
-      </div>
-
-      <div class="feat sv sv-d2">
-        <span class="feat-icon">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 12a10 10 0 0 1 18-3"/><polyline points="24 4 24 9 19 9"/><path d="M26 20a10 10 0 0 1-18 3"/><polyline points="8 28 8 23 13 23"/>
-          </svg>
-        </span>
-        <h3 class="feat-title">The Voice Workflow</h3>
-        <p class="feat-desc">AMIRA can speak, listen, qualify, remind, and route calls with the same tone as your brand, giving your business a calm voice when humans are not available.</p>
-      </div>
-
-      <div class="feat sv sv-d3">
-        <span class="feat-icon">
-          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M16 27s-10-6-10-14a6 6 0 0 1 10-4 6 6 0 0 1 10 4c0 8-10 14-10 14z"/>
-          </svg>
-        </span>
-        <h3 class="feat-title">The Relationship You Forgot</h3>
-        <p class="feat-desc">Every customer, client, and lead has context. AMIRA remembers the useful details and reaches out at the right moment with the right next step.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-  <!-- HOW -->
-  <section class="how-band" id="how">
-    <div class="text-center sv">
-      <div class="label">How It Works</div>
-      <h2 class="heading">Live in three steps. <em>Not three&nbsp;months.</em></h2>
-    </div>
-    <div class="steps">
-      <div class="sv sv-d1">
-        <div class="step-num">01</div>
-        <h3 class="step-title">We Learn Your Business</h3>
-        <p class="step-desc">We study your services, your voice, your customers, and your internal processes. Then we build the agent personality and connect it to the work it needs to do.</p>
-      </div>
-      <div class="sv sv-d2">
-        <div class="step-num">02</div>
-        <h3 class="step-title">We Install It</h3>
-        <p class="step-desc">One script tag, one integration path, or one voice workflow. We handle design, systems, prompts, testing, and the quiet details that make it feel polished.</p>
-      </div>
-      <div class="sv sv-d3">
-        <div class="step-num">03</div>
-        <h3 class="step-title">We Optimise Together</h3>
-        <p class="step-desc">We monitor conversations, refine the agents, and send you reports. You watch the system become sharper, calmer, and more useful every week.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="cta-section">
-    <div class="sv">
-      <div class="label" style="margin-bottom:24px">Get Started</div>
-      <h2 class="heading">Your competitors' customers are being helped <em>right&nbsp;now.</em></h2>
-      <p class="cta-sub">Every missed call today is revenue in someone else's account tomorrow. Talk to Amira and hear exactly what your customers would hear.</p>
-      <div class="cta-buttons">
+      <h1>Every missed call is a customer <em>someone else just won.</em></h1>
+      <p class="hero-sub">Amira answers your calls, WhatsApps, and website chats in your brand's voice. She books the job, fills the diary, and follows up while you work, sleep, or finally take a Sunday off.</p>
+      <div class="hero-ctas">
         <a href="#" class="btn filled" data-amira-voice>🎙 Talk to Amira Now</a>
-        <a href="https://wa.me/972506484887?text=Hi%20Amira%20team,%20I'd%20like%20to%20learn%20more!" class="btn" target="_blank" rel="noopener">WhatsApp Us</a>
+        <a href="#this-is-you" class="btn">See Who She Works For</a>
       </div>
-      <div class="cta-terms">No setup fee &middot; Bespoke to your business &middot; Live in days</div>
-    </div>
-  </section>
+      <div class="hero-trust">
+        <span>On the phones right now</span>
+        <span class="trust-line"></span>
+        <em>for clinics, law firms, and the trades</em>
+      </div>
+      <div class="hero-cue" aria-hidden="true">Missed call &middot; 21:47</div>
+    </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div>
-      <div class="foot-brand">
-        <span class="foot-bird" aria-hidden="true">
+    <!-- WHY · the cost of the dark -->
+    <section class="section" id="why">
+      <div class="wrap text-center sv">
+        <div class="label">The Quiet Problem</div>
+        <h2 class="heading">The leak is quiet. <em>The numbers are not.</em></h2>
+      </div>
+      <div class="wrap">
+        <div class="stats">
+          <div class="stat sv sv-d1">
+            <div class="stat-num">70%</div>
+            <div class="stat-text">of leads, tasks, and customer moments go cold without fast follow&#8209;up</div>
+            <div class="stat-src">Service Gap</div>
+          </div>
+          <div class="stat sv sv-d2">
+            <div class="stat-num">5 min</div>
+            <div class="stat-text">the window before a hot lead grows cold</div>
+            <div class="stat-src">Harvard Business Review</div>
+          </div>
+          <div class="stat sv sv-d3">
+            <div class="stat-num">21&times;</div>
+            <div class="stat-text">conversion lift when you reply inside it</div>
+            <div class="stat-src">Lead Response Study</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE NIGHT LOG · this is you -->
+    <section class="section" id="this-is-you" style="padding-bottom:30px">
+      <div class="wrap text-center sv">
+        <div class="label">This Is You</div>
+        <h2 class="heading">You are not losing customers to competitors. <em>You are losing them to voicemail.</em></h2>
+      </div>
+    </section>
+
+    <!-- INCIDENT 1 · 21:47 · the geyser -->
+    <section class="incident">
+      <div class="inc-sticky">
+        <div class="inc-grid">
+          <div class="inc-copy">
+            <div class="inc-time">21:47</div>
+            <div class="inc-kicker">For Plumbers &amp; Trades</div>
+            <h3 class="inc-pain">Geysers do not burst <em>during office hours.</em></h3>
+            <p class="inc-body">The first company to answer wins the job. Amira picks up at 21:47, reassures your customer, quotes the callout, and books the morning slot before they try the next number on Google.</p>
+            <div class="inc-does">Calls answered &middot; Jobs booked &middot; Nights saved</div>
+          </div>
+          <div class="inc-phone" role="group" aria-label="Live demonstration of Amira handling a missed call for a plumber at 21:47">
+            <div class="phone">
+              <div class="ph-head">
+                <span class="ph-ava">A</span>
+                <span class="ph-id">
+                  <em class="ph-name">Bramley Plumbers</em>
+                  <span class="ph-status"><i></i>Amira &middot; replies instantly</span>
+                </span>
+              </div>
+              <div class="ph-screen">
+                <span class="sys">Missed call &middot; 21:47</span>
+                <div class="slot">
+                  <div class="msg them typing gta"><i></i><i></i><i></i></div>
+                  <div class="msg them ga">Hi, it's Amira from Bramley Plumbers. I saw we just missed your call. What's going on?</div>
+                </div>
+                <div class="msg me gb">geyser burst, water everywhere 😭</div>
+                <div class="msg them gc">That's an emergency. Thabo can be at yours at 07:00, and I'm sending you the mains shut-off steps right now. Book him?</div>
+                <div class="msg me gd">yes please!!</div>
+                <div class="msg them ge">✓ Booked. Reminder at 06:30. Try get some sleep.</div>
+                <div class="res gres">R4,500 job. Saved at 21:47.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INCIDENT 2 · 23:05 · the accident -->
+    <section class="incident flip">
+      <div class="inc-sticky">
+        <div class="inc-grid">
+          <div class="inc-copy">
+            <div class="inc-time">23:05</div>
+            <div class="inc-kicker">For Law Firms</div>
+            <h3 class="inc-pain">The client who could not reach you <em>hired the firm that answered.</em></h3>
+            <p class="inc-body">Nobody shops for a lawyer calmly. They call down a list at 22:00 and stop at the first real answer. Amira captures the matter, asks the intake questions you would ask, and books the consult while the other firms ring.</p>
+            <div class="inc-does">Leads captured &middot; Cases qualified &middot; Consults booked</div>
+          </div>
+          <div class="inc-phone" role="group" aria-label="Live demonstration of Amira handling a website chat for a law firm at 23:05">
+            <div class="phone">
+              <div class="ph-head">
+                <span class="ph-ava">A</span>
+                <span class="ph-id">
+                  <em class="ph-name">Meyer &amp; Associates</em>
+                  <span class="ph-status"><i></i>Amira &middot; replies instantly</span>
+                </span>
+              </div>
+              <div class="ph-screen">
+                <span class="sys">Website chat &middot; 23:05</span>
+                <div class="msg me ga">I was in an accident last week. do you take these cases?</div>
+                <div class="slot">
+                  <div class="msg them typing gta"><i></i><i></i><i></i></div>
+                  <div class="msg them gb">I'm sorry to hear that. We do. May I take a few details so the right attorney calls you at 09:00 sharp?</div>
+                </div>
+                <div class="msg me gc">yes thank you 🙏</div>
+                <div class="res gres">Case captured. Consult booked for 09:00.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INCIDENT 3 · 06:12 · the ear -->
+    <section class="incident">
+      <div class="inc-sticky">
+        <div class="inc-grid">
+          <div class="inc-copy">
+            <div class="inc-time">06:12</div>
+            <div class="inc-kicker">For Doctors &amp; Clinics</div>
+            <h3 class="inc-pain">Your receptionist is excellent. She is also <em>human, off at five, and one person.</em></h3>
+            <p class="inc-body">Patients call at 21:00 about tomorrow's emergency, and somebody asks about medical aid for the hundredth time. Amira answers instantly, books the appointment, refills cancelled slots, and knows exactly what is urgent enough to escalate.</p>
+            <div class="inc-does">Appointments booked &middot; No&#8209;shows chased &middot; Diary full</div>
+          </div>
+          <div class="inc-phone" role="group" aria-label="Live demonstration of Amira handling a WhatsApp for a medical practice at 06:12">
+            <div class="phone">
+              <div class="ph-head">
+                <span class="ph-ava">A</span>
+                <span class="ph-id">
+                  <em class="ph-name">Naidoo Family Practice</em>
+                  <span class="ph-status"><i></i>Amira &middot; replies instantly</span>
+                </span>
+              </div>
+              <div class="ph-screen">
+                <span class="sys">New WhatsApp &middot; 06:12</span>
+                <div class="msg me ga">hi, any chance dr naidoo can see me today? bad ear pain</div>
+                <div class="slot">
+                  <div class="msg them typing gta"><i></i><i></i><i></i></div>
+                  <div class="msg them gb">Morning! Dr Naidoo has 09:20 or 11:45 open today. Which suits you?</div>
+                </div>
+                <div class="msg me gc">9:20 please</div>
+                <div class="msg them gd">✓ Booked. I've sent your intake form, so you can skip the clipboard. Feel better soon.</div>
+                <div class="res gres">Empty slot filled before reception opened.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <p class="log-foot sv">Salons, vets, agencies, gyms. If your phone makes you money, Amira belongs on it.</p>
+
+    <!-- DAWN · proof -->
+    <section class="dawn-quote" id="proof">
+      <div class="sunrise" aria-hidden="true"></div>
+      <div class="sv">
+        <span class="perch" aria-hidden="true">
           <svg class="bird" viewBox="0 0 64 64">
             <path class="b-wing b-wb" d="M30 14 C40 4 52 6 49 13 C46 20 36 26 27 27 C23 27.5 22 24 24 20 C26 17 28 16 30 14 Z"/>
             <path class="b-body" d="M43 19 C48 17 52 21 50 27 C48 33 41 40 31 44 C25 46 19 44 17 40 C24 40 30 35 33 29 C36 23 38 21 43 19 Z"/>
@@ -971,39 +959,163 @@
             <path class="b-tail t3" d="M26 44 C22 52 21 58 21 63"/>
           </svg>
         </span>
-        AMIRA
+        <div class="label" style="margin-bottom:26px">Real Customer &middot; Real Rands</div>
+        <p class="quote">&ldquo;Amira saved me legit thousands of Rands. I had no idea how these missed jobs add up. And my customers have never been more satisfied.&rdquo;</p>
+        <div class="quote-who"><b>Rochelle</b> &middot; Bramley Plumbers &middot; Johannesburg</div>
       </div>
-      <div class="foot-sub">Human Software Resources</div>
-    </div>
-    <div class="foot-links">
-      <a href="index.html" class="foot-link">Home</a>
-      <a href="about.html" class="foot-link">About</a>
-      <a href="privacy.html" class="foot-link">Privacy</a>
-      <a href="mailto:shimshongfisher@gmail.com" class="foot-link">Contact</a>
-      <a href="team-login.html" class="foot-link">Team Login</a>
-    </div>
-    <div class="foot-copy">&copy; 2026 AMIRA HSR</div>
-  </footer>
+    </section>
+  </div>
 
+  <!-- ═══════════════ MORNING ═══════════════ -->
+  <div class="morning">
 
-  <script>
-    const n=document.getElementById('nav');
-    let p=0;
-    window.addEventListener('scroll',()=>{const y=window.scrollY;if((y>50)!==(p>50))n.classList.toggle('scrolled',y>50);p=y},{passive:true});
+    <!-- FEATURES · 09:00 -->
+    <section class="section" id="features">
+      <div class="wrap text-center sv">
+        <div class="timechip"><i></i>09:00 &middot; Diary full</div>
+        <div class="label">What Amira Handles</div>
+        <h2 class="heading">Your finest operator, <em>available at every&nbsp;hour.</em></h2>
+      </div>
+      <div class="wrap">
+        <div class="features">
 
-    const mobMenu=document.getElementById('mobMenu');
-    const hamburgerBtn=document.getElementById('hamburgerBtn');
-    if (mobMenu && hamburgerBtn) {
-      const syncMenuState=()=>{
-        const open=mobMenu.matches(':popover-open');
-        hamburgerBtn.classList.toggle('is-open', open);
-        hamburgerBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      };
-      mobMenu.addEventListener('toggle', syncMenuState);
-      syncMenuState();
-    }
+          <div class="feat-group sv">Before the Handoff</div>
 
-  </script>
+          <div class="feat sv sv-d1">
+            <span class="feat-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 8h22l-2 14H7L5 8z"/><circle cx="12" cy="27" r="1.5"/><circle cx="22" cy="27" r="1.5"/><path d="M5 8L4 4H1"/>
+              </svg>
+            </span>
+            <h3 class="feat-title">The Lead Left Hanging</h3>
+            <p class="feat-desc">AMIRA follows up by name, over WhatsApp, email, or voice, within minutes, so warm interest does not disappear into yesterday's inbox.</p>
+          </div>
+
+          <div class="feat sv sv-d2">
+            <span class="feat-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 18a8 8 0 1 1-8-12 6 6 0 0 0 8 12z"/>
+              </svg>
+            </span>
+            <h3 class="feat-title">The After-Hours Customer</h3>
+            <p class="feat-desc">Questions arrive after hours, between meetings, and while your team is busy. AMIRA answers in seconds, in your voice, and knows when to escalate.</p>
+          </div>
+
+          <div class="feat sv sv-d3">
+            <span class="feat-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="16,4 26,12 16,28 6,12"/><line x1="6" y1="12" x2="26" y2="12"/><line x1="16" y1="4" x2="11" y2="12"/><line x1="16" y1="4" x2="21" y2="12"/>
+              </svg>
+            </span>
+            <h3 class="feat-title">The Missed Next Step</h3>
+            <p class="feat-desc">A conversation should not end with one answer. AMIRA guides people to the next useful action, from sending an email to completing a form to receiving a tailored recommendation.</p>
+          </div>
+
+          <div class="feat-group sv">After the Interaction</div>
+
+          <div class="feat sv sv-d1">
+            <span class="feat-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="10" width="18" height="14"/><path d="M22 14h5l3 4v6h-8"/><circle cx="10" cy="26" r="2"/><circle cx="24" cy="26" r="2"/>
+              </svg>
+            </span>
+            <h3 class="feat-title">The Status Chase</h3>
+            <p class="feat-desc">The question that floods every inbox: what happened next? AMIRA checks systems, updates people, and gives clean answers before small gaps become noisy problems.</p>
+          </div>
+
+          <div class="feat sv sv-d2">
+            <span class="feat-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M6 12a10 10 0 0 1 18-3"/><polyline points="24 4 24 9 19 9"/><path d="M26 20a10 10 0 0 1-18 3"/><polyline points="8 28 8 23 13 23"/>
+              </svg>
+            </span>
+            <h3 class="feat-title">The Voice Workflow</h3>
+            <p class="feat-desc">AMIRA can speak, listen, qualify, remind, and route calls with the same tone as your brand, giving your business a calm voice when humans are not available.</p>
+          </div>
+
+          <div class="feat sv sv-d3">
+            <span class="feat-icon">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 27s-10-6-10-14a6 6 0 0 1 10-4 6 6 0 0 1 10 4c0 8-10 14-10 14z"/>
+              </svg>
+            </span>
+            <h3 class="feat-title">The Relationship You Forgot</h3>
+            <p class="feat-desc">Every customer, client, and lead has context. AMIRA remembers the useful details and reaches out at the right moment with the right next step.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW · a strip of night kept in the morning -->
+    <section class="how-band" id="how">
+      <div class="text-center sv">
+        <div class="label">How It Works</div>
+        <h2 class="heading">Live in three steps. <em>Not three&nbsp;months.</em></h2>
+      </div>
+      <div class="steps">
+        <div class="sv sv-d1">
+          <div class="step-num">01</div>
+          <h3 class="step-title">We Learn Your Business</h3>
+          <p class="step-desc">We study your services, your voice, your customers, and your internal processes. Then we build the agent personality and connect it to the work it needs to do.</p>
+        </div>
+        <div class="sv sv-d2">
+          <div class="step-num">02</div>
+          <h3 class="step-title">We Install It</h3>
+          <p class="step-desc">One script tag, one integration path, or one voice workflow. We handle design, systems, prompts, testing, and the quiet details that make it feel polished.</p>
+        </div>
+        <div class="sv sv-d3">
+          <div class="step-num">03</div>
+          <h3 class="step-title">We Optimise Together</h3>
+          <p class="step-desc">We monitor conversations, refine the agents, and send you reports. You watch the system become sharper, calmer, and more useful every week.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="sv">
+        <div class="label" style="margin-bottom:24px">Get Started</div>
+        <h2 class="heading">Your competitors' customers are being helped <em>right&nbsp;now.</em></h2>
+        <p class="cta-sub">Every missed call today is revenue in someone else's account tomorrow. Talk to Amira and hear exactly what your customers would hear.</p>
+        <div class="cta-buttons">
+          <a href="#" class="btn filled" data-amira-voice>🎙 Talk to Amira Now</a>
+          <a href="https://wa.me/972506484887?text=Hi%20Amira%20team,%20I'd%20like%20to%20learn%20more!" class="btn" target="_blank" rel="noopener">WhatsApp Us</a>
+        </div>
+        <div class="cta-terms">No setup fee &middot; Bespoke to your business &middot; Live in days</div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div>
+        <div class="foot-brand">
+          <span class="foot-bird" aria-hidden="true">
+            <svg class="bird" viewBox="0 0 64 64">
+              <path class="b-wing b-wb" d="M30 14 C40 4 52 6 49 13 C46 20 36 26 27 27 C23 27.5 22 24 24 20 C26 17 28 16 30 14 Z"/>
+              <path class="b-body" d="M43 19 C48 17 52 21 50 27 C48 33 41 40 31 44 C25 46 19 44 17 40 C24 40 30 35 33 29 C36 23 38 21 43 19 Z"/>
+              <path class="b-beak" d="M49 21 L63 17 L50 25 Z"/>
+              <circle class="b-eye" cx="47" cy="22" r="1.2"/>
+              <path class="b-wing b-wf" d="M28 12 C36 4 46 5 44 12 C42 18 33 24 25 25 C21 25.5 20 22 22 18 C24 15 26 14 28 12 Z"/>
+              <path class="b-tail t1" d="M20 41 C12 47 8 55 6 61"/>
+              <path class="b-tail t2" d="M23 43 C17 51 15 58 14 62"/>
+              <path class="b-tail t3" d="M26 44 C22 52 21 58 21 63"/>
+            </svg>
+          </span>
+          AMIRA
+        </div>
+        <div class="foot-sub">Human Software Resources</div>
+      </div>
+      <div class="foot-links">
+        <a href="index.html" class="foot-link">Home</a>
+        <a href="about.html" class="foot-link">About</a>
+        <a href="privacy.html" class="foot-link">Privacy</a>
+        <a href="mailto:shimshongfisher@gmail.com" class="foot-link">Contact</a>
+        <a href="team-login.html" class="foot-link">Team Login</a>
+      </div>
+      <div class="foot-copy">&copy; 2026 AMIRA HSR</div>
+    </footer>
+  </div>
 
   <script src="https://platform.amirahsr.org/widget.js" data-amira-site="wgt_amirahsr_686580f7b7b7" defer></script>
 
@@ -1027,11 +1139,10 @@
     })();
   </script>
 
-<style>.wa-float{position:fixed;left:22px;bottom:22px;z-index:1000;display:inline-flex;align-items:center;gap:9px;padding:11px 20px;background:#fdfbf7;color:#2c2420;border:1px solid #b8956a;border-radius:100px;text-decoration:none;font-family:'Outfit','Nunito Sans',system-ui,sans-serif;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;box-shadow:0 6px 22px rgba(44,36,32,.12);transition:all .25s ease}.wa-float svg{transition:fill .25s ease}.wa-float:hover{background:#b8956a;color:#fdfbf7;box-shadow:0 8px 26px rgba(184,149,106,.3)}.wa-float:hover svg path{fill:#fdfbf7}@media(max-width:520px){.wa-float{left:16px;bottom:16px;padding:10px 16px}}</style>
-<a href="https://wa.me/972506484887?text=Hi%20Amira%20team,%20I'd%20like%20to%20learn%20more!" class="wa-float" aria-label="Message us on WhatsApp">
-  <svg width="17" height="17" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#2c2420" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-  WhatsApp
-</a>
+  <a href="https://wa.me/972506484887?text=Hi%20Amira%20team,%20I'd%20like%20to%20learn%20more!" class="wa-float" aria-label="Message us on WhatsApp">
+    <svg width="17" height="17" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#E9D2A4" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 00-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    WhatsApp
+  </a>
 </body>
 
 </html>

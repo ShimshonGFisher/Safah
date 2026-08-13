@@ -537,19 +537,22 @@
         /* waypoints anchored to where the incidents pin on the page;
            between 23:xx and 06:xx the small hours fly past; nothing rang. */
         @keyframes night-pass {
-          /* rescaled when the client roster added 476px to the morning:
-             night waypoints x0.9563, the morning one shifted by the band. */
+          /* Rescaled twice, because these are percentages of scrollable height:
+             the client roster added 476px (x0.9563), then the press slot added
+             101px (x0.990821, page 10902 -> 11003). Waypoints below the morning
+             keep their pixel offset, so p -> p*r; the morning one sits after both
+             insertions, so p -> p*r + (1-r). Redo this if page height changes. */
           0% { --mins: 0; opacity: 0; }    /* 21:00, still on the hero */
-          5.74% { opacity: 1; }
-          13.39% { --mins: 40; }           /* 21:40, something is coming */
-          18.07% { --mins: 45; }           /* the geyser: pinned at 21:47 */
-          27.35% { --mins: 56; }
-          35.77% { --mins: 121; }          /* the accident: pinned at 23:05 */
-          45.14% { --mins: 130; }
-          53.55% { --mins: 548; }          /* the ear: pinned at 06:12 */
-          62.93% { --mins: 560; }
-          72.78% { --mins: 590; }          /* first light */
-          85.08% { --mins: 660; }          /* morning */
+          5.69% { opacity: 1; }
+          13.27% { --mins: 40; }           /* 21:40, something is coming */
+          17.90% { --mins: 45; }           /* the geyser: pinned at 21:47 */
+          27.10% { --mins: 56; }
+          35.44% { --mins: 121; }          /* the accident: pinned at 23:05 */
+          44.73% { --mins: 130; }
+          53.06% { --mins: 548; }          /* the ear: pinned at 06:12 */
+          62.35% { --mins: 560; }
+          72.11% { --mins: 590; }          /* first light */
+          85.22% { --mins: 660; }          /* morning */
           100% { --mins: 720; }            /* 09:00 */
         }
       }
@@ -1033,13 +1036,11 @@
 
         </div>
 
-        <!-- FEATURED IN · uncomment the two lines below when the magazine file
-             arrives, then swap in the publication name and the article URL.
-             Until then this slot renders nothing at all, by design. -->
-        <!--
+        <!-- FEATURED IN · the Bezalel feature, published with the editor's written
+             permission. Adding this slot changes page height, which rescales every
+             night-pass waypoint below. Re-measure if you touch it. -->
         <div class="press sv">Featured in</div>
-        <p class="press-name"><a href="ARTICLE_URL" target="_blank" rel="noopener">PUBLICATION NAME</a></p>
-        -->
+        <p class="press-name"><a href="/press/bezalel-j-zine-july-2026.pdf" target="_blank" rel="noopener">J-Zine Edit, The Trends Issue, July 2026</a></p>
       </div>
     </section>
 

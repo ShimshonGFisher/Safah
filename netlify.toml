@@ -1,3 +1,29 @@
+# ═══ CANADA ═══
+# Canadian visitors get the CAD page with the founding rates.
+# force = true is mandatory: pricing.html is a real file on disk, and a
+# static file beats a non-forced rule. Both paths are covered because the
+# nav links point at pricing.html while Netlify also exposes /pricing.
+[[redirects]]
+  from = "/pricing.html"
+  to = "/pricing-ca.html"
+  status = 302
+  force = true
+  conditions = {Country = ["ca"]}
+
+[[redirects]]
+  from = "/pricing"
+  to = "/pricing-ca.html"
+  status = 302
+  force = true
+  conditions = {Country = ["ca"]}
+
+# Escape hatch. Without this a Canadian IP can never reach the Rand page,
+# because every route to it is redirected above.
+[[redirects]]
+  from = "/pricing-za"
+  to = "/pricing.html"
+  status = 200
+
 [[redirects]]
   from = "/ai-staff"
   to = "/ai-staff.html"

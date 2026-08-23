@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#FDFBF7" />
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<title>Terms and Conditions | AMIRA</title>
+<meta name="description" content="AMIRA's terms and conditions of use. The rules that govern our AI concierge services for business clients, and the use of our website, chat widget, and voice channels.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1A1F3A;
+    --gold: #C9A96E;
+    --ivory: #FAF8F3;
+    --ink: #2A2E40;
+    --muted: #5C6175;
+    --line: #E4DFD2;
+    --gold-soft: #F2EAD9;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --maxw: 760px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--ivory);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 16.5px;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  a { color: var(--navy); text-decoration: none; border-bottom: 1px solid var(--gold); transition: color .15s, border-color .15s; }
+  a:hover { color: var(--gold); border-color: var(--navy); }
+
+  /* ---------- Masthead ---------- */
+  .masthead {
+    background: var(--navy);
+    color: var(--ivory);
+    padding: 64px 24px 56px;
+    border-bottom: 3px solid var(--gold);
+  }
+  .masthead-inner { max-width: var(--maxw); margin: 0 auto; }
+  .brand {
+    font-family: var(--sans);
+    font-weight: 600;
+    letter-spacing: .42em;
+    font-size: 13px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 22px;
+  }
+  .masthead h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(40px, 7vw, 58px);
+    line-height: 1.04;
+    margin: 0 0 18px;
+    letter-spacing: .01em;
+  }
+  .masthead .lede {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(18px, 2.6vw, 21px);
+    line-height: 1.5;
+    color: #D8D5CC;
+    max-width: 620px;
+    margin: 0;
+  }
+  .badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 30px;
+  }
+  .badge {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,169,110,.45);
+    border-radius: 2px;
+    padding: 6px 11px;
+  }
+  .dates {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,.12);
+    font-size: 13px;
+    letter-spacing: .04em;
+    color: #B7B4AD;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+  }
+  .dates b { color: var(--ivory); font-weight: 500; }
+
+  /* ---------- Layout ---------- */
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 56px 24px 96px; }
+
+  /* ---------- TOC ---------- */
+  .toc {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--gold);
+    border-radius: 3px;
+    padding: 28px 32px;
+    margin-bottom: 56px;
+  }
+  .toc h2 {
+    font-family: var(--sans);
+    font-size: 12px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 16px;
+    font-weight: 600;
+  }
+  .toc ol { margin: 0; padding: 0; list-style: none; counter-reset: toc; columns: 2; column-gap: 40px; }
+  .toc li { counter-increment: toc; margin: 0 0 9px; font-size: 14.5px; break-inside: avoid; }
+  .toc li a { border: none; color: var(--ink); display: flex; gap: 10px; }
+  .toc li a:hover { color: var(--gold); }
+  .toc li a::before { content: counter(toc, decimal-leading-zero); color: var(--gold); font-variant-numeric: tabular-nums; font-weight: 500; min-width: 22px; }
+
+  /* ---------- Sections ---------- */
+  section { margin-bottom: 52px; scroll-margin-top: 24px; }
+  .sec-num {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: .18em;
+    color: var(--gold);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+  }
+  h2.sec-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: clamp(27px, 4vw, 33px);
+    line-height: 1.15;
+    color: var(--navy);
+    margin: 0 0 20px;
+    letter-spacing: .01em;
+  }
+  h3 {
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--navy);
+    margin: 30px 0 10px;
+    letter-spacing: .01em;
+  }
+  p { margin: 0 0 16px; }
+  .muted { color: var(--muted); }
+
+  ul.clean { margin: 0 0 16px; padding-left: 0; list-style: none; }
+  ul.clean li { position: relative; padding-left: 22px; margin-bottom: 10px; }
+  ul.clean li::before { content: ""; position: absolute; left: 4px; top: 11px; width: 6px; height: 6px; background: var(--gold); border-radius: 50%; }
+  ul.clean li b { color: var(--navy); font-weight: 600; }
+
+  /* ---------- Tables ---------- */
+  .tbl { width: 100%; border-collapse: collapse; margin: 8px 0 20px; font-size: 14.5px; }
+  .tbl th { text-align: left; background: var(--navy); color: var(--ivory); font-weight: 500; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 11px 14px; }
+  .tbl td { padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; background: #fff; }
+  .tbl tr:last-child td { border-bottom: none; }
+  .tbl td:first-child { font-weight: 500; color: var(--navy); width: 38%; }
+
+  /* ---------- Role / callout cards ---------- */
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 8px 0 4px; }
+  .card { background: #fff; border: 1px solid var(--line); border-top: 3px solid var(--gold); border-radius: 3px; padding: 22px 24px; }
+  .card h3 { margin-top: 0; }
+  .card p:last-child { margin-bottom: 0; }
+
+  .note {
+    background: var(--gold-soft);
+    border: 1px solid #E6D6B4;
+    border-radius: 3px;
+    padding: 18px 22px;
+    margin: 8px 0 20px;
+    font-size: 14.5px;
+  }
+  .note b { color: var(--navy); }
+
+  /* ---------- Footer ---------- */
+  footer {
+    background: var(--navy);
+    color: #C7C4BC;
+    padding: 48px 24px;
+    font-size: 14px;
+  }
+  footer .footer-inner { max-width: var(--maxw); margin: 0 auto; }
+  footer .brand { margin-bottom: 14px; }
+  footer p { margin: 0 0 8px; }
+  footer a { color: var(--gold); border-color: rgba(201,169,110,.4); }
+  footer a:hover { color: var(--ivory); }
+  .totop { display: inline-block; margin-top: 18px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; }
+
+  @media (max-width: 620px) {
+    .toc ol { columns: 1; }
+    .cards { grid-template-columns: 1fr; }
+    .tbl td:first-child { width: auto; }
+    .tbl, .tbl tbody, .tbl tr { display: block; }
+    .tbl thead { display: none; }
+    .tbl td { display: block; border-bottom: none; }
+    .tbl tr { border-bottom: 1px solid var(--line); padding: 6px 0; }
+    .dates { gap: 14px; }
+  }
+
+  @media print {
+    .masthead, footer { background: #fff; color: #000; border-color: #000; }
+    .masthead .brand, .badge, .sec-num, footer .brand { color: #000; }
+    .toc, .totop { display: none; }
+    body { font-size: 11pt; }
+    a { color: #000; border: none; }
+  }
+</style>
+
+  <!-- AMIRA TELEMETRY: Google Analytics Radar -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9PE6C1NP7N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9PE6C1NP7N');
+  </script>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <p class="brand">AMIRA</p>
+    <h1>Terms and Conditions</h1>
+    <p class="lede">The agreement between us: what we provide, what we charge, what we are responsible for, and the rules that apply when you use the AMIRA platform, our concierge services, and this website.</p>
+    <div class="badges">
+      <span class="badge">For business clients</span>
+      <span class="badge">For visitors &amp; end users</span>
+      <span class="badge">Month to month &middot; No lock-in</span>
+      <span class="badge">Governed by South African law</span>
+    </div>
+    <div class="dates">
+      <span>Effective date: <b>23 August 2026</b></span>
+      <span>Last updated: <b>23 August 2026</b></span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <nav class="toc" aria-label="Table of contents">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#scope">About these terms and who they cover</a></li>
+      <li><a href="#who">Who we are</a></li>
+      <li><a href="#definitions">Key terms</a></li>
+      <li><a href="#services">The Services</a></li>
+      <li><a href="#accounts">Accounts and access</a></li>
+      <li><a href="#onboarding">Onboarding and going live</a></li>
+      <li><a href="#fees">Fees, billing and taxes</a></li>
+      <li><a href="#term">Term, cancellation and suspension</a></li>
+      <li><a href="#responsibilities">Your responsibilities as a client</a></li>
+      <li><a href="#acceptable">Acceptable use</a></li>
+      <li><a href="#messaging">Messaging, consent and marketing</a></li>
+      <li><a href="#voice">Voice calls and recordings</a></li>
+      <li><a href="#ai">How the AI works, and what it cannot do</a></li>
+      <li><a href="#thirdparty">Third-party platforms and integrations</a></li>
+      <li><a href="#data">Your data and personal information</a></li>
+      <li><a href="#confidentiality">Confidentiality</a></li>
+      <li><a href="#ip">Intellectual property</a></li>
+      <li><a href="#publicity">Publicity and client references</a></li>
+      <li><a href="#availability">Availability, support and changes</a></li>
+      <li><a href="#warranties">Warranties and disclaimers</a></li>
+      <li><a href="#liability">Limitation of liability</a></li>
+      <li><a href="#indemnity">Indemnity</a></li>
+      <li><a href="#endusers">Terms for visitors and end users</a></li>
+      <li><a href="#consumer">Consumer rights and cooling-off</a></li>
+      <li><a href="#changes">Changes to these terms</a></li>
+      <li><a href="#law">Governing law and disputes</a></li>
+      <li><a href="#notices">Notices and addresses</a></li>
+      <li><a href="#general">General</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </nav>
+
+  <section id="scope">
+    <span class="sec-num">Section 01</span>
+    <h2 class="sec-title">About these terms and who they cover</h2>
+    <p>These terms and conditions ("Terms") govern your use of our marketing website (amirahsr.org), our platform and administration console (platform.amirahsr.org), the AMIRA chat widget wherever it is embedded, our WhatsApp and messaging integrations, our voice answering service, and any related service we provide, together "the Services".</p>
+    <p>You accept these Terms when you do any of the following: use this website, accept a proposal or order from us, pay an invoice or subscription, or use an AMIRA concierge. If you accept on behalf of a business, you confirm that you are authorised to bind that business, and "you" means that business.</p>
+    <div class="cards">
+      <div class="card">
+        <h3>If you are a business client</h3>
+        <p>All of these Terms apply to you, and Sections 4 to 22 in particular. Together with any written proposal, order, or quotation we have agreed with you, they form the contract between us.</p>
+      </div>
+      <div class="card">
+        <h3>If you are a visitor or end user</h3>
+        <p>Sections 1 to 3 and 23 to 29 apply to you. That includes browsing this website, trying the demo, or chatting with a concierge we operate for one of our clients.</p>
+      </div>
+    </div>
+    <h3>Order of precedence</h3>
+    <p>If there is a conflict between documents, the following order applies: first, a signed order, proposal, or service agreement between us; second, any separate data processing or operator agreement; third, these Terms; fourth, our <a href="https://amirahsr.org/privacy">Privacy Policy</a>; and last, any other material on our website.</p>
+    <div class="note">
+      <b>Please read Sections 13, 20 and 21 carefully.</b> They explain the limits of an AI concierge, the fact that the Services must not be relied on for emergencies, and the limits on our legal liability. They affect your rights.
+    </div>
+  </section>
+
+  <section id="who">
+    <span class="sec-num">Section 02</span>
+    <h2 class="sec-title">Who we are</h2>
+    <p>The Services are operated by Shimshon Gavriel Fisher, a sole proprietor trading as Amira Human Software Resources ("AMIRA", "we", "us", "our"). The information below is provided in line with section 43 of the Electronic Communications and Transactions Act 25 of 2002.</p>
+    <table class="tbl">
+      <thead><tr><th>Detail</th><th>Information</th></tr></thead>
+      <tbody>
+        <tr><td>Full name</td><td>Shimshon Gavriel Fisher</td></tr>
+        <tr><td>Trading as</td><td>Amira Human Software Resources</td></tr>
+        <tr><td>Legal status</td><td>Sole proprietorship, South Africa</td></tr>
+        <tr><td>Principal place of business</td><td>131 Lyndhurst Road, Johannesburg, 2192, South Africa</td></tr>
+        <tr><td>Website</td><td>amirahsr.org</td></tr>
+        <tr><td>Email</td><td>shimshon@amirahsr.org and team@amirahsr.org</td></tr>
+        <tr><td>WhatsApp</td><td>+972 50 648 4887</td></tr>
+        <tr><td>Nature of the Services</td><td>An AI customer concierge that answers enquiries, captures leads, books appointments, and answers calls for businesses across web chat, WhatsApp, and voice</td></tr>
+        <tr><td>Payment methods</td><td>Card and online payment through our payment provider acting as merchant of record, or electronic funds transfer against invoice</td></tr>
+        <tr><td>Security</td><td>Traffic is encrypted in transit. Our security practices are described in our <a href="https://amirahsr.org/privacy">Privacy Policy</a></td></tr>
+        <tr><td>Complaints</td><td>shimshon@amirahsr.org, and see Sections 26 and 29</td></tr>
+      </tbody>
+    </table>
+    <p class="muted">We may reorganise the business, including by incorporating a company and transferring the Services to it. If we do, we will tell you and Section 28 applies.</p>
+  </section>
+
+  <section id="definitions">
+    <span class="sec-num">Section 03</span>
+    <h2 class="sec-title">Key terms</h2>
+    <ul class="clean">
+      <li><b>Client</b> means a business that subscribes to or uses the Services.</li>
+      <li><b>Concierge</b> means the AI assistant we configure and operate for a Client on one or more Channels.</li>
+      <li><b>Channel</b> means a route through which the Concierge communicates, such as a website chat widget, WhatsApp, email, or a voice line.</li>
+      <li><b>End user</b> means a customer, patient, caller, or visitor of a Client who interacts with a Concierge.</li>
+      <li><b>Order</b> means the proposal, quotation, order form, invoice, or written confirmation that records what you have subscribed to, the Fees, and any specific terms.</li>
+      <li><b>Client Content</b> means everything you give us or configure, including your business information, pricing, service descriptions, documents, brand assets, contact lists, and the answers you want the Concierge to give.</li>
+      <li><b>Knowledge Base</b> means the structured Client Content the Concierge draws on when it answers.</li>
+      <li><b>Output</b> means anything the Concierge generates, including messages, summaries, transcripts, lead records, and spoken replies.</li>
+      <li><b>Platform</b> means our software, infrastructure, administration console, and the agent architecture behind the Concierge.</li>
+      <li><b>Fees</b> means the amounts payable for the Services, as set out in your Order or published on our pricing page.</li>
+    </ul>
+  </section>
+
+  <section id="services">
+    <span class="sec-num">Section 04</span>
+    <h2 class="sec-title">The Services</h2>
+    <p>We build, host, and operate a Concierge for your business, and we give you access to the Platform to manage it. What you receive depends on the package in your Order. Our published packages are:</p>
+    <table class="tbl">
+      <thead><tr><th>Package</th><th>What it covers</th></tr></thead>
+      <tbody>
+        <tr><td>Message Handling</td><td>Replies to enquiries on WhatsApp, website chat, and the web widget, in your brand's voice, with lead capture, appointment booking, follow-up, and handover to your team</td></tr>
+        <tr><td>Never Miss a Call</td><td>Live AI answering of inbound calls, with booking, message taking, after-hours and overflow cover, and warm transfer to your team</td></tr>
+        <tr><td>Bespoke automation</td><td>Additional workflows we scope, build, and maintain for you under a separate Order, charged as agreed</td></tr>
+      </tbody>
+    </table>
+    <p>We provide the Services as a subscription. Nothing in these Terms sells, assigns, or transfers the Platform or any part of it to you. We may improve, refine, or re-engineer how the Services are delivered, including the AI models, providers, and infrastructure we use, as long as we do not materially reduce what you have contracted for.</p>
+    <p>We may use subcontractors, service providers, and AI providers to deliver the Services. We remain responsible to you for their performance of the work we have delegated to them.</p>
+  </section>
+
+  <section id="accounts">
+    <span class="sec-num">Section 05</span>
+    <h2 class="sec-title">Accounts and access</h2>
+    <p>Where the Services include access to the Platform, we issue credentials to you or to the people you nominate. You are responsible for everything done under your account.</p>
+    <ul class="clean">
+      <li>Keep credentials confidential, do not share logins between people, and use a unique password.</li>
+      <li>Make sure the people you give access to understand and follow these Terms. You are responsible for their acts and omissions as if they were your own.</li>
+      <li>Tell us immediately at shimshon@amirahsr.org if you suspect any unauthorised access, credential loss, or security incident.</li>
+      <li>Keep your account details, billing contact, and escalation contacts current.</li>
+    </ul>
+    <p>We may suspend or revoke access to any individual user where we reasonably believe the account is compromised or is being used in breach of Section 10.</p>
+  </section>
+
+  <section id="onboarding">
+    <span class="sec-num">Section 06</span>
+    <h2 class="sec-title">Onboarding and going live</h2>
+    <p>Before a Concierge goes live, we study your business, build the agent personality, assemble the Knowledge Base from the Client Content you provide, and connect the Channels and integrations in your Order.</p>
+    <p>You must review and approve the Concierge before it goes live on any Channel. Your approval confirms that the information it will give your customers is accurate, current, lawful, and appropriate for your business. After go-live you remain responsible for telling us when anything material changes, such as pricing, availability, service areas, policies, or the people who handle escalations.</p>
+    <p>Go-live dates, timelines, and estimates we give you are indications, not commitments, and they depend on you supplying content, access, and approvals promptly. Where a third party has to approve something, such as a WhatsApp sender registration or a number port, the timing is outside our control.</p>
+  </section>
+
+  <section id="fees">
+    <span class="sec-num">Section 07</span>
+    <h2 class="sec-title">Fees, billing and taxes</h2>
+    <h3>7.1 What you pay</h3>
+    <p>Fees are set out in your Order, or, where there is no Order, they are the prices published on our pricing page at the time you subscribe. Published prices are quoted in South African Rand and are per month per business. Where we quote in another currency, that is stated in your Order and payment is due in that currency.</p>
+    <h3>7.2 Billing cycle</h3>
+    <p>Subscriptions are billed monthly in advance and renew automatically each month until cancelled under Section 8. The first billing period starts on the date stated in your Order, or on go-live if no date is stated. Any onboarding, setup, or build fee is payable up front unless your Order says otherwise.</p>
+    <h3>7.3 How you pay</h3>
+    <p>You may pay by card or online payment through our payment provider, which acts as merchant of record, or by electronic funds transfer against invoice. Invoices are due within seven days of the invoice date unless your Order says otherwise. Payment processing fees, bank charges, and currency conversion costs charged by your bank or card issuer are for your account. Where a payment processing fee is added to a transaction by us, we will show it before you pay.</p>
+    <h3>7.4 Usage, allowances and pass-through costs</h3>
+    <p>Where your Order includes an allowance, such as a number of voice minutes, calls, conversations, or messages, usage above that allowance is billed at the rate in your Order. Where your Order does not state an allowance, fair use applies: we will contact you before charging anything extra if your usage is significantly out of line with the package you bought.</p>
+    <p>Third-party costs that we pass through to you, such as WhatsApp conversation charges, telephone numbers, call minutes, or paid integrations, are additional unless your Order states that they are included. We will tell you what these are before they start.</p>
+    <h3>7.5 Taxes</h3>
+    <p>Fees exclude value added tax and any other tax or levy. If we become liable to charge VAT or any similar tax, we will add it at the applicable rate and show it on your invoice. Where you are required to withhold tax, you must gross up so that we receive the full Fee.</p>
+    <h3>7.6 Late payment</h3>
+    <p>If an amount is overdue we may charge interest at the rate prescribed under the Prescribed Rate of Interest Act 55 of 1975, calculated daily from the due date until payment. If payment remains outstanding for 14 days after the due date, we may suspend the Services on notice to you. If it remains outstanding for 30 days, we may terminate under Section 8. You remain liable for Fees that accrued before suspension or termination, and for reasonable costs of recovery.</p>
+    <h3>7.7 Price changes</h3>
+    <p>We may change our Fees. We will give you at least 30 days' written notice, and the change takes effect from your next billing period after that notice. If you do not accept a price increase, you may cancel under Section 8 before it takes effect.</p>
+    <h3>7.8 Refunds and chargebacks</h3>
+    <p>Except where the law requires otherwise, Fees for a billing period already started are not refundable, including where you cancel mid-month or stop using the Services. If you believe you have been billed incorrectly, contact us within 30 days of the invoice and we will investigate and correct any genuine error. Please raise billing disputes with us before initiating a chargeback, so we can resolve it quickly.</p>
+  </section>
+
+  <section id="term">
+    <span class="sec-num">Section 08</span>
+    <h2 class="sec-title">Term, cancellation and suspension</h2>
+    <h3>8.1 Term</h3>
+    <p>Unless your Order says otherwise, the Services run month to month with no lock-in period, and renew automatically at the start of each billing period.</p>
+    <h3>8.2 Cancelling</h3>
+    <p>You may cancel at any time by emailing team@amirahsr.org or by using the cancellation option in the Platform or in your payment provider's portal. Cancellation takes effect at the end of the billing period you have already paid for. The Concierge stays live until then, and the Services are not extended or refunded beyond it. Please cancel at least three business days before your renewal date so the next payment is not collected.</p>
+    <h3>8.3 Termination by us</h3>
+    <p>We may terminate the Services for convenience on 30 days' written notice, in which case we will refund any Fees you have paid for a period after the termination date. We may terminate or suspend immediately, on notice, if you materially breach these Terms and do not fix it within seven days of us asking, if you fail to pay as described in Section 7.6, if you become insolvent or subject to business rescue or liquidation, or if continuing would in our reasonable view expose either of us to legal, regulatory, or security risk.</p>
+    <h3>8.4 Immediate suspension</h3>
+    <p>We may suspend a Channel or the whole Service without prior notice where there is a security threat, suspected fraud, a demand or enforcement action by a third-party platform such as Meta or a telecommunications provider, or a breach of Section 10 that we consider serious. We will tell you as soon as we reasonably can and work with you to restore service where the cause can be fixed.</p>
+    <h3>8.5 What happens on termination</h3>
+    <ul class="clean">
+      <li>Access to the Platform and the Concierge ends, and we deprovision the Channels we operate for you.</li>
+      <li>You may request an export of your conversation and lead data within 30 days of termination. After that period we delete or anonymise it in line with our <a href="https://amirahsr.org/privacy">Privacy Policy</a> and any operator agreement between us.</li>
+      <li>A WhatsApp sender or telephone number registered in your name stays yours. We will co-operate reasonably with a port or transfer, at your cost, subject to the relevant provider's rules.</li>
+      <li>Fees accrued up to the effective date remain payable, and Sections 15 to 17 and 20 to 28 survive.</li>
+    </ul>
+  </section>
+
+  <section id="responsibilities">
+    <span class="sec-num">Section 09</span>
+    <h2 class="sec-title">Your responsibilities as a client</h2>
+    <p>The Concierge speaks to your customers, in your name, about your business. That places real responsibilities on you.</p>
+    <ul class="clean">
+      <li><b>Accuracy.</b> Client Content must be accurate, current, lawful, and not misleading, including prices, availability, turnaround times, qualifications, and claims about your services. You must tell us promptly when it changes.</li>
+      <li><b>Oversight.</b> You must monitor conversations, leads, and bookings through the Platform or the notifications we send, and respond to anything that needs a person. The Concierge supports your team, it does not replace your duty to serve your customers.</li>
+      <li><b>Escalation.</b> You must keep at least one reachable human contact for handovers and urgent matters, and keep those details current.</li>
+      <li><b>Your own compliance.</b> You are responsible for the laws and licence conditions that govern your industry and your customer communications, including health, legal, financial services, credit, and consumer protection rules. If you are an authorised financial services provider, you remain responsible for compliance with the Financial Advisory and Intermediary Services Act 37 of 2002, including what may and may not be said to clients.</li>
+      <li><b>Consents and notices.</b> You must obtain any consent and give any notice your customers are entitled to, including for messaging, recording, and the processing of their personal information. See Sections 11, 12 and 15.</li>
+      <li><b>Co-operation.</b> You must give us the access, content, approvals, and testing time we reasonably need. Where you do not, we are not responsible for the resulting delay or for gaps in what the Concierge can answer.</li>
+    </ul>
+  </section>
+
+  <section id="acceptable">
+    <span class="sec-num">Section 10</span>
+    <h2 class="sec-title">Acceptable use</h2>
+    <p>You must not use the Services, and must not permit anyone else to use them, to do any of the following.</p>
+    <ul class="clean">
+      <li>Break any law, infringe anyone's rights, or facilitate fraud, deception, or a scam.</li>
+      <li>Send unsolicited bulk or marketing messages, or contact people who have opted out or who never opted in. See Section 11.</li>
+      <li>Hold the Concierge out as a human being where a person has asked whether they are speaking to a person, or remove, hide, or override the disclosure that the assistant is automated.</li>
+      <li>Operate an emergency, crisis, medical triage, safety, or life-support line, or any service where a delayed, missed, or inaccurate response could cause injury, illness, or serious harm.</li>
+      <li>Give regulated advice through the Concierge, including medical diagnosis, legal advice, or financial advice, unless you are licensed to do so, you have configured and approved that use, and you accept responsibility for it.</li>
+      <li>Upload or process special personal information, such as health, biometric, religious, or criminal record data, or information about children, unless it is necessary, you have a lawful basis, and we have agreed the arrangement with you in writing.</li>
+      <li>Use the Services for adult content, unlicensed gambling, illegal substances, weapons, hate speech, harassment, extremist content, or anything a payment provider or messaging platform prohibits.</li>
+      <li>Attempt to manipulate, jailbreak, or inject instructions into a Concierge, extract our system prompts or agent configuration, or use the Services to develop a competing product.</li>
+      <li>Copy, reverse engineer, decompile, scrape, or benchmark the Platform, or test its security without our prior written consent.</li>
+      <li>Resell, sublicense, or white-label the Services, or provide them to a third party as your own, without a written partner or reseller agreement with us.</li>
+      <li>Interfere with the Platform's integrity or performance, or introduce malicious code.</li>
+    </ul>
+    <p>We may investigate suspected breaches, and may review conversation data to the extent necessary for that purpose. We may suspend or terminate under Section 8, and we may report unlawful activity to the authorities where the law requires it.</p>
+  </section>
+
+  <section id="messaging">
+    <span class="sec-num">Section 11</span>
+    <h2 class="sec-title">Messaging, consent and marketing</h2>
+    <p>Messaging channels have their own rules, and they are enforced by the platforms that run them as well as by law.</p>
+    <h3>11.1 WhatsApp and Meta</h3>
+    <p>Where we operate a WhatsApp Channel for you, you must comply with the WhatsApp Business Messaging Policy, the Meta Commerce Policy, and the WhatsApp Business Terms, as they change from time to time. That includes obtaining opt-in before messaging a person, using approved message templates where required, and maintaining message quality. Meta may restrict, rate limit, or ban a sender, and may change its policies, pricing, or approvals at any time. That is outside our control and is not a breach of these Terms by us, although we will help you respond to it.</p>
+    <h3>11.2 The sender identity is yours</h3>
+    <p>A WhatsApp sender, business profile, or telephone number used for your Concierge is registered to your business and represents your business. You are responsible for how it is used, including messages sent by anyone else with access to it.</p>
+    <h3>11.3 Direct marketing</h3>
+    <p>You warrant that you have a lawful basis for every contact you ask us to message, and that any list you give us was lawfully collected. You are responsible for compliance with section 69 of the Protection of Personal Information Act 4 of 2013, the opt-out and pre-emptive block provisions of the Consumer Protection Act 68 of 2008, and, where you operate outside South Africa, the equivalent rules including the GDPR and UK GDPR, PECR, CAN-SPAM, and the Telephone Consumer Protection Act. You must honour opt-outs promptly, and you must not use the Concierge for cold outreach unless we have agreed that use in writing.</p>
+    <p>We may decline to send, or may stop sending, any message we reasonably consider unlawful, abusive, misleading, or likely to put a Channel at risk.</p>
+  </section>
+
+  <section id="voice">
+    <span class="sec-num">Section 12</span>
+    <h2 class="sec-title">Voice calls and recordings</h2>
+    <h3>12.1 Not an emergency service</h3>
+    <p>Our voice Service is a business answering service delivered over the internet. It is not a public telephone service. It cannot be used to reach emergency services, it does not transmit a caller's location, and it must never be presented to your customers as an emergency line. You must not configure it in a way that suggests otherwise, and you must maintain an independent means of contact for emergencies.</p>
+    <h3>12.2 Recording and transcription</h3>
+    <p>Where recording or transcription is enabled, calls may be recorded, transcribed, stored, and made available to you in the Platform, for the purposes of records, quality, and improving your Concierge. You are responsible for ensuring that callers are told at the start of the call that the call is answered by an automated assistant and may be recorded, and for obtaining any consent the law requires. In some countries and some United States states, every party to a call must consent. You must satisfy yourself that your configuration meets the rules in every place you take calls from, including the Regulation of Interception of Communications and Provision of Communication-Related Information Act 70 of 2002 in South Africa.</p>
+    <h3>12.3 Quality and dependencies</h3>
+    <p>Voice quality depends on networks, carriers, and third-party providers we do not control. Calls may drop, be delayed, or be misheard. Numbers are provisioned through a telecommunications provider on your behalf and remain subject to that provider's terms, including registration requirements such as RICA in South Africa.</p>
+  </section>
+
+  <section id="ai">
+    <span class="sec-num">Section 13</span>
+    <h2 class="sec-title">How the AI works, and what it cannot do</h2>
+    <p>The Concierge uses artificial intelligence, including large language models supplied by third parties, to understand what a person is asking and to generate a reply. This is powerful, and it is not perfect. You should read this section as a description of what you are buying.</p>
+    <ul class="clean">
+      <li><b>Outputs can be wrong.</b> The Concierge can misunderstand, give an incomplete answer, or state something inaccurate, even when it is configured correctly. We build guardrails, test, and refine, but we do not warrant that any particular Output will be accurate, complete, or suitable.</li>
+      <li><b>Outputs are not advice.</b> Nothing the Concierge says is professional, medical, legal, financial, or safety advice, and it must not be presented to your customers as such.</li>
+      <li><b>Not for emergencies.</b> Neither you nor an End user may rely on the Concierge in an emergency or in any situation where a delay or an error could cause harm. End users should contact emergency services directly.</li>
+      <li><b>Bookings and quotes.</b> Where the Concierge books an appointment, gives a price, quotes a callout, or makes any commitment, it does so from the Client Content and rules you approved. Those Outputs are made on your behalf and you are responsible for them as between you and your customer. We recommend configuring quotes as estimates subject to your confirmation, and we will help you set that up.</li>
+      <li><b>Human oversight is required.</b> Decisions that matter, such as accepting a customer, fulfilling an order, or confirming an appointment, must involve a person at your business.</li>
+      <li><b>Disclosure.</b> We tell people plainly that they are speaking to an automated assistant, and offer a route to a human. This is not optional.</li>
+      <li><b>Model dependencies.</b> The Services depend on AI providers whose availability, pricing, and policies can change. We may substitute providers or models to keep the Services running or to improve them.</li>
+      <li><b>No training on your conversations.</b> We do not use End user conversation content to train our own or third parties' AI models. See our <a href="https://amirahsr.org/privacy">Privacy Policy</a>.</li>
+    </ul>
+    <div class="note">
+      <b>In short:</b> the Concierge is an excellent front desk, and it is not a guarantee. Configure it carefully, review what it says, and keep a person in the loop for anything consequential.
+    </div>
+  </section>
+
+  <section id="thirdparty">
+    <span class="sec-num">Section 14</span>
+    <h2 class="sec-title">Third-party platforms and integrations</h2>
+    <p>The Services connect to platforms and providers we do not control, including Meta and the WhatsApp Business Platform, AI providers, hosting providers, telecommunications providers, calendar and scheduling tools, and payment providers.</p>
+    <p>Where you hold an account with one of those providers, your relationship with them is governed by their terms, not ours, and you are responsible for complying with them. Where we hold the account on your behalf, we will operate it in line with the relevant provider's rules.</p>
+    <p>We are not responsible for a third party's outage, deprecation, policy change, price change, rate limit, account restriction, or refusal to approve something. If a provider withdraws or restricts access in a way that affects your Concierge, we will tell you, propose an alternative where one exists, and may have to suspend the affected Channel in the meantime. If no reasonable alternative exists, either of us may terminate the affected part of the Services on notice.</p>
+  </section>
+
+  <section id="data">
+    <span class="sec-num">Section 15</span>
+    <h2 class="sec-title">Your data and personal information</h2>
+    <p>Our <a href="https://amirahsr.org/privacy">Privacy Policy</a> forms part of these Terms and explains how we handle personal information. This section deals with the contractual position between us.</p>
+    <h3>15.1 Our roles</h3>
+    <div class="cards">
+      <div class="card">
+        <h3>You are the responsible party</h3>
+        <p>For the personal information of your own customers and End users, you decide why and how it is processed. You are the responsible party under POPIA, and the controller under the GDPR and UK GDPR.</p>
+      </div>
+      <div class="card">
+        <h3>We are the operator</h3>
+        <p>We process that information on your documented instructions to deliver the Services. We are the operator under POPIA, and the processor under the GDPR and UK GDPR.</p>
+      </div>
+    </div>
+    <h3>15.2 Our undertakings</h3>
+    <p style="margin-top:18px;">When acting as operator or processor, we will: process personal information only on your instructions and as needed to provide the Services or comply with law; keep it confidential and limit access to people who need it; apply the security measures described in our Privacy Policy; engage sub-processors under written terms and remain responsible for them; assist you, at your cost where the effort is material, with data subject requests, security notifications, and impact assessments; notify you without undue delay after becoming aware of a security compromise affecting your data; and delete or return the data at the end of the Services in line with Section 8.5.</p>
+    <h3>15.3 Your undertakings</h3>
+    <p>You warrant that you have a lawful basis for the personal information you give us or ask us to process, that you have given the notices and obtained the consents required, and that your instructions to us are lawful. You must not send us special personal information or children's information except as permitted under Section 10.</p>
+    <h3>15.4 Separate agreements and aggregated data</h3>
+    <p>Where we sign a separate data processing or operator agreement with you, that agreement prevails over this section to the extent of any conflict. We may generate and use aggregated, de-identified statistics about usage and performance to operate, secure, and improve the Services, provided they do not identify you, your End users, or your business.</p>
+  </section>
+
+  <section id="confidentiality">
+    <span class="sec-num">Section 16</span>
+    <h2 class="sec-title">Confidentiality</h2>
+    <p>Each of us may receive information from the other that is not public and that a reasonable person would treat as confidential, including pricing, business plans, customer information, prompts, configurations, and technical material.</p>
+    <p>Each of us will keep the other's confidential information confidential, use it only for the purposes of these Terms, and disclose it only to people and providers who need it and who are bound by equivalent obligations. These duties do not apply to information that is or becomes public through no breach, that was already lawfully known, that is independently developed, or that must be disclosed by law, regulation, or court order, in which case the disclosing party will give notice where it is lawful to do so. These duties continue for three years after the Services end, and indefinitely for anything that is a trade secret.</p>
+  </section>
+
+  <section id="ip">
+    <span class="sec-num">Section 17</span>
+    <h2 class="sec-title">Intellectual property</h2>
+    <h3>17.1 What we own</h3>
+    <p>We own, and retain, all intellectual property in the Platform, our software, agent architecture, system prompts, workflows, tooling, templates, methodologies, documentation, website, and brand, together with any improvement, adaptation, or derivative of them, including work we develop while delivering the Services to you. Nothing in these Terms transfers that to you.</p>
+    <h3>17.2 What you own</h3>
+    <p>You own, and retain, all intellectual property in your Client Content, your brand, your data, and the lead and conversation records generated for your business. You grant us a non-exclusive, worldwide, royalty-free licence to host, copy, process, transmit, adapt, and display that material for as long as needed to provide the Services, to support you, and to comply with law.</p>
+    <h3>17.3 Bespoke work</h3>
+    <p>Where we build a bespoke automation or integration for you, we grant you a non-exclusive licence to use it for your own business for as long as you subscribe. Unless your Order expressly says otherwise, we retain ownership of the underlying tooling, code, and know-how, including anything reusable across clients. If you want to own a deliverable outright, that must be agreed in writing and priced accordingly.</p>
+    <h3>17.4 Feedback</h3>
+    <p>If you give us ideas, suggestions, or feedback about the Services, we may use them freely and without obligation or payment to you.</p>
+  </section>
+
+  <section id="publicity">
+    <span class="sec-num">Section 18</span>
+    <h2 class="sec-title">Publicity and client references</h2>
+    <p>We may identify you as a client of AMIRA, and use your business name and logo, on our website, in proposals, and in marketing material. If you would rather we did not, email us and we will remove it within a reasonable period.</p>
+    <p>We will only publish a case study, testimonial, quote, or metrics about your business with your prior approval. You may say that you use AMIRA, but you may not otherwise use our name, logo, or brand without our written permission, and you may not suggest that we endorse your products or services.</p>
+  </section>
+
+  <section id="availability">
+    <span class="sec-num">Section 19</span>
+    <h2 class="sec-title">Availability, support and changes</h2>
+    <p>We aim to keep the Services available at all times, and we design them to run around the clock. We do not, however, guarantee uninterrupted or error-free operation, and we do not offer a service level agreement or uptime credits unless your Order expressly includes one.</p>
+    <p>The Services may be unavailable during planned maintenance, which we try to schedule outside business hours and to announce in advance where it is likely to be disruptive, and during unplanned events including third-party outages, network failures, and security incidents.</p>
+    <p>Support is provided by email to shimshon@amirahsr.org and team@amirahsr.org, and on WhatsApp, during business hours in South African Standard Time on business days. We respond to service-affecting outages as quickly as we reasonably can, including outside those hours where we are able to.</p>
+    <p>We may add, change, or withdraw features. Where a change materially and adversely affects what you have contracted for, we will give you at least 30 days' notice, and you may cancel under Section 8 before it takes effect.</p>
+  </section>
+
+  <section id="warranties">
+    <span class="sec-num">Section 20</span>
+    <h2 class="sec-title">Warranties and disclaimers</h2>
+    <p>We warrant that we will provide the Services with reasonable skill and care, using suitably competent people, and in compliance with the laws that apply to us as a service provider.</p>
+    <p>Beyond that warranty, and to the fullest extent permitted by law, the Services are provided as they are and as available, and we exclude all other warranties, representations, conditions, and terms, whether express or implied, including any implied warranty of merchantability, fitness for a particular purpose, accuracy, or non-infringement.</p>
+    <p>In particular, we do not warrant or guarantee: that any Output will be accurate, complete, or appropriate; that the Concierge will capture every lead, answer every call, or handle every enquiry correctly; that the Services will be uninterrupted, secure, or free of error; or that using the Services will produce any particular commercial result.</p>
+    <p>Statistics, benchmarks, research figures, and example scenarios on our website and in our marketing are illustrative and drawn from third-party sources or from other businesses. They describe what is possible, not what you will achieve, and they are not a promise, projection, or warranty of any revenue, conversion rate, response time, or return.</p>
+  </section>
+
+  <section id="liability">
+    <span class="sec-num">Section 21</span>
+    <h2 class="sec-title">Limitation of liability</h2>
+    <p>Nothing in these Terms limits or excludes liability that cannot lawfully be limited or excluded, including liability for fraud, fraudulent misrepresentation, gross negligence, death or personal injury caused by negligence, or any liability under the Consumer Protection Act 68 of 2008 that may not be limited.</p>
+    <p>Subject to that, and to the fullest extent permitted by law:</p>
+    <ul class="clean">
+      <li>Neither party is liable for indirect, incidental, special, punitive, or consequential loss, or for loss of profit, revenue, business, anticipated savings, opportunity, goodwill, reputation, or data, however it arises, even if the possibility of it was known.</li>
+      <li>Our total aggregate liability arising out of or in connection with the Services, whether in contract, delict, statute, or otherwise, is limited to the total Fees you actually paid us for the Services in the three months immediately before the event that gave rise to the claim.</li>
+      <li>We are not liable for loss arising from Client Content you supplied or approved, from your configuration choices, from your failure to monitor or escalate, from an End user's reliance on an Output, from the acts or omissions of your customers or personnel, or from a third-party platform's outage, restriction, or policy decision.</li>
+      <li>Any claim must be brought within 12 months of the date on which you first became aware, or ought reasonably to have become aware, of the circumstances giving rise to it.</li>
+    </ul>
+    <p>You accept that these limits are reasonable given the Fees charged, that they reflect a fair allocation of risk between us, and that our pricing is set on the basis that they apply.</p>
+  </section>
+
+  <section id="indemnity">
+    <span class="sec-num">Section 22</span>
+    <h2 class="sec-title">Indemnity</h2>
+    <p>You indemnify us, and will hold us harmless, against claims, demands, proceedings, fines, losses, and reasonable legal costs brought by a third party, including one of your customers, an End user, a regulator, or a third-party platform, to the extent they arise from: your Client Content or your configuration; your breach of Sections 9, 10, 11, 12 or 15; your use of the Services in your industry or in breach of your own regulatory obligations; any marketing or messaging you send or instruct us to send; or your infringement of a third party's rights.</p>
+    <p>We will tell you promptly about any claim we want to be indemnified for, let you take reasonable control of the defence, and co-operate at your cost. You may not settle a claim in a way that admits fault on our part or imposes an obligation on us without our written consent.</p>
+  </section>
+
+  <section id="endusers">
+    <span class="sec-num">Section 23</span>
+    <h2 class="sec-title">Terms for visitors and end users</h2>
+    <p>This section applies to anyone who uses this website, tries our demo, or chats or speaks with a Concierge we operate for one of our clients.</p>
+    <h3>23.1 You are speaking to an AI</h3>
+    <p>An AMIRA Concierge is an automated assistant. It can be wrong, and it is not a substitute for professional advice. Do not rely on it in an emergency. If you have an emergency, contact the emergency services in your country directly. You can ask to be put through to a person at the business at any time.</p>
+    <h3>23.2 The business is your counterparty</h3>
+    <p>When you chat with a Concierge on a business's website or WhatsApp number, your relationship, and any booking, quote, order, or service you agree to, is with that business, not with AMIRA. We provide the technology on their behalf. Questions, complaints, and requests about your personal information should go to that business first, and we will assist them in responding.</p>
+    <h3>23.3 The demo</h3>
+    <p>The demonstration on this website exists so you can hear what a Concierge sounds like. Conversations and calls with the demo may be recorded, transcribed, and reviewed by us to improve the product and to follow up on business enquiries. Please do not share sensitive personal, health, financial, or identity-document information with the demo.</p>
+    <h3>23.4 Fair use of this website and the widget</h3>
+    <ul class="clean">
+      <li>The content of this website is ours or our licensors', and is protected by copyright. You may view, download, and print it for your own personal or internal business use. You may not republish, sell, systematically copy, or scrape it without our written permission.</li>
+      <li>Do not use automated tools to harvest content or contact details, attempt to interfere with the website or the widget, or try to reverse engineer, probe, or extract the configuration behind a Concierge.</li>
+      <li>Do not submit content that is unlawful, abusive, defamatory, obscene, infringing, or that contains malicious code, and do not attempt to make a Concierge produce that kind of content.</li>
+      <li>We may block, rate limit, or report anyone who abuses the Services.</li>
+    </ul>
+    <h3>23.5 Links</h3>
+    <p>This website and the sites where the widget appears may link to third parties we do not control. We are not responsible for their content, products, or practices.</p>
+  </section>
+
+  <section id="consumer">
+    <span class="sec-num">Section 24</span>
+    <h2 class="sec-title">Consumer rights and cooling-off</h2>
+    <p>Nothing in these Terms limits any right you have under the Consumer Protection Act 68 of 2008 or the Electronic Communications and Transactions Act 25 of 2002 that cannot be limited by agreement. Where a provision of these Terms conflicts with such a right, that right prevails to the extent of the conflict.</p>
+    <p>If you are a natural person and the cooling-off right in section 44 of the Electronic Communications and Transactions Act applies to your transaction, you may cancel within seven days of concluding it, without reason or penalty, by emailing shimshon@amirahsr.org. Where we have already started providing the Services at your request during that period, we may charge for what has been provided. Bespoke work already performed, and third-party costs already incurred on your instruction, are not refundable.</p>
+    <p class="muted">Most of our clients contract as businesses rather than as consumers, and the Consumer Protection Act does not apply to every transaction. Where it does apply, it applies in full.</p>
+  </section>
+
+  <section id="changes">
+    <span class="sec-num">Section 25</span>
+    <h2 class="sec-title">Changes to these terms</h2>
+    <p>We may update these Terms from time to time, to reflect changes in the Services, our providers, our practices, or the law. The current version is always the one published on this page, and the date at the top shows when it last changed.</p>
+    <p>Where a change materially affects your rights or obligations as a client, we will give you at least 14 days' notice by email or through the Platform before it takes effect. If you continue to use the Services after that, you accept the updated Terms. If you do not accept them, you may cancel under Section 8 without penalty before they take effect. For visitors and End users, changes take effect when they are published.</p>
+  </section>
+
+  <section id="law">
+    <span class="sec-num">Section 26</span>
+    <h2 class="sec-title">Governing law and disputes</h2>
+    <p>These Terms, and any dispute or claim arising out of them or their subject matter, are governed by the law of the Republic of South Africa, without regard to conflict of law rules.</p>
+    <p>If a dispute arises, we ask that you raise it with us first at shimshon@amirahsr.org. Both parties will then try in good faith to resolve it through discussion within 15 business days of the notice.</p>
+    <p>If it is not resolved, either party may refer the dispute to arbitration in Johannesburg under the rules of the Arbitration Foundation of Southern Africa, before one arbitrator appointed under those rules, conducted in English. The arbitrator's award is final and binding, and may be made an order of court. Nothing in this section prevents either party from approaching a court for urgent or interim relief, or for the recovery of an undisputed debt.</p>
+    <p>The parties consent, in terms of section 45 of the Magistrates' Courts Act 32 of 1944, to the jurisdiction of the Magistrates' Court for any proceedings that fall within its jurisdiction, without limiting our right to institute proceedings in a court of higher jurisdiction.</p>
+  </section>
+
+  <section id="notices">
+    <span class="sec-num">Section 27</span>
+    <h2 class="sec-title">Notices and addresses</h2>
+    <p>We choose 131 Lyndhurst Road, Johannesburg, 2192, South Africa as our address for the service of legal notices and process, our domicilium citandi et executandi. You choose the physical address recorded in your Order, or, if none is recorded, your principal place of business.</p>
+    <p>Notices may be given by email, to shimshon@amirahsr.org for us and to the billing or administrative email address on your account for you. A notice sent by email is deemed received on the first business day after it is sent, unless the sender receives a delivery failure. A notice delivered by hand is deemed received on delivery, and one sent by prepaid registered post is deemed received seven business days after posting.</p>
+    <p>Either party may change its address on 14 days' written notice.</p>
+  </section>
+
+  <section id="general">
+    <span class="sec-num">Section 28</span>
+    <h2 class="sec-title">General</h2>
+    <ul class="clean">
+      <li><b>Entire agreement.</b> These Terms, your Order, and any separate data processing agreement are the whole agreement between us about the Services, and replace all earlier discussions, proposals, and representations. Neither party relies on any statement not recorded in them, except that nothing excludes liability for fraudulent misrepresentation.</li>
+      <li><b>Variation.</b> Changes to your Order must be agreed in writing. We may amend these Terms as described in Section 25.</li>
+      <li><b>Cession and assignment.</b> You may not cede, assign, or transfer your rights or obligations without our written consent, which we will not unreasonably withhold. We may cede or assign ours to a successor entity, including a company we incorporate to carry on this business, or to a purchaser of the business or its assets, on notice to you.</li>
+      <li><b>Subcontracting.</b> We may subcontract or delegate performance, and remain responsible for that performance.</li>
+      <li><b>No waiver.</b> A failure or delay in enforcing a right is not a waiver of it, and no waiver is effective unless in writing.</li>
+      <li><b>Severability.</b> If a provision is found invalid or unenforceable, it is severed to the minimum extent necessary and the rest remains in force.</li>
+      <li><b>Relationship.</b> Nothing in these Terms creates a partnership, joint venture, agency, or employment relationship between us. Neither party may bind the other.</li>
+      <li><b>Force majeure.</b> Neither party is liable for a failure or delay caused by an event beyond its reasonable control, including natural disaster, war, civil unrest, epidemic, strike, load shedding or other power failure, network or internet failure, cyber attack, or an act of government. Payment obligations are not excused.</li>
+      <li><b>Survival.</b> Any provision that by its nature should survive termination does so, including Sections 15 to 18 and 20 to 28.</li>
+      <li><b>Language and headings.</b> These Terms are concluded in English. Headings are for convenience and do not affect interpretation. No provision is interpreted against the party that drafted it.</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <span class="sec-num">Section 29</span>
+    <h2 class="sec-title">Contact</h2>
+    <p>Questions about these Terms, your subscription, an invoice, or a complaint:</p>
+    <ul class="clean">
+      <li><b>Email:</b> shimshon@amirahsr.org</li>
+      <li><b>Accounts and support:</b> team@amirahsr.org</li>
+      <li><b>WhatsApp:</b> +972 50 648 4887</li>
+      <li><b>Postal:</b> 131 Lyndhurst Road, Johannesburg, 2192, South Africa</li>
+    </ul>
+    <p>For anything about personal information, see our <a href="https://amirahsr.org/privacy">Privacy Policy</a>, which sets out your rights and how to exercise them.</p>
+  </section>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <p class="brand">AMIRA</p>
+    <p>AI customer concierge for businesses.</p>
+    <p><a href="https://amirahsr.org/">Home</a> &nbsp;&middot;&nbsp; <a href="https://amirahsr.org/about">About</a> &nbsp;&middot;&nbsp; <a href="https://amirahsr.org/pricing">Pricing</a> &nbsp;&middot;&nbsp; <a href="https://amirahsr.org/privacy">Privacy</a> &nbsp;&middot;&nbsp; <a href="https://amirahsr.org/terms">Terms</a></p>
+    <p>&copy; 2026 Shimshon Gavriel Fisher t/a Amira Human Software Resources. All rights reserved.</p>
+    <a class="totop" href="#">Back to top</a>
+  </div>
+</footer>
+
+</body>
+</html>

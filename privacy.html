@@ -365,7 +365,18 @@
       <li><b>Invoice drafts and the audit log.</b> Each draft and its versions, and a record of who approved or changed it, and when.</li>
     </ul>
 
-    <h3>5.4 Information we collect automatically</h3>
+    <h3>5.4 Data from connected QuickBooks Online and monday.com accounts</h3>
+    <p>A client connects these accounts itself, and only a person entitled to do so can connect them: for QuickBooks Online, an administrator of the QuickBooks company; for monday.com, a user of the client's monday.com account who installs and authorises our app. We ask each service for the narrowest access this work needs.</p>
+    <ul class="clean">
+      <li><b>QuickBooks Online.</b> We use Intuit's accounting permission (com.intuit.quickbooks.accounting). We read the company's customers, its products and services, and its invoice lines from the last 12 months, and refresh that copy when QuickBooks tells us something changed. We write only after people at the client approve a draft, and only two things: the new invoice, and a new customer when the invoice needs one. We do not delete or edit existing records in QuickBooks.</li>
+      <li><b>monday.com.</b> We use only the review board the client chooses. We create one item for each approved draft, read it back before acting on it, update its status and invoice number, read the names of the account's users so we know who approved an item, and register a webhook so monday.com tells us when an item's status changes. We do not read the client's other boards, and we do not delete anything in monday.com.</li>
+      <li><b>Used only for that client.</b> We use this data only to draft, check, and create that client's invoices. One client's data is never shared with or shown to another client. We do not sell it, use it for advertising, publish it, or use it to train our own or anyone else's AI models. It goes only to the sub-processors in Section 9 that the backoffice needs, such as the AI provider that drafts an invoice from a voice note.</li>
+      <li><b>Disconnecting.</b> A client can disconnect at any time from AMIRA, from the apps settings inside QuickBooks Online, or by uninstalling our app in monday.com. When a client disconnects, uninstalls our app, or revokes our access, we stop using that connection at once, delete its access tokens, and delete the copy of the data we read from that account within 10 days. Invoice drafts, their transcripts, and the audit log of who approved each invoice stay as the client's own billing record, as our Terms set out, and are deleted with the rest of the client's data when its use of the Services ends.</li>
+      <li><b>Requests.</b> A client can ask us at any time for a copy of the data we hold from its connected accounts, or for its deletion, and we will act on it within 10 days. People whose details are held in a client's QuickBooks or monday.com account can also use the rights in Section 13.</li>
+    </ul>
+    <p class="muted">QuickBooks and Intuit are trademarks of Intuit Inc. monday.com is a trademark of monday.com Ltd. AMIRA is not affiliated with or endorsed by either company.</p>
+
+    <h3>5.5 Information we collect automatically</h3>
     <p>When you use our website or the widget, we and our service providers may automatically collect technical information such as IP address, approximate location derived from it, device and browser type, pages viewed, referring URLs, and timestamps, as well as diagnostic logs used to keep the Services secure and reliable. We use cookies and similar technologies for this, as described in Section 8.</p>
   </section>
 
@@ -388,7 +399,7 @@
       </tbody>
     </table>
     <p class="muted">Where we rely on legitimate interests, we have weighed those interests against your rights. Where we rely on consent, you may withdraw it at any time without affecting processing already carried out.</p>
-    <div class="note"><b>We do not sell personal information,</b> and we do not use end-user conversation content to train our own or third parties' AI models. We do not share personal information with third parties for their own marketing.</div>
+    <div class="note"><b>We do not sell personal information,</b> and we do not use end-user conversation content, backoffice voice notes and transcripts, or data from a client's connected accounts to train our own or third parties' AI models. We do not share personal information with third parties for their own marketing.</div>
   </section>
 
   <section id="ai">
@@ -420,13 +431,16 @@
     <table class="tbl">
       <thead><tr><th>Sub-processor</th><th>Purpose</th></tr></thead>
       <tbody>
-        <tr><td>Meta Platforms (WhatsApp Business Platform / Cloud API)</td><td>Delivering and receiving messages on the WhatsApp channel</td></tr>
+        <tr><td>Meta Platforms (WhatsApp Business Platform / Cloud API, Instagram, Messenger)</td><td>Delivering and receiving messages on those channels, and the sign-up flow a client uses to connect its WhatsApp number</td></tr>
         <tr><td>Anthropic (Claude API)</td><td>Generating concierge responses from message content, and drafting invoices from voice notes in the backoffice</td></tr>
         <tr><td>OpenAI (API)</td><td>Transcribing voice notes that end users send to the concierge, and voice conversations with the concierge where a client enables them; also a transcription provider being evaluated for the backoffice (see the note below)</td></tr>
         <tr><td>Google (Gemini API)</td><td>Transcription provider being evaluated for the backoffice (see the note below)</td></tr>
         <tr><td>Hetzner Online GmbH (Germany)</td><td>Hosting and infrastructure where the platform and data reside</td></tr>
+        <tr><td>Cloudflare</td><td>Protecting and routing traffic: requests to the platform and the chat widget pass through Cloudflare's network on their way to our servers</td></tr>
+        <tr><td>Netlify</td><td>Hosting our website (amirahsr.org) and its sign-in page</td></tr>
+        <tr><td>Resend</td><td>Sending service emails, such as sign-in links, lead notifications, and alerts</td></tr>
         <tr><td>Lemon Squeezy</td><td>Processing client subscription and billing payments as our merchant of record</td></tr>
-        <tr><td>Google (Workspace / Calendar), where a client enables it</td><td>Calendar and scheduling integrations for that client</td></tr>
+        <tr><td>Google (sign-in, Workspace, Calendar, Fonts)</td><td>Signing clients in with their Google account; our business email; calendar and scheduling integrations where a client enables them; and the fonts used by the platform console and the chat widget, which your browser loads from Google</td></tr>
         <tr><td>Intuit (QuickBooks Online), where a client connects it</td><td>Reading the client's customers, products and services, and recent invoice lines; creating approved invoices and new customers in the client's QuickBooks company</td></tr>
         <tr><td>monday.com, where a client connects it</td><td>Posting draft invoices to the client's board for office review, and reading back approvals and changes</td></tr>
       </tbody>
@@ -451,7 +465,9 @@
       <li><b>Client account and billing records</b> are kept for the life of the account and afterwards as needed to meet legal, tax, and accounting obligations.</li>
       <li><b>Backoffice voice recordings</b> are kept only for the newest 50 voice notes of each company using the backoffice, and never longer than 180 days. Once a recording falls outside those limits, the file is deleted and any review link to it stops working. While we hold a recording, it is stored encrypted.</li>
       <li><b>Backoffice transcripts, invoice drafts, and the audit log</b> are kept after the recording is deleted, as the client's record of what was billed and who approved it.</li>
-      <li><b>Security and diagnostic logs</b> are kept for a limited period for security and reliability.</li>
+      <li><b>Data read from a connected QuickBooks Online or monday.com account</b> is kept while the connection is active and deleted within 10 days after it ends (see Section 5.4).</li>
+      <li><b>Records of AI requests</b> (which model ran, how much text it processed, and the cost, without the content) are kept with the client's account records.</li>
+      <li><b>Server and security logs</b> are kept for no more than 30 days.</li>
     </ul>
     <p class="muted">Where AMIRA acts as a processor, retention follows the instructions of the business client and our agreement with them.</p>
   </section>
@@ -459,7 +475,8 @@
   <section id="security">
     <span class="sec-num">Section 12</span>
     <h2 class="sec-title">How we protect information</h2>
-    <p>We take reasonable and appropriate technical and organisational measures to protect personal information against loss, misuse, and unauthorised access. These include encryption in transit, access controls and least-privilege access, network and server hardening, secured infrastructure, and regular updates. In the backoffice, voice recordings and the access tokens for a client's QuickBooks and monday.com accounts are stored encrypted, each client's backoffice data is kept apart at the database level, and every approval and change is written to an audit log that cannot be quietly rewritten. No method of transmission or storage is completely secure, so we cannot guarantee absolute security, but we work to protect your information and to respond promptly to any incident, including notifying affected people and regulators where the law requires.</p>
+    <p>We take reasonable and appropriate technical and organisational measures to protect personal information against loss, misuse, and unauthorised access. These include encryption in transit (TLS 1.2 or higher), access controls and least-privilege access, network and server hardening, secured infrastructure, and regular updates. In the backoffice, voice recordings and the access tokens for a client's QuickBooks and monday.com accounts are encrypted with AES-256-GCM, with the keys held apart from the database; each client's backoffice data is kept apart at the database level, so one client's data cannot be read in another client's context; and every approval and change is written to an audit log that cannot be quietly rewritten. No method of transmission or storage is completely secure, so we cannot guarantee absolute security, but we work to protect your information and to respond promptly to any incident, including notifying affected people, affected clients, and regulators where the law requires.</p>
+    <p>To report a security concern, email shimshon@amirahsr.org.</p>
   </section>
 
   <section id="rights">
